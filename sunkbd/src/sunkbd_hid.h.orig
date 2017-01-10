@@ -72,20 +72,20 @@ typedef struct setup_dat setup_dat;
  */
 #if defined (KEYBOARD)
 /* store the keyboard type */
-volatile static __data char sunkbd_type;
+volatile static data char sunkbd_type;
 /* flag for pending reset */
-volatile static __data char sunkbd_reset;
+volatile static data char sunkbd_reset;
 /* layout flag */
-volatile static __data char sunkbd_layout;
+volatile static data char sunkbd_layout;
 
 /* key buffer */
-volatile __data Byte key_buffer[8];
+volatile data Byte key_buffer[8];
 
 /*
  * transmit queue
  * at the moment only one byte deep and restricted to 0-127
  */
-volatile __data char kbd_txmit_me;   /* apply_reset_values */
+volatile data char kbd_txmit_me;   /* apply_reset_values */
 #endif
 
 /*
@@ -93,13 +93,13 @@ volatile __data char kbd_txmit_me;   /* apply_reset_values */
  */
 #if defined (MOUSE)
 /* intermediate space to hold mouse data during transmission */
-volatile __data char mbuf0, mbuf1, mbuf2;
+volatile data char mbuf0, mbuf1, mbuf2;
 
 /* mouse buffer */
-volatile __data char mouse_buffer[8];
+volatile data char mouse_buffer[8];
 
 /* current state of mouse packet reception */
-volatile __data Byte mouse_state;
+volatile data Byte mouse_state;
 #endif
 
 
@@ -109,45 +109,45 @@ volatile __data Byte mouse_state;
 
 #if defined (KEYBOARD)
 /* report has changed, in1buf should be transferred on the next opportunity */
-static __bit kbd_new_keys;             /* apply_reset_values */
+static bit kbd_new_keys;             /* apply_reset_values */
 /* the next output packet is related to a control transfer after SETUP */
-static __bit is_ctrl_out0_kbd;         /* apply_reset_values */
+static bit is_ctrl_out0_kbd;         /* apply_reset_values */
 /*
  * remember IDLE mode
  */
-static __bit kbd_idle_mode;            /* apply_reset_values */
+static bit kbd_idle_mode;            /* apply_reset_values */
 /*
  * idle duration expressed as multiples of 4 ms
  * default is 125 * 4 ms = 500 ms
  */
-static __data Byte kbd_idle_duration;  /* apply_reset_values */
-static __data Byte kbd_idle_counter;
+static data Byte kbd_idle_duration;  /* apply_reset_values */
+static data Byte kbd_idle_counter;
 /* busy semaphore for IN1 endpoint */
-static __bit in1_busy;                 /* apply_reset_values */
+static bit in1_busy;                 /* apply_reset_values */
 #endif
 
 #if defined (MOUSE)
 /* report has changed, in2buf should be transferred on the next opportunity */
-static __bit mouse_new_keys;           /* apply_reset_values */
+static bit mouse_new_keys;           /* apply_reset_values */
 /* the next output packet is related to a control transfer after SETUP */
-static __bit is_ctrl_out0_mouse;       /* apply_reset_values */
+static bit is_ctrl_out0_mouse;       /* apply_reset_values */
 /*
  * remember IDLE mode
  */
-static __bit mouse_idle_mode;          /* apply_reset_values */
+static bit mouse_idle_mode;          /* apply_reset_values */
 /*
  * idle duration expressed as multiples of 4 ms
  * default is 5 * 4 ms = 20 ms
  */
-static __data Byte mouse_idle_duration; /* apply_reset_values */
-static __data Byte mouse_idle_counter;
+static data Byte mouse_idle_duration; /* apply_reset_values */
+static data Byte mouse_idle_counter;
 /* busy semaphore for IN2 endpoint */
-static __bit in2_busy;                 /* apply_reset_values */
+static bit in2_busy;                 /* apply_reset_values */
 #endif
 
 
 /* the device descriptor */
-static __code Byte dev_desc[] = {
+static code Byte dev_desc[] = {
    0x12, // bLength             : Length of Descriptor
    0x01, // bDescriptorType     : Descriptor Type = Device
    0x00, // bcdUSB (L)          : USB Specification Version 1.00 (L)
@@ -169,7 +169,7 @@ static __code Byte dev_desc[] = {
 };
 
 /* the configuration descriptor */
-static __code Byte conf_desc[] = {
+static code Byte conf_desc[] = {
    0x09, // bLength             : Length of Descriptor
    0x02, // bDescriptorType     : Descriptor Type = Configuration
 #if defined (KEYBOARD) && defined (MOUSE)
@@ -286,7 +286,7 @@ static __code Byte conf_desc[] = {
 
 /* the Keyboard Report Descriptor */
 #if defined (KEYBOARD)
-static __code Byte report_desc_keyboard[] = {
+static code Byte report_desc_keyboard[] = {
    0x05, 0x01, // Usage Page (Generic, Desktop),
    0x09, 0x06, // Usage (Keyboard),
    0xa1, 0x01, // Collection (Application),
@@ -323,7 +323,7 @@ static __code Byte report_desc_keyboard[] = {
 #endif
 
 #if defined (MOUSE)
-static __code Byte report_desc_mouse[] = {
+static code Byte report_desc_mouse[] = {
    0x05, 0x01, // Usage Page (Generic Desktop),
    0x09, 0x02, // Usage (Mouse),
    0xa1, 0x01, // Collection (Application),
@@ -355,17 +355,17 @@ static __code Byte report_desc_mouse[] = {
 
 
 /* language ID string descriptor */
-static __code Byte string_langid[] = { 0x04, 0x03, 0x00, 0x00 };
+static code Byte string_langid[] = { 0x04, 0x03, 0x00, 0x00 };
 
 /* manufacturer string descriptor */
-static __code Byte string_mfg[] = {
+static code Byte string_mfg[] = {
    0x22, 0x03,
    'A',0, 'C',0, 'M',0, 'E',0, ' ',0, 'u',0, 's',0, 'b',0,
    ' ',0, 'W',0, 'i',0, 'd',0, 'g',0, 'e',0, 't',0, 's',0
 };
 
 /* product string descriptor */
-static __code Byte string_prod[] = {
+static code Byte string_prod[] = {
 #if defined (KEYBOARD) && !defined (MOUSE)
    0x22, 0x03,
    'S',0, 'u',0, 'n',0, ' ',0, 'k',0, 'e',0, 'y',0, 'b',0,
@@ -387,7 +387,7 @@ static __code Byte string_prod[] = {
 
 #if defined (KEYBOARD)
 /* keyboard interface string descriptor */
-static __code Byte string_if_keyboard[] = {
+static code Byte string_if_keyboard[] = {
    0x86, 0x03,
    'S',0, 'u',0, 'n',0, ' ',0, 'K',0, 'e',0, 'y',0, 'b',0,
    'o',0, 'a',0, 'r',0, 'd',0, ' ',0, 'H',0, 'I',0, 'D',0,
@@ -403,7 +403,7 @@ static __code Byte string_if_keyboard[] = {
 
 #if defined (MOUSE)
 /* mouse interface string descriptor */
-static __code Byte string_if_mouse[] = {
+static code Byte string_if_mouse[] = {
    0x80, 0x03,
    'S',0, 'u',0, 'n',0, ' ',0, 'M',0, 'o',0, 'u',0, 's',0,
    'e',0, ' ',0, 'H',0, 'I',0, 'D',0, ' ',0, 'D',0, 'r',0,
@@ -424,7 +424,7 @@ static __code Byte string_if_mouse[] = {
 #define NUM_STRING 4
 #endif
 
-static __data unsigned int string_index[NUM_STRING] = {
+static data unsigned int string_index[NUM_STRING] = {
    (unsigned int)string_langid,
    (unsigned int)string_mfg,
    (unsigned int)string_prod
@@ -440,7 +440,7 @@ static __data unsigned int string_index[NUM_STRING] = {
 /*
  * mapping from sun scancodes to USB HID/HUT
  */
-static __code Byte scancode_map[] = {
+static code Byte scancode_map[] = {
    0x00, 0x78, 0x81, 0x79, 0x80, 0x3a, 0x3b, 0x43, 0x3c, 0x44, 0x3d, 0x45, 0x3e, 0xe4, 0x3f, 0x00,
    0x40, 0x41, 0x42, 0xe2, 0x52, 0x48, 0x46, 0x47, 0x50, 0x74, 0x7a, 0x51, 0x4f, 0x29, 0x1e, 0x1f,
    0x20, 0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x2d, 0x2e, 0x35, 0x2a, 0x49, 0x00, 0x54, 0x55,
@@ -459,7 +459,7 @@ static __code Byte scancode_map[] = {
 #define in1buf(n)  (&IN1BUF)[n]
 #define in2buf(n)  (&IN2BUF)[n]
 #define out0buf(n) (&OUT0BUF)[n]
-static __xdata setup_dat * __data sdat = (__xdata setup_dat *)&SETUPDAT;
+static xdata setup_dat * data sdat = (xdata setup_dat *)&SETUPDAT;
 
 /*
  * values for endpoint validation

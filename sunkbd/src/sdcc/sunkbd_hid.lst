@@ -1,0 +1,2864 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.6.0 #9615 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module sunkbd_hid
+                                      6 	.optsdcc -mmcs51 --model-small
+                                      7 	
+                                      8 ;--------------------------------------------------------
+                                      9 ; Public variables in this module
+                                     10 ;--------------------------------------------------------
+                                     11 	.globl _main
+                                     12 	.globl __sdcc_external_startup
+                                     13 	.globl _SMOD1
+                                     14 	.globl _ET2
+                                     15 	.globl _TF2
+                                     16 	.globl _TR2
+                                     17 	.globl _TI_1
+                                     18 	.globl _RI_1
+                                     19 	.globl _TI_0
+                                     20 	.globl _RI_0
+                                     21 	.globl _ES1
+                                     22 	.globl _ES0
+                                     23 	.globl _EUSB
+                                     24 	.globl _CY
+                                     25 	.globl _AC
+                                     26 	.globl _F0
+                                     27 	.globl _RS1
+                                     28 	.globl _RS0
+                                     29 	.globl _OV
+                                     30 	.globl _F1
+                                     31 	.globl _P
+                                     32 	.globl _PS
+                                     33 	.globl _PT1
+                                     34 	.globl _PX1
+                                     35 	.globl _PT0
+                                     36 	.globl _PX0
+                                     37 	.globl _RD
+                                     38 	.globl _WR
+                                     39 	.globl _T1
+                                     40 	.globl _T0
+                                     41 	.globl _INT1
+                                     42 	.globl _INT0
+                                     43 	.globl _TXD
+                                     44 	.globl _RXD
+                                     45 	.globl _P3_7
+                                     46 	.globl _P3_6
+                                     47 	.globl _P3_5
+                                     48 	.globl _P3_4
+                                     49 	.globl _P3_3
+                                     50 	.globl _P3_2
+                                     51 	.globl _P3_1
+                                     52 	.globl _P3_0
+                                     53 	.globl _EA
+                                     54 	.globl _ES
+                                     55 	.globl _ET1
+                                     56 	.globl _EX1
+                                     57 	.globl _ET0
+                                     58 	.globl _EX0
+                                     59 	.globl _P2_7
+                                     60 	.globl _P2_6
+                                     61 	.globl _P2_5
+                                     62 	.globl _P2_4
+                                     63 	.globl _P2_3
+                                     64 	.globl _P2_2
+                                     65 	.globl _P2_1
+                                     66 	.globl _P2_0
+                                     67 	.globl _SM0
+                                     68 	.globl _SM1
+                                     69 	.globl _SM2
+                                     70 	.globl _REN
+                                     71 	.globl _TB8
+                                     72 	.globl _RB8
+                                     73 	.globl _TI
+                                     74 	.globl _RI
+                                     75 	.globl _P1_7
+                                     76 	.globl _P1_6
+                                     77 	.globl _P1_5
+                                     78 	.globl _P1_4
+                                     79 	.globl _P1_3
+                                     80 	.globl _P1_2
+                                     81 	.globl _P1_1
+                                     82 	.globl _P1_0
+                                     83 	.globl _TF1
+                                     84 	.globl _TR1
+                                     85 	.globl _TF0
+                                     86 	.globl _TR0
+                                     87 	.globl _IE1
+                                     88 	.globl _IT1
+                                     89 	.globl _IE0
+                                     90 	.globl _IT0
+                                     91 	.globl _P0_7
+                                     92 	.globl _P0_6
+                                     93 	.globl _P0_5
+                                     94 	.globl _P0_4
+                                     95 	.globl _P0_3
+                                     96 	.globl _P0_2
+                                     97 	.globl _P0_1
+                                     98 	.globl _P0_0
+                                     99 	.globl _DPH1
+                                    100 	.globl _DPL1
+                                    101 	.globl _DPH0
+                                    102 	.globl _DPL0
+                                    103 	.globl _EICON
+                                    104 	.globl _TH2
+                                    105 	.globl _TL2
+                                    106 	.globl _RCAP2H
+                                    107 	.globl _RCAP2L
+                                    108 	.globl _T2CON
+                                    109 	.globl _CKCON
+                                    110 	.globl _SBUF1
+                                    111 	.globl _SBUF0
+                                    112 	.globl _SCON1
+                                    113 	.globl _SCON0
+                                    114 	.globl _EIE
+                                    115 	.globl _MPAGE
+                                    116 	.globl _EXIF
+                                    117 	.globl _DPS
+                                    118 	.globl _B
+                                    119 	.globl _ACC
+                                    120 	.globl _PSW
+                                    121 	.globl _IP
+                                    122 	.globl _P3
+                                    123 	.globl _IE
+                                    124 	.globl _P2
+                                    125 	.globl _SBUF
+                                    126 	.globl _SCON
+                                    127 	.globl _P1
+                                    128 	.globl _TH1
+                                    129 	.globl _TH0
+                                    130 	.globl _TL1
+                                    131 	.globl _TL0
+                                    132 	.globl _TMOD
+                                    133 	.globl _TCON
+                                    134 	.globl _PCON
+                                    135 	.globl _DPH
+                                    136 	.globl _DPL
+                                    137 	.globl _SP
+                                    138 	.globl _P0
+                                    139 	.globl _AUTODATA
+                                    140 	.globl _AUTOPTRL
+                                    141 	.globl _AUTOPTRH
+                                    142 	.globl _FASTXFR
+                                    143 	.globl _OUT07VAL
+                                    144 	.globl _IN07VAL
+                                    145 	.globl _I2DAT
+                                    146 	.globl _I2CS
+                                    147 	.globl _SETUPDAT
+                                    148 	.globl _SUDPTRL
+                                    149 	.globl _SUDPTRH
+                                    150 	.globl _TOGCTL
+                                    151 	.globl _USBCS
+                                    152 	.globl _USBBAV
+                                    153 	.globl _USBPAIR
+                                    154 	.globl _USBIEN
+                                    155 	.globl _USBIRQ
+                                    156 	.globl _OUT07IEN
+                                    157 	.globl _IN07IEN
+                                    158 	.globl _OUT07IRQ
+                                    159 	.globl _IN07IRQ
+                                    160 	.globl _ISOCTL
+                                    161 	.globl _PORTCCFG
+                                    162 	.globl _PORTBCFG
+                                    163 	.globl _PORTACFG
+                                    164 	.globl _PINSC
+                                    165 	.globl _OUTC
+                                    166 	.globl _OEC
+                                    167 	.globl _PINSB
+                                    168 	.globl _OUTB
+                                    169 	.globl _OEB
+                                    170 	.globl _PINSA
+                                    171 	.globl _OUTA
+                                    172 	.globl _OEA
+                                    173 	.globl _OUT4BC
+                                    174 	.globl _IN4BC
+                                    175 	.globl _OUT4CS
+                                    176 	.globl _IN4CS
+                                    177 	.globl _OUT4BUF
+                                    178 	.globl _IN4BUF
+                                    179 	.globl _OUT3BC
+                                    180 	.globl _OUT3CS
+                                    181 	.globl _IN3BC
+                                    182 	.globl _IN3CS
+                                    183 	.globl _OUT3BUF
+                                    184 	.globl _IN3BUF
+                                    185 	.globl _OUT2BUF
+                                    186 	.globl _OUT2CS
+                                    187 	.globl _OUT2BC
+                                    188 	.globl _IN2CS
+                                    189 	.globl _IN2BC
+                                    190 	.globl _IN2BUF
+                                    191 	.globl _OUT1BC
+                                    192 	.globl _OUT1CS
+                                    193 	.globl _OUT1BUF
+                                    194 	.globl _IN1BC
+                                    195 	.globl _IN1BUF
+                                    196 	.globl _IN1CS
+                                    197 	.globl _OUT0BC
+                                    198 	.globl _OUT0BUF
+                                    199 	.globl _IN0BC
+                                    200 	.globl _IN0BUF
+                                    201 	.globl _EP0CS
+                                    202 	.globl _kbd_txmit_me
+                                    203 	.globl _key_buffer
+                                    204 ;--------------------------------------------------------
+                                    205 ; special function registers
+                                    206 ;--------------------------------------------------------
+                                    207 	.area RSEG    (ABS,DATA)
+      000000                        208 	.org 0x0000
+                           000080   209 _P0	=	0x0080
+                           000081   210 _SP	=	0x0081
+                           000082   211 _DPL	=	0x0082
+                           000083   212 _DPH	=	0x0083
+                           000087   213 _PCON	=	0x0087
+                           000088   214 _TCON	=	0x0088
+                           000089   215 _TMOD	=	0x0089
+                           00008A   216 _TL0	=	0x008a
+                           00008B   217 _TL1	=	0x008b
+                           00008C   218 _TH0	=	0x008c
+                           00008D   219 _TH1	=	0x008d
+                           000090   220 _P1	=	0x0090
+                           000098   221 _SCON	=	0x0098
+                           000099   222 _SBUF	=	0x0099
+                           0000A0   223 _P2	=	0x00a0
+                           0000A8   224 _IE	=	0x00a8
+                           0000B0   225 _P3	=	0x00b0
+                           0000B8   226 _IP	=	0x00b8
+                           0000D0   227 _PSW	=	0x00d0
+                           0000E0   228 _ACC	=	0x00e0
+                           0000F0   229 _B	=	0x00f0
+                           000086   230 _DPS	=	0x0086
+                           000091   231 _EXIF	=	0x0091
+                           000092   232 _MPAGE	=	0x0092
+                           0000E8   233 _EIE	=	0x00e8
+                           000098   234 _SCON0	=	0x0098
+                           0000C0   235 _SCON1	=	0x00c0
+                           000099   236 _SBUF0	=	0x0099
+                           0000C1   237 _SBUF1	=	0x00c1
+                           00008E   238 _CKCON	=	0x008e
+                           0000C8   239 _T2CON	=	0x00c8
+                           0000CA   240 _RCAP2L	=	0x00ca
+                           0000CB   241 _RCAP2H	=	0x00cb
+                           0000CC   242 _TL2	=	0x00cc
+                           0000CD   243 _TH2	=	0x00cd
+                           0000D8   244 _EICON	=	0x00d8
+                           000082   245 _DPL0	=	0x0082
+                           000083   246 _DPH0	=	0x0083
+                           000084   247 _DPL1	=	0x0084
+                           000085   248 _DPH1	=	0x0085
+                                    249 ;--------------------------------------------------------
+                                    250 ; special function bits
+                                    251 ;--------------------------------------------------------
+                                    252 	.area RSEG    (ABS,DATA)
+      000000                        253 	.org 0x0000
+                           000080   254 _P0_0	=	0x0080
+                           000081   255 _P0_1	=	0x0081
+                           000082   256 _P0_2	=	0x0082
+                           000083   257 _P0_3	=	0x0083
+                           000084   258 _P0_4	=	0x0084
+                           000085   259 _P0_5	=	0x0085
+                           000086   260 _P0_6	=	0x0086
+                           000087   261 _P0_7	=	0x0087
+                           000088   262 _IT0	=	0x0088
+                           000089   263 _IE0	=	0x0089
+                           00008A   264 _IT1	=	0x008a
+                           00008B   265 _IE1	=	0x008b
+                           00008C   266 _TR0	=	0x008c
+                           00008D   267 _TF0	=	0x008d
+                           00008E   268 _TR1	=	0x008e
+                           00008F   269 _TF1	=	0x008f
+                           000090   270 _P1_0	=	0x0090
+                           000091   271 _P1_1	=	0x0091
+                           000092   272 _P1_2	=	0x0092
+                           000093   273 _P1_3	=	0x0093
+                           000094   274 _P1_4	=	0x0094
+                           000095   275 _P1_5	=	0x0095
+                           000096   276 _P1_6	=	0x0096
+                           000097   277 _P1_7	=	0x0097
+                           000098   278 _RI	=	0x0098
+                           000099   279 _TI	=	0x0099
+                           00009A   280 _RB8	=	0x009a
+                           00009B   281 _TB8	=	0x009b
+                           00009C   282 _REN	=	0x009c
+                           00009D   283 _SM2	=	0x009d
+                           00009E   284 _SM1	=	0x009e
+                           00009F   285 _SM0	=	0x009f
+                           0000A0   286 _P2_0	=	0x00a0
+                           0000A1   287 _P2_1	=	0x00a1
+                           0000A2   288 _P2_2	=	0x00a2
+                           0000A3   289 _P2_3	=	0x00a3
+                           0000A4   290 _P2_4	=	0x00a4
+                           0000A5   291 _P2_5	=	0x00a5
+                           0000A6   292 _P2_6	=	0x00a6
+                           0000A7   293 _P2_7	=	0x00a7
+                           0000A8   294 _EX0	=	0x00a8
+                           0000A9   295 _ET0	=	0x00a9
+                           0000AA   296 _EX1	=	0x00aa
+                           0000AB   297 _ET1	=	0x00ab
+                           0000AC   298 _ES	=	0x00ac
+                           0000AF   299 _EA	=	0x00af
+                           0000B0   300 _P3_0	=	0x00b0
+                           0000B1   301 _P3_1	=	0x00b1
+                           0000B2   302 _P3_2	=	0x00b2
+                           0000B3   303 _P3_3	=	0x00b3
+                           0000B4   304 _P3_4	=	0x00b4
+                           0000B5   305 _P3_5	=	0x00b5
+                           0000B6   306 _P3_6	=	0x00b6
+                           0000B7   307 _P3_7	=	0x00b7
+                           0000B0   308 _RXD	=	0x00b0
+                           0000B1   309 _TXD	=	0x00b1
+                           0000B2   310 _INT0	=	0x00b2
+                           0000B3   311 _INT1	=	0x00b3
+                           0000B4   312 _T0	=	0x00b4
+                           0000B5   313 _T1	=	0x00b5
+                           0000B6   314 _WR	=	0x00b6
+                           0000B7   315 _RD	=	0x00b7
+                           0000B8   316 _PX0	=	0x00b8
+                           0000B9   317 _PT0	=	0x00b9
+                           0000BA   318 _PX1	=	0x00ba
+                           0000BB   319 _PT1	=	0x00bb
+                           0000BC   320 _PS	=	0x00bc
+                           0000D0   321 _P	=	0x00d0
+                           0000D1   322 _F1	=	0x00d1
+                           0000D2   323 _OV	=	0x00d2
+                           0000D3   324 _RS0	=	0x00d3
+                           0000D4   325 _RS1	=	0x00d4
+                           0000D5   326 _F0	=	0x00d5
+                           0000D6   327 _AC	=	0x00d6
+                           0000D7   328 _CY	=	0x00d7
+                           0000E8   329 _EUSB	=	0x00e8
+                           0000AC   330 _ES0	=	0x00ac
+                           0000AE   331 _ES1	=	0x00ae
+                           000098   332 _RI_0	=	0x0098
+                           000099   333 _TI_0	=	0x0099
+                           0000C0   334 _RI_1	=	0x00c0
+                           0000C1   335 _TI_1	=	0x00c1
+                           0000CA   336 _TR2	=	0x00ca
+                           0000CF   337 _TF2	=	0x00cf
+                           0000AD   338 _ET2	=	0x00ad
+                           0000DF   339 _SMOD1	=	0x00df
+                                    340 ;--------------------------------------------------------
+                                    341 ; overlayable register banks
+                                    342 ;--------------------------------------------------------
+                                    343 	.area REG_BANK_0	(REL,OVR,DATA)
+      000000                        344 	.ds 8
+                                    345 	.area REG_BANK_1	(REL,OVR,DATA)
+      000000                        346 	.ds 8
+                                    347 	.area REG_BANK_2	(REL,OVR,DATA)
+      000000                        348 	.ds 8
+                                    349 	.area REG_BANK_3	(REL,OVR,DATA)
+      000000                        350 	.ds 8
+                                    351 ;--------------------------------------------------------
+                                    352 ; overlayable bit register bank
+                                    353 ;--------------------------------------------------------
+                                    354 	.area BIT_BANK	(REL,OVR,DATA)
+      000000                        355 bits:
+      000000                        356 	.ds 1
+                           008000   357 	b0 = bits[0]
+                           008100   358 	b1 = bits[1]
+                           008200   359 	b2 = bits[2]
+                           008300   360 	b3 = bits[3]
+                           008400   361 	b4 = bits[4]
+                           008500   362 	b5 = bits[5]
+                           008600   363 	b6 = bits[6]
+                           008700   364 	b7 = bits[7]
+                                    365 ;--------------------------------------------------------
+                                    366 ; internal ram data
+                                    367 ;--------------------------------------------------------
+                                    368 	.area DSEG    (DATA)
+      000000                        369 _sunkbd_type:
+      000000                        370 	.ds 1
+      000001                        371 _sunkbd_reset:
+      000001                        372 	.ds 1
+      000002                        373 _sunkbd_layout:
+      000002                        374 	.ds 1
+      000003                        375 _key_buffer::
+      000003                        376 	.ds 8
+      00000B                        377 _kbd_txmit_me::
+      00000B                        378 	.ds 1
+      00000C                        379 _kbd_idle_duration:
+      00000C                        380 	.ds 1
+      00000D                        381 _kbd_idle_counter:
+      00000D                        382 	.ds 1
+      00000E                        383 _string_index:
+      00000E                        384 	.ds 8
+      000016                        385 _sdat:
+      000016                        386 	.ds 2
+                                    387 ;--------------------------------------------------------
+                                    388 ; overlayable items in internal ram 
+                                    389 ;--------------------------------------------------------
+                                    390 	.area	OSEG    (OVR,DATA)
+                                    391 	.area	OSEG    (OVR,DATA)
+                                    392 ;--------------------------------------------------------
+                                    393 ; Stack segment in internal ram 
+                                    394 ;--------------------------------------------------------
+                                    395 	.area	SSEG
+      000000                        396 __start__stack:
+      000000                        397 	.ds	1
+                                    398 
+                                    399 ;--------------------------------------------------------
+                                    400 ; indirectly addressable internal ram data
+                                    401 ;--------------------------------------------------------
+                                    402 	.area ISEG    (DATA)
+                                    403 ;--------------------------------------------------------
+                                    404 ; absolute internal ram data
+                                    405 ;--------------------------------------------------------
+                                    406 	.area IABS    (ABS,DATA)
+                                    407 	.area IABS    (ABS,DATA)
+                                    408 ;--------------------------------------------------------
+                                    409 ; bit data
+                                    410 ;--------------------------------------------------------
+                                    411 	.area BSEG    (BIT)
+      000000                        412 _kbd_new_keys:
+      000000                        413 	.ds 1
+      000001                        414 _is_ctrl_out0_kbd:
+      000001                        415 	.ds 1
+      000002                        416 _kbd_idle_mode:
+      000002                        417 	.ds 1
+      000003                        418 _in1_busy:
+      000003                        419 	.ds 1
+      000004                        420 _kbd_serial_isr_parse_scancode_1_38:
+      000004                        421 	.ds 1
+                                    422 ;--------------------------------------------------------
+                                    423 ; paged external ram data
+                                    424 ;--------------------------------------------------------
+                                    425 	.area PSEG    (PAG,XDATA)
+                                    426 ;--------------------------------------------------------
+                                    427 ; external ram data
+                                    428 ;--------------------------------------------------------
+                                    429 	.area XSEG    (XDATA)
+                           007FB4   430 _EP0CS	=	0x7fb4
+                           007F00   431 _IN0BUF	=	0x7f00
+                           007FB5   432 _IN0BC	=	0x7fb5
+                           007EC0   433 _OUT0BUF	=	0x7ec0
+                           007FC5   434 _OUT0BC	=	0x7fc5
+                           007FB6   435 _IN1CS	=	0x7fb6
+                           007E80   436 _IN1BUF	=	0x7e80
+                           007FB7   437 _IN1BC	=	0x7fb7
+                           007E40   438 _OUT1BUF	=	0x7e40
+                           007FC6   439 _OUT1CS	=	0x7fc6
+                           007FC7   440 _OUT1BC	=	0x7fc7
+                           007E00   441 _IN2BUF	=	0x7e00
+                           007FB9   442 _IN2BC	=	0x7fb9
+                           007FB8   443 _IN2CS	=	0x7fb8
+                           007FC9   444 _OUT2BC	=	0x7fc9
+                           007FC8   445 _OUT2CS	=	0x7fc8
+                           007DC0   446 _OUT2BUF	=	0x7dc0
+                           007D80   447 _IN3BUF	=	0x7d80
+                           007D40   448 _OUT3BUF	=	0x7d40
+                           007FBA   449 _IN3CS	=	0x7fba
+                           007FBB   450 _IN3BC	=	0x7fbb
+                           007FCA   451 _OUT3CS	=	0x7fca
+                           007FCB   452 _OUT3BC	=	0x7fcb
+                           007D00   453 _IN4BUF	=	0x7d00
+                           007CC0   454 _OUT4BUF	=	0x7cc0
+                           007FBC   455 _IN4CS	=	0x7fbc
+                           007FCC   456 _OUT4CS	=	0x7fcc
+                           007FBD   457 _IN4BC	=	0x7fbd
+                           007FCD   458 _OUT4BC	=	0x7fcd
+                           007F9C   459 _OEA	=	0x7f9c
+                           007F96   460 _OUTA	=	0x7f96
+                           007F99   461 _PINSA	=	0x7f99
+                           007F9D   462 _OEB	=	0x7f9d
+                           007F97   463 _OUTB	=	0x7f97
+                           007F9A   464 _PINSB	=	0x7f9a
+                           007F9E   465 _OEC	=	0x7f9e
+                           007F98   466 _OUTC	=	0x7f98
+                           007F9B   467 _PINSC	=	0x7f9b
+                           007F93   468 _PORTACFG	=	0x7f93
+                           007F94   469 _PORTBCFG	=	0x7f94
+                           007F95   470 _PORTCCFG	=	0x7f95
+                           007FA1   471 _ISOCTL	=	0x7fa1
+                           007FA9   472 _IN07IRQ	=	0x7fa9
+                           007FAA   473 _OUT07IRQ	=	0x7faa
+                           007FAC   474 _IN07IEN	=	0x7fac
+                           007FAD   475 _OUT07IEN	=	0x7fad
+                           007FAB   476 _USBIRQ	=	0x7fab
+                           007FAE   477 _USBIEN	=	0x7fae
+                           007FDD   478 _USBPAIR	=	0x7fdd
+                           007FAF   479 _USBBAV	=	0x7faf
+                           007FD6   480 _USBCS	=	0x7fd6
+                           007FD7   481 _TOGCTL	=	0x7fd7
+                           007FD4   482 _SUDPTRH	=	0x7fd4
+                           007FD5   483 _SUDPTRL	=	0x7fd5
+                           007FE8   484 _SETUPDAT	=	0x7fe8
+                           007FA5   485 _I2CS	=	0x7fa5
+                           007FA6   486 _I2DAT	=	0x7fa6
+                           007FDE   487 _IN07VAL	=	0x7fde
+                           007FDF   488 _OUT07VAL	=	0x7fdf
+                           007FE2   489 _FASTXFR	=	0x7fe2
+                           007FE3   490 _AUTOPTRH	=	0x7fe3
+                           007FE4   491 _AUTOPTRL	=	0x7fe4
+                           007FE5   492 _AUTODATA	=	0x7fe5
+                                    493 ;--------------------------------------------------------
+                                    494 ; absolute external ram data
+                                    495 ;--------------------------------------------------------
+                                    496 	.area XABS    (ABS,XDATA)
+                                    497 ;--------------------------------------------------------
+                                    498 ; external initialized ram data
+                                    499 ;--------------------------------------------------------
+                                    500 	.area XISEG   (XDATA)
+                                    501 	.area HOME    (CODE)
+                                    502 	.area GSINIT0 (CODE)
+                                    503 	.area GSINIT1 (CODE)
+                                    504 	.area GSINIT2 (CODE)
+                                    505 	.area GSINIT3 (CODE)
+                                    506 	.area GSINIT4 (CODE)
+                                    507 	.area GSINIT5 (CODE)
+                                    508 	.area GSINIT  (CODE)
+                                    509 	.area GSFINAL (CODE)
+                                    510 	.area CSEG    (CODE)
+                                    511 ;--------------------------------------------------------
+                                    512 ; interrupt vector 
+                                    513 ;--------------------------------------------------------
+                                    514 	.area HOME    (CODE)
+      000000                        515 __interrupt_vect:
+      000000 02r00r00         [24]  516 	ljmp	__sdcc_gsinit_startup
+      000003 32               [24]  517 	reti
+      000004                        518 	.ds	7
+      00000B 32               [24]  519 	reti
+      00000C                        520 	.ds	7
+      000013 32               [24]  521 	reti
+      000014                        522 	.ds	7
+      00001B 32               [24]  523 	reti
+      00001C                        524 	.ds	7
+      000023 02r05rA4         [24]  525 	ljmp	_kbd_serial_isr
+      000026                        526 	.ds	5
+      00002B 02r06rD8         [24]  527 	ljmp	_timer2_isr
+      00002E                        528 	.ds	5
+      000033 32               [24]  529 	reti
+      000034                        530 	.ds	7
+      00003B 32               [24]  531 	reti
+      00003C                        532 	.ds	7
+      000043 02r01r24         [24]  533 	ljmp	_usb_isr
+                                    534 ;--------------------------------------------------------
+                                    535 ; global & static initialisations
+                                    536 ;--------------------------------------------------------
+                                    537 	.area HOME    (CODE)
+                                    538 	.area GSINIT  (CODE)
+                                    539 	.area GSFINAL (CODE)
+                                    540 	.area GSINIT  (CODE)
+                                    541 	.globl __sdcc_gsinit_startup
+                                    542 	.globl __sdcc_program_startup
+                                    543 	.globl __start__stack
+                                    544 	.globl __mcs51_genXINIT
+                                    545 	.globl __mcs51_genXRAMCLEAR
+                                    546 	.globl __mcs51_genRAMCLEAR
+                                    547 ;	sunkbd_hid.h:427: static __data unsigned int string_index[NUM_STRING] = {
+      000000 7Er73            [12]  548 	mov	r6,#_string_langid
+      000002 7Fs00            [12]  549 	mov	r7,#(_string_langid >> 8)
+      000004 8E*0E            [24]  550 	mov	(_string_index + 0),r6
+      000006 8F*0F            [24]  551 	mov	(_string_index + 1),r7
+      000008 7Er77            [12]  552 	mov	r6,#_string_mfg
+      00000A 7Fs00            [12]  553 	mov	r7,#(_string_mfg >> 8)
+      00000C 8E*10            [24]  554 	mov	((_string_index + 0x0002) + 0),r6
+      00000E 8F*11            [24]  555 	mov	((_string_index + 0x0002) + 1),r7
+      000010 7Er99            [12]  556 	mov	r6,#_string_prod
+      000012 7Fs00            [12]  557 	mov	r7,#(_string_prod >> 8)
+      000014 8E*12            [24]  558 	mov	((_string_index + 0x0004) + 0),r6
+      000016 8F*13            [24]  559 	mov	((_string_index + 0x0004) + 1),r7
+      000018 7ErBB            [12]  560 	mov	r6,#_string_if_keyboard
+      00001A 7Fs00            [12]  561 	mov	r7,#(_string_if_keyboard >> 8)
+      00001C 8E*14            [24]  562 	mov	((_string_index + 0x0006) + 0),r6
+      00001E 8F*15            [24]  563 	mov	((_string_index + 0x0006) + 1),r7
+                                    564 ;	sunkbd_hid.h:462: static __xdata setup_dat * __data sdat = (__xdata setup_dat *)&SETUPDAT;
+      000020 75*16 E8         [24]  565 	mov	_sdat,#_SETUPDAT
+      000023 75*17 7F         [24]  566 	mov	(_sdat + 1),#(_SETUPDAT >> 8)
+                                    567 	.area GSFINAL (CODE)
+      000000 02r00r46         [24]  568 	ljmp	__sdcc_program_startup
+                                    569 ;--------------------------------------------------------
+                                    570 ; Home
+                                    571 ;--------------------------------------------------------
+                                    572 	.area HOME    (CODE)
+                                    573 	.area HOME    (CODE)
+      000046                        574 __sdcc_program_startup:
+      000046 02r08r30         [24]  575 	ljmp	_main
+                                    576 ;	return from main will return to caller
+                                    577 ;--------------------------------------------------------
+                                    578 ; code
+                                    579 ;--------------------------------------------------------
+                                    580 	.area CSEG    (CODE)
+                                    581 ;------------------------------------------------------------
+                                    582 ;Allocation info for local variables in function 'apply_reset_values'
+                                    583 ;------------------------------------------------------------
+                                    584 ;	sunkbd_hid.c:50: static void apply_reset_values()
+                                    585 ;	-----------------------------------------
+                                    586 ;	 function apply_reset_values
+                                    587 ;	-----------------------------------------
+      000000                        588 _apply_reset_values:
+                           000007   589 	ar7 = 0x07
+                           000006   590 	ar6 = 0x06
+                           000005   591 	ar5 = 0x05
+                           000004   592 	ar4 = 0x04
+                           000003   593 	ar3 = 0x03
+                           000002   594 	ar2 = 0x02
+                           000001   595 	ar1 = 0x01
+                           000000   596 	ar0 = 0x00
+                                    597 ;	sunkbd_hid.c:54: kbd_txmit_me        = -1;
+      000000 75*0B FF         [24]  598 	mov	_kbd_txmit_me,#0xff
+                                    599 ;	sunkbd_hid.c:55: kbd_new_keys        = 0;
+      000003 C2*00            [12]  600 	clr	_kbd_new_keys
+                                    601 ;	sunkbd_hid.c:56: is_ctrl_out0_kbd    = 0;
+      000005 C2*01            [12]  602 	clr	_is_ctrl_out0_kbd
+                                    603 ;	sunkbd_hid.c:57: kbd_idle_mode       = FALSE;
+      000007 C2*02            [12]  604 	clr	_kbd_idle_mode
+                                    605 ;	sunkbd_hid.c:58: kbd_idle_duration   = 125;
+      000009 75*0C 7D         [24]  606 	mov	_kbd_idle_duration,#0x7d
+                                    607 ;	sunkbd_hid.c:59: in1_busy            = FALSE;
+      00000C C2*03            [12]  608 	clr	_in1_busy
+      00000E 22               [24]  609 	ret
+                                    610 ;------------------------------------------------------------
+                                    611 ;Allocation info for local variables in function 'get_descriptor'
+                                    612 ;------------------------------------------------------------
+                                    613 ;	sunkbd_hid.c:86: static void get_descriptor(void) __using (1)
+                                    614 ;	-----------------------------------------
+                                    615 ;	 function get_descriptor
+                                    616 ;	-----------------------------------------
+      00000F                        617 _get_descriptor:
+                           00000F   618 	ar7 = 0x0f
+                           00000E   619 	ar6 = 0x0e
+                           00000D   620 	ar5 = 0x0d
+                           00000C   621 	ar4 = 0x0c
+                           00000B   622 	ar3 = 0x0b
+                           00000A   623 	ar2 = 0x0a
+                           000009   624 	ar1 = 0x09
+                           000008   625 	ar0 = 0x08
+                                    626 ;	sunkbd_hid.c:88: switch (sdat->wValueH) {
+      00000F 85*16 82         [24]  627 	mov	dpl,_sdat
+      000012 85*17 83         [24]  628 	mov	dph,(_sdat + 1)
+      000015 A3               [24]  629 	inc	dptr
+      000016 A3               [24]  630 	inc	dptr
+      000017 A3               [24]  631 	inc	dptr
+      000018 E0               [24]  632 	movx	a,@dptr
+      000019 FF               [12]  633 	mov	r7,a
+      00001A BF 01 02         [24]  634 	cjne	r7,#0x01,00143$
+      00001D 80 19            [24]  635 	sjmp	00101$
+      00001F                        636 00143$:
+      00001F BF 02 02         [24]  637 	cjne	r7,#0x02,00144$
+      000022 80 2D            [24]  638 	sjmp	00102$
+      000024                        639 00144$:
+      000024 BF 03 02         [24]  640 	cjne	r7,#0x03,00145$
+      000027 80 41            [24]  641 	sjmp	00103$
+      000029                        642 00145$:
+      000029 BF 21 03         [24]  643 	cjne	r7,#0x21,00146$
+      00002C 02r00rB7         [24]  644 	ljmp	00107$
+      00002F                        645 00146$:
+      00002F BF 22 03         [24]  646 	cjne	r7,#0x22,00147$
+      000032 02r00rED         [24]  647 	ljmp	00111$
+      000035                        648 00147$:
+      000035 02r01r1D         [24]  649 	ljmp	00115$
+                                    650 ;	sunkbd_hid.c:90: case USB_DT_DEVICE:
+      000038                        651 00101$:
+                                    652 ;	sunkbd_hid.c:91: EP0CS   = 0x02;   /* clear HSNACK */
+      000038 90 7F B4         [24]  653 	mov	dptr,#_EP0CS
+      00003B 74 02            [12]  654 	mov	a,#0x02
+      00003D F0               [24]  655 	movx	@dptr,a
+                                    656 ;	sunkbd_hid.c:92: SUDPTRH = (Byte)((unsigned int)dev_desc >> 8);
+      00003E 7Er00            [12]  657 	mov	r6,#_dev_desc
+      000040 7Fs00            [12]  658 	mov	r7,#(_dev_desc >> 8)
+      000042 90 7F D4         [24]  659 	mov	dptr,#_SUDPTRH
+      000045 EF               [12]  660 	mov	a,r7
+      000046 F0               [24]  661 	movx	@dptr,a
+                                    662 ;	sunkbd_hid.c:93: SUDPTRL = (unsigned int)dev_desc & 0xff;
+      000047 7Er00            [12]  663 	mov	r6,#_dev_desc
+      000049 7Fs00            [12]  664 	mov	r7,#(_dev_desc >> 8)
+      00004B 90 7F D5         [24]  665 	mov	dptr,#_SUDPTRL
+      00004E EE               [12]  666 	mov	a,r6
+      00004F F0               [24]  667 	movx	@dptr,a
+                                    668 ;	sunkbd_hid.c:94: break;
+      000050 22               [24]  669 	ret
+                                    670 ;	sunkbd_hid.c:97: case USB_DT_CONFIG:
+      000051                        671 00102$:
+                                    672 ;	sunkbd_hid.c:98: EP0CS   = 0x02;   /* clear HSNACK */
+      000051 90 7F B4         [24]  673 	mov	dptr,#_EP0CS
+      000054 74 02            [12]  674 	mov	a,#0x02
+      000056 F0               [24]  675 	movx	@dptr,a
+                                    676 ;	sunkbd_hid.c:99: SUDPTRH = (Byte)((unsigned int)conf_desc >> 8);
+      000057 7Er12            [12]  677 	mov	r6,#_conf_desc
+      000059 7Fs00            [12]  678 	mov	r7,#(_conf_desc >> 8)
+      00005B 90 7F D4         [24]  679 	mov	dptr,#_SUDPTRH
+      00005E EF               [12]  680 	mov	a,r7
+      00005F F0               [24]  681 	movx	@dptr,a
+                                    682 ;	sunkbd_hid.c:100: SUDPTRL = (unsigned int)conf_desc & 0xff;
+      000060 7Er12            [12]  683 	mov	r6,#_conf_desc
+      000062 7Fs00            [12]  684 	mov	r7,#(_conf_desc >> 8)
+      000064 90 7F D5         [24]  685 	mov	dptr,#_SUDPTRL
+      000067 EE               [12]  686 	mov	a,r6
+      000068 F0               [24]  687 	movx	@dptr,a
+                                    688 ;	sunkbd_hid.c:101: break;
+      000069 22               [24]  689 	ret
+                                    690 ;	sunkbd_hid.c:104: case USB_DT_STRING:
+      00006A                        691 00103$:
+                                    692 ;	sunkbd_hid.c:105: if (sdat->wValueL < NUM_STRING) {
+      00006A 85*16 82         [24]  693 	mov	dpl,_sdat
+      00006D 85*17 83         [24]  694 	mov	dph,(_sdat + 1)
+      000070 A3               [24]  695 	inc	dptr
+      000071 A3               [24]  696 	inc	dptr
+      000072 E0               [24]  697 	movx	a,@dptr
+      000073 FF               [12]  698 	mov	r7,a
+      000074 BF 04 00         [24]  699 	cjne	r7,#0x04,00148$
+      000077                        700 00148$:
+      000077 50 37            [24]  701 	jnc	00105$
+                                    702 ;	sunkbd_hid.c:106: EP0CS     = 0x02;   /* clear HSNACK */
+      000079 90 7F B4         [24]  703 	mov	dptr,#_EP0CS
+      00007C 74 02            [12]  704 	mov	a,#0x02
+      00007E F0               [24]  705 	movx	@dptr,a
+                                    706 ;	sunkbd_hid.c:107: SUDPTRH = (Byte)(string_index[sdat->wValueL] >> 8);
+      00007F 85*16 82         [24]  707 	mov	dpl,_sdat
+      000082 85*17 83         [24]  708 	mov	dph,(_sdat + 1)
+      000085 A3               [24]  709 	inc	dptr
+      000086 A3               [24]  710 	inc	dptr
+      000087 E0               [24]  711 	movx	a,@dptr
+      000088 25 E0            [12]  712 	add	a,acc
+      00008A 24r0E            [12]  713 	add	a,#_string_index
+      00008C F9               [12]  714 	mov	r1,a
+      00008D 87 0E            [24]  715 	mov	ar6,@r1
+      00008F 09               [12]  716 	inc	r1
+      000090 87 0F            [24]  717 	mov	ar7,@r1
+      000092 90 7F D4         [24]  718 	mov	dptr,#_SUDPTRH
+      000095 EF               [12]  719 	mov	a,r7
+      000096 F0               [24]  720 	movx	@dptr,a
+                                    721 ;	sunkbd_hid.c:108: SUDPTRL = string_index[sdat->wValueL] & 0xff;
+      000097 85*16 82         [24]  722 	mov	dpl,_sdat
+      00009A 85*17 83         [24]  723 	mov	dph,(_sdat + 1)
+      00009D A3               [24]  724 	inc	dptr
+      00009E A3               [24]  725 	inc	dptr
+      00009F E0               [24]  726 	movx	a,@dptr
+      0000A0 25 E0            [12]  727 	add	a,acc
+      0000A2 24r0E            [12]  728 	add	a,#_string_index
+      0000A4 F9               [12]  729 	mov	r1,a
+      0000A5 87 0E            [24]  730 	mov	ar6,@r1
+      0000A7 09               [12]  731 	inc	r1
+      0000A8 87 0F            [24]  732 	mov	ar7,@r1
+      0000AA 90 7F D5         [24]  733 	mov	dptr,#_SUDPTRL
+      0000AD EE               [12]  734 	mov	a,r6
+      0000AE F0               [24]  735 	movx	@dptr,a
+      0000AF 22               [24]  736 	ret
+      0000B0                        737 00105$:
+                                    738 ;	sunkbd_hid.c:110: EP0CS     = 0x03;   /* stall */
+      0000B0 90 7F B4         [24]  739 	mov	dptr,#_EP0CS
+      0000B3 74 03            [12]  740 	mov	a,#0x03
+      0000B5 F0               [24]  741 	movx	@dptr,a
+                                    742 ;	sunkbd_hid.c:112: break;
+                                    743 ;	sunkbd_hid.c:115: case USB_DT_HID:
+      0000B6 22               [24]  744 	ret
+      0000B7                        745 00107$:
+                                    746 ;	sunkbd_hid.c:131: if (sdat->wIndexL == 0) {
+      0000B7 74 04            [12]  747 	mov	a,#0x04
+      0000B9 25*16            [12]  748 	add	a,_sdat
+      0000BB FE               [12]  749 	mov	r6,a
+      0000BC E4               [12]  750 	clr	a
+      0000BD 35*17            [12]  751 	addc	a,(_sdat + 1)
+      0000BF FF               [12]  752 	mov	r7,a
+      0000C0 8E 82            [24]  753 	mov	dpl,r6
+      0000C2 8F 83            [24]  754 	mov	dph,r7
+      0000C4 E0               [24]  755 	movx	a,@dptr
+      0000C5 70 1F            [24]  756 	jnz	00109$
+                                    757 ;	sunkbd_hid.c:133: EP0CS   = 0x02;   /* clear HSNACK */
+      0000C7 90 7F B4         [24]  758 	mov	dptr,#_EP0CS
+      0000CA 74 02            [12]  759 	mov	a,#0x02
+      0000CC F0               [24]  760 	movx	@dptr,a
+                                    761 ;	sunkbd_hid.c:135: SUDPTRH = (Byte)(((unsigned int)conf_desc) + 18 >> 8);
+      0000CD 7Er12            [12]  762 	mov	r6,#_conf_desc
+      0000CF 7Fs00            [12]  763 	mov	r7,#(_conf_desc >> 8)
+      0000D1 74 12            [12]  764 	mov	a,#0x12
+      0000D3 2E               [12]  765 	add	a,r6
+      0000D4 E4               [12]  766 	clr	a
+      0000D5 3F               [12]  767 	addc	a,r7
+      0000D6 90 7F D4         [24]  768 	mov	dptr,#_SUDPTRH
+      0000D9 F0               [24]  769 	movx	@dptr,a
+                                    770 ;	sunkbd_hid.c:136: SUDPTRL = ((unsigned int)conf_desc) + 18 & 0xff;
+      0000DA 7Er12            [12]  771 	mov	r6,#_conf_desc
+      0000DC 7Fs00            [12]  772 	mov	r7,#(_conf_desc >> 8)
+      0000DE 90 7F D5         [24]  773 	mov	dptr,#_SUDPTRL
+      0000E1 74 12            [12]  774 	mov	a,#0x12
+      0000E3 2E               [12]  775 	add	a,r6
+      0000E4 F0               [24]  776 	movx	@dptr,a
+      0000E5 22               [24]  777 	ret
+      0000E6                        778 00109$:
+                                    779 ;	sunkbd_hid.c:141: EP0CS   = 0x03;   /* stall */
+      0000E6 90 7F B4         [24]  780 	mov	dptr,#_EP0CS
+      0000E9 74 03            [12]  781 	mov	a,#0x03
+      0000EB F0               [24]  782 	movx	@dptr,a
+                                    783 ;	sunkbd_hid.c:143: break;
+                                    784 ;	sunkbd_hid.c:146: case USB_DT_REPORT:
+      0000EC 22               [24]  785 	ret
+      0000ED                        786 00111$:
+                                    787 ;	sunkbd_hid.c:160: if (sdat->wIndexL == 0) {
+      0000ED 74 04            [12]  788 	mov	a,#0x04
+      0000EF 25*16            [12]  789 	add	a,_sdat
+      0000F1 FE               [12]  790 	mov	r6,a
+      0000F2 E4               [12]  791 	clr	a
+      0000F3 35*17            [12]  792 	addc	a,(_sdat + 1)
+      0000F5 FF               [12]  793 	mov	r7,a
+      0000F6 8E 82            [24]  794 	mov	dpl,r6
+      0000F8 8F 83            [24]  795 	mov	dph,r7
+      0000FA E0               [24]  796 	movx	a,@dptr
+      0000FB 70 19            [24]  797 	jnz	00113$
+                                    798 ;	sunkbd_hid.c:162: EP0CS   = 0x02;   /* clear HSNACK */
+      0000FD 90 7F B4         [24]  799 	mov	dptr,#_EP0CS
+      000100 74 02            [12]  800 	mov	a,#0x02
+      000102 F0               [24]  801 	movx	@dptr,a
+                                    802 ;	sunkbd_hid.c:163: SUDPTRH = (Byte)((unsigned int)(report_desc_keyboard) >> 8);
+      000103 7Er34            [12]  803 	mov	r6,#_report_desc_keyboard
+      000105 7Fs00            [12]  804 	mov	r7,#(_report_desc_keyboard >> 8)
+      000107 90 7F D4         [24]  805 	mov	dptr,#_SUDPTRH
+      00010A EF               [12]  806 	mov	a,r7
+      00010B F0               [24]  807 	movx	@dptr,a
+                                    808 ;	sunkbd_hid.c:164: SUDPTRL = (unsigned int)(report_desc_keyboard) & 0xff;
+      00010C 7Er34            [12]  809 	mov	r6,#_report_desc_keyboard
+      00010E 7Fs00            [12]  810 	mov	r7,#(_report_desc_keyboard >> 8)
+      000110 90 7F D5         [24]  811 	mov	dptr,#_SUDPTRL
+      000113 EE               [12]  812 	mov	a,r6
+      000114 F0               [24]  813 	movx	@dptr,a
+      000115 22               [24]  814 	ret
+      000116                        815 00113$:
+                                    816 ;	sunkbd_hid.c:173: EP0CS   = 0x03;   /* stall */
+      000116 90 7F B4         [24]  817 	mov	dptr,#_EP0CS
+      000119 74 03            [12]  818 	mov	a,#0x03
+      00011B F0               [24]  819 	movx	@dptr,a
+                                    820 ;	sunkbd_hid.c:175: break;
+                                    821 ;	sunkbd_hid.c:177: default:
+      00011C 22               [24]  822 	ret
+      00011D                        823 00115$:
+                                    824 ;	sunkbd_hid.c:178: EP0CS     = 0x03;   /* stall */
+      00011D 90 7F B4         [24]  825 	mov	dptr,#_EP0CS
+      000120 74 03            [12]  826 	mov	a,#0x03
+      000122 F0               [24]  827 	movx	@dptr,a
+                                    828 ;	sunkbd_hid.c:180: }
+      000123 22               [24]  829 	ret
+                                    830 ;------------------------------------------------------------
+                                    831 ;Allocation info for local variables in function 'usb_isr'
+                                    832 ;------------------------------------------------------------
+                                    833 ;i                         Allocated to registers r7 
+                                    834 ;led_status                Allocated to registers r7 
+                                    835 ;------------------------------------------------------------
+                                    836 ;	sunkbd_hid.c:199: static void usb_isr(void) __interrupt (8) __using (1) __critical
+                                    837 ;	-----------------------------------------
+                                    838 ;	 function usb_isr
+                                    839 ;	-----------------------------------------
+      000124                        840 _usb_isr:
+      000124 C2 AF            [12]  841 	clr	ea
+      000126 C0*00            [24]  842 	push	bits
+      000128 C0 E0            [24]  843 	push	acc
+      00012A C0 F0            [24]  844 	push	b
+      00012C C0 82            [24]  845 	push	dpl
+      00012E C0 83            [24]  846 	push	dph
+      000130 C0 07            [24]  847 	push	(0+7)
+      000132 C0 06            [24]  848 	push	(0+6)
+      000134 C0 05            [24]  849 	push	(0+5)
+      000136 C0 04            [24]  850 	push	(0+4)
+      000138 C0 03            [24]  851 	push	(0+3)
+      00013A C0 02            [24]  852 	push	(0+2)
+      00013C C0 01            [24]  853 	push	(0+1)
+      00013E C0 00            [24]  854 	push	(0+0)
+      000140 C0 D0            [24]  855 	push	psw
+      000142 75 D0 08         [24]  856 	mov	psw,#0x08
+                                    857 ;	sunkbd_hid.c:202: EXIF &= 0xef;
+      000145 53 91 EF         [24]  858 	anl	_EXIF,#0xef
+                                    859 ;	sunkbd_hid.c:205: if (USBIRQ & 0x01) {
+      000148 90 7F AB         [24]  860 	mov	dptr,#_USBIRQ
+      00014B E0               [24]  861 	movx	a,@dptr
+      00014C FF               [12]  862 	mov	r7,a
+      00014D 20 E0 03         [24]  863 	jb	acc.0,00322$
+      000150 02r05r0D         [24]  864 	ljmp	00183$
+      000153                        865 00322$:
+                                    866 ;	sunkbd_hid.c:209: USBIRQ = 0x01;
+      000153 90 7F AB         [24]  867 	mov	dptr,#_USBIRQ
+      000156 74 01            [12]  868 	mov	a,#0x01
+      000158 F0               [24]  869 	movx	@dptr,a
+                                    870 ;	sunkbd_hid.c:211: switch (sdat->bRequest) {
+      000159 85*16 82         [24]  871 	mov	dpl,_sdat
+      00015C 85*17 83         [24]  872 	mov	dph,(_sdat + 1)
+      00015F A3               [24]  873 	inc	dptr
+      000160 E0               [24]  874 	movx	a,@dptr
+      000161 FF               [12]  875 	mov  r7,a
+      000162 24 F4            [12]  876 	add	a,#0xff - 0x0b
+      000164 50 03            [24]  877 	jnc	00323$
+      000166 02r05r07         [24]  878 	ljmp	00180$
+      000169                        879 00323$:
+      000169 EF               [12]  880 	mov	a,r7
+      00016A 24 0A            [12]  881 	add	a,#(00324$-3-.)
+      00016C 83               [24]  882 	movc	a,@a+pc
+      00016D F5 82            [12]  883 	mov	dpl,a
+      00016F EF               [12]  884 	mov	a,r7
+      000170 24 10            [12]  885 	add	a,#(00325$-3-.)
+      000172 83               [24]  886 	movc	a,@a+pc
+      000173 F5 83            [12]  887 	mov	dph,a
+      000175 E4               [12]  888 	clr	a
+      000176 73               [24]  889 	jmp	@a+dptr
+      000177                        890 00324$:
+      000177r8F                     891 	.db	00101$
+      000178rC3                     892 	.db	00107$
+      000179rA1                     893 	.db	00125$
+      00017ArE2                     894 	.db	00132$
+      00017Br07                     895 	.db	00180$
+      00017Cr07                     896 	.db	00180$
+      00017DrD5                     897 	.db	00148$
+      00017Er07                     898 	.db	00180$
+      00017FrDB                     899 	.db	00149$
+      000180r01                     900 	.db	00153$
+      000181r2C                     901 	.db	00158$
+      000182r9B                     902 	.db	00169$
+      000183                        903 00325$:
+      000183s01                     904 	.db	00101$>>8
+      000184s01                     905 	.db	00107$>>8
+      000185s02                     906 	.db	00125$>>8
+      000186s02                     907 	.db	00132$>>8
+      000187s05                     908 	.db	00180$>>8
+      000188s05                     909 	.db	00180$>>8
+      000189s03                     910 	.db	00148$>>8
+      00018As05                     911 	.db	00180$>>8
+      00018Bs03                     912 	.db	00149$>>8
+      00018Cs04                     913 	.db	00153$>>8
+      00018Ds04                     914 	.db	00158$>>8
+      00018Es04                     915 	.db	00169$>>8
+                                    916 ;	sunkbd_hid.c:214: case 0x00:
+      00018F                        917 00101$:
+                                    918 ;	sunkbd_hid.c:215: switch (sdat->bmRequestType) {
+      00018F 85*16 82         [24]  919 	mov	dpl,_sdat
+      000192 85*17 83         [24]  920 	mov	dph,(_sdat + 1)
+      000195 E0               [24]  921 	movx	a,@dptr
+      000196 FF               [12]  922 	mov	r7,a
+      000197 BF 80 02         [24]  923 	cjne	r7,#0x80,00326$
+      00019A 80 08            [24]  924 	sjmp	00104$
+      00019C                        925 00326$:
+      00019C BF 81 02         [24]  926 	cjne	r7,#0x81,00327$
+      00019F 80 03            [24]  927 	sjmp	00104$
+      0001A1                        928 00327$:
+      0001A1 BF 82 16         [24]  929 	cjne	r7,#0x82,00105$
+                                    930 ;	sunkbd_hid.c:221: case 0x82:
+      0001A4                        931 00104$:
+                                    932 ;	sunkbd_hid.c:222: in0buf(0) = 0x00;
+      0001A4 90 7F 00         [24]  933 	mov	dptr,#_IN0BUF
+      0001A7 E4               [12]  934 	clr	a
+      0001A8 F0               [24]  935 	movx	@dptr,a
+                                    936 ;	sunkbd_hid.c:223: in0buf(1) = 0x00;
+      0001A9 90 7F 01         [24]  937 	mov	dptr,#(_IN0BUF + 0x0001)
+      0001AC F0               [24]  938 	movx	@dptr,a
+                                    939 ;	sunkbd_hid.c:224: IN0BC     = 0x02;
+      0001AD 90 7F B5         [24]  940 	mov	dptr,#_IN0BC
+      0001B0 74 02            [12]  941 	mov	a,#0x02
+      0001B2 F0               [24]  942 	movx	@dptr,a
+                                    943 ;	sunkbd_hid.c:225: EP0CS     = 0x02;   /* clear HSNACK */
+      0001B3 90 7F B4         [24]  944 	mov	dptr,#_EP0CS
+      0001B6 F0               [24]  945 	movx	@dptr,a
+                                    946 ;	sunkbd_hid.c:226: break;
+      0001B7 02r05r0D         [24]  947 	ljmp	00183$
+                                    948 ;	sunkbd_hid.c:228: default:
+      0001BA                        949 00105$:
+                                    950 ;	sunkbd_hid.c:229: EP0CS     = 0x03;   /* stall */
+      0001BA 90 7F B4         [24]  951 	mov	dptr,#_EP0CS
+      0001BD 74 03            [12]  952 	mov	a,#0x03
+      0001BF F0               [24]  953 	movx	@dptr,a
+                                    954 ;	sunkbd_hid.c:232: break;
+      0001C0 02r05r0D         [24]  955 	ljmp	00183$
+                                    956 ;	sunkbd_hid.c:235: case 0x01:
+      0001C3                        957 00107$:
+                                    958 ;	sunkbd_hid.c:236: switch (sdat->bmRequestType) {
+      0001C3 85*16 82         [24]  959 	mov	dpl,_sdat
+      0001C6 85*17 83         [24]  960 	mov	dph,(_sdat + 1)
+      0001C9 E0               [24]  961 	movx	a,@dptr
+      0001CA FF               [12]  962 	mov	r7,a
+      0001CB 60 13            [24]  963 	jz	00108$
+      0001CD BF 01 02         [24]  964 	cjne	r7,#0x01,00331$
+      0001D0 80 17            [24]  965 	sjmp	00109$
+      0001D2                        966 00331$:
+      0001D2 BF 02 02         [24]  967 	cjne	r7,#0x02,00332$
+      0001D5 80 1B            [24]  968 	sjmp	00110$
+      0001D7                        969 00332$:
+      0001D7 BF A1 03         [24]  970 	cjne	r7,#0xa1,00333$
+      0001DA 02r02r58         [24]  971 	ljmp	00116$
+      0001DD                        972 00333$:
+      0001DD 02r02r98         [24]  973 	ljmp	00123$
+                                    974 ;	sunkbd_hid.c:238: case 0x00:
+      0001E0                        975 00108$:
+                                    976 ;	sunkbd_hid.c:239: EP0CS     = 0x02;   /* clear HSNACK */
+      0001E0 90 7F B4         [24]  977 	mov	dptr,#_EP0CS
+      0001E3 74 02            [12]  978 	mov	a,#0x02
+      0001E5 F0               [24]  979 	movx	@dptr,a
+                                    980 ;	sunkbd_hid.c:240: break;
+      0001E6 02r05r0D         [24]  981 	ljmp	00183$
+                                    982 ;	sunkbd_hid.c:242: case 0x01:
+      0001E9                        983 00109$:
+                                    984 ;	sunkbd_hid.c:243: EP0CS     = 0x02;   /* clear HSNACK */
+      0001E9 90 7F B4         [24]  985 	mov	dptr,#_EP0CS
+      0001EC 74 02            [12]  986 	mov	a,#0x02
+      0001EE F0               [24]  987 	movx	@dptr,a
+                                    988 ;	sunkbd_hid.c:244: break;
+      0001EF 02r05r0D         [24]  989 	ljmp	00183$
+                                    990 ;	sunkbd_hid.c:246: case 0x02:
+      0001F2                        991 00110$:
+                                    992 ;	sunkbd_hid.c:247: switch (sdat->wIndexL) {
+      0001F2 85*16 82         [24]  993 	mov	dpl,_sdat
+      0001F5 85*17 83         [24]  994 	mov	dph,(_sdat + 1)
+      0001F8 A3               [24]  995 	inc	dptr
+      0001F9 A3               [24]  996 	inc	dptr
+      0001FA A3               [24]  997 	inc	dptr
+      0001FB A3               [24]  998 	inc	dptr
+      0001FC E0               [24]  999 	movx	a,@dptr
+      0001FD FF               [12] 1000 	mov	r7,a
+      0001FE 60 12            [24] 1001 	jz	00111$
+      000200 BF 80 02         [24] 1002 	cjne	r7,#0x80,00335$
+      000203 80 1D            [24] 1003 	sjmp	00112$
+      000205                       1004 00335$:
+      000205 BF 81 02         [24] 1005 	cjne	r7,#0x81,00336$
+      000208 80 2A            [24] 1006 	sjmp	00113$
+      00020A                       1007 00336$:
+      00020A BF 82 02         [24] 1008 	cjne	r7,#0x82,00337$
+      00020D 80 40            [24] 1009 	sjmp	00114$
+      00020F                       1010 00337$:
+      00020F 02r05r0D         [24] 1011 	ljmp	00183$
+                                   1012 ;	sunkbd_hid.c:250: case 0x00:  /* OUT0 */
+      000212                       1013 00111$:
+                                   1014 ;	sunkbd_hid.c:251: TOGCTL = 0x00;
+      000212 90 7F D7         [24] 1015 	mov	dptr,#_TOGCTL
+      000215 E4               [12] 1016 	clr	a
+      000216 F0               [24] 1017 	movx	@dptr,a
+                                   1018 ;	sunkbd_hid.c:252: TOGCTL = 0x20;
+      000217 74 20            [12] 1019 	mov	a,#0x20
+      000219 F0               [24] 1020 	movx	@dptr,a
+                                   1021 ;	sunkbd_hid.c:253: EP0CS  = 0x02;   /* clear HSNACK */
+      00021A 90 7F B4         [24] 1022 	mov	dptr,#_EP0CS
+      00021D C4               [12] 1023 	swap	a
+      00021E F0               [24] 1024 	movx	@dptr,a
+                                   1025 ;	sunkbd_hid.c:254: break;
+      00021F 02r05r0D         [24] 1026 	ljmp	00183$
+                                   1027 ;	sunkbd_hid.c:255: case 0x80:  /* IN0  */
+      000222                       1028 00112$:
+                                   1029 ;	sunkbd_hid.c:256: TOGCTL = 0x10;
+      000222 90 7F D7         [24] 1030 	mov	dptr,#_TOGCTL
+      000225 74 10            [12] 1031 	mov	a,#0x10
+      000227 F0               [24] 1032 	movx	@dptr,a
+                                   1033 ;	sunkbd_hid.c:257: TOGCTL = 0x30;
+      000228 74 30            [12] 1034 	mov	a,#0x30
+      00022A F0               [24] 1035 	movx	@dptr,a
+                                   1036 ;	sunkbd_hid.c:258: EP0CS  = 0x02;   /* clear HSNACK */
+      00022B 90 7F B4         [24] 1037 	mov	dptr,#_EP0CS
+      00022E 74 02            [12] 1038 	mov	a,#0x02
+      000230 F0               [24] 1039 	movx	@dptr,a
+                                   1040 ;	sunkbd_hid.c:259: break;
+      000231 02r05r0D         [24] 1041 	ljmp	00183$
+                                   1042 ;	sunkbd_hid.c:260: case 0x81:  /* IN1  */
+      000234                       1043 00113$:
+                                   1044 ;	sunkbd_hid.c:262: IN1CS &= 0xfe;
+      000234 90 7F B6         [24] 1045 	mov	dptr,#_IN1CS
+      000237 E0               [24] 1046 	movx	a,@dptr
+      000238 FF               [12] 1047 	mov	r7,a
+      000239 74 FE            [12] 1048 	mov	a,#0xfe
+      00023B 5F               [12] 1049 	anl	a,r7
+      00023C F0               [24] 1050 	movx	@dptr,a
+                                   1051 ;	sunkbd_hid.c:263: TOGCTL = 0x11;
+      00023D 90 7F D7         [24] 1052 	mov	dptr,#_TOGCTL
+      000240 74 11            [12] 1053 	mov	a,#0x11
+      000242 F0               [24] 1054 	movx	@dptr,a
+                                   1055 ;	sunkbd_hid.c:264: TOGCTL = 0x31;
+      000243 74 31            [12] 1056 	mov	a,#0x31
+      000245 F0               [24] 1057 	movx	@dptr,a
+                                   1058 ;	sunkbd_hid.c:265: EP0CS  = 0x02;   /* clear HSNACK */
+      000246 90 7F B4         [24] 1059 	mov	dptr,#_EP0CS
+      000249 74 02            [12] 1060 	mov	a,#0x02
+      00024B F0               [24] 1061 	movx	@dptr,a
+                                   1062 ;	sunkbd_hid.c:269: break;
+      00024C 02r05r0D         [24] 1063 	ljmp	00183$
+                                   1064 ;	sunkbd_hid.c:270: case 0x82:  /* IN2  */
+      00024F                       1065 00114$:
+                                   1066 ;	sunkbd_hid.c:277: EP0CS  = 0x03;   /* stall */
+      00024F 90 7F B4         [24] 1067 	mov	dptr,#_EP0CS
+      000252 74 03            [12] 1068 	mov	a,#0x03
+      000254 F0               [24] 1069 	movx	@dptr,a
+                                   1070 ;	sunkbd_hid.c:281: break;
+      000255 02r05r0D         [24] 1071 	ljmp	00183$
+                                   1072 ;	sunkbd_hid.c:284: case 0xa1:
+      000258                       1073 00116$:
+                                   1074 ;	sunkbd_hid.c:311: if (sdat->wIndexL == 0) {
+      000258 74 04            [12] 1075 	mov	a,#0x04
+      00025A 25*16            [12] 1076 	add	a,_sdat
+      00025C FE               [12] 1077 	mov	r6,a
+      00025D E4               [12] 1078 	clr	a
+      00025E 35*17            [12] 1079 	addc	a,(_sdat + 1)
+      000260 FF               [12] 1080 	mov	r7,a
+      000261 8E 82            [24] 1081 	mov	dpl,r6
+      000263 8F 83            [24] 1082 	mov	dph,r7
+      000265 E0               [24] 1083 	movx	a,@dptr
+      000266 70 27            [24] 1084 	jnz	00121$
+                                   1085 ;	sunkbd_hid.c:313: while (i-- > 0)
+      000268 7F 07            [12] 1086 	mov	r7,#0x07
+      00026A                       1087 00117$:
+      00026A 8F 0E            [24] 1088 	mov	ar6,r7
+      00026C 1F               [12] 1089 	dec	r7
+      00026D EE               [12] 1090 	mov	a,r6
+      00026E 60 0E            [24] 1091 	jz	00119$
+                                   1092 ;	sunkbd_hid.c:314: in0buf(i) = key_buffer[i];
+      000270 8F 82            [24] 1093 	mov	dpl,r7
+      000272 75 83 7F         [24] 1094 	mov	dph,#(_IN0BUF >> 8)
+      000275 EF               [12] 1095 	mov	a,r7
+      000276 24r03            [12] 1096 	add	a,#_key_buffer
+      000278 F9               [12] 1097 	mov	r1,a
+      000279 E7               [12] 1098 	mov	a,@r1
+      00027A FE               [12] 1099 	mov	r6,a
+      00027B F0               [24] 1100 	movx	@dptr,a
+      00027C 80 EC            [24] 1101 	sjmp	00117$
+      00027E                       1102 00119$:
+                                   1103 ;	sunkbd_hid.c:317: kbd_new_keys = FALSE;
+      00027E C2*00            [12] 1104 	clr	_kbd_new_keys
+                                   1105 ;	sunkbd_hid.c:319: IN0BC    = 0x08;
+      000280 90 7F B5         [24] 1106 	mov	dptr,#_IN0BC
+      000283 74 08            [12] 1107 	mov	a,#0x08
+      000285 F0               [24] 1108 	movx	@dptr,a
+                                   1109 ;	sunkbd_hid.c:320: EP0CS    = 0x02;   /* clear HSNACK */
+      000286 90 7F B4         [24] 1110 	mov	dptr,#_EP0CS
+      000289 74 02            [12] 1111 	mov	a,#0x02
+      00028B F0               [24] 1112 	movx	@dptr,a
+      00028C 02r05r0D         [24] 1113 	ljmp	00183$
+      00028F                       1114 00121$:
+                                   1115 ;	sunkbd_hid.c:334: EP0CS = 0x03;   /* stall */
+      00028F 90 7F B4         [24] 1116 	mov	dptr,#_EP0CS
+      000292 74 03            [12] 1117 	mov	a,#0x03
+      000294 F0               [24] 1118 	movx	@dptr,a
+                                   1119 ;	sunkbd_hid.c:337: break;
+      000295 02r05r0D         [24] 1120 	ljmp	00183$
+                                   1121 ;	sunkbd_hid.c:339: default:
+      000298                       1122 00123$:
+                                   1123 ;	sunkbd_hid.c:340: EP0CS     = 0x03;   /* stall */
+      000298 90 7F B4         [24] 1124 	mov	dptr,#_EP0CS
+      00029B 74 03            [12] 1125 	mov	a,#0x03
+      00029D F0               [24] 1126 	movx	@dptr,a
+                                   1127 ;	sunkbd_hid.c:343: break;
+      00029E 02r05r0D         [24] 1128 	ljmp	00183$
+                                   1129 ;	sunkbd_hid.c:346: case 0x02:
+      0002A1                       1130 00125$:
+                                   1131 ;	sunkbd_hid.c:347: switch (sdat->bmRequestType) {
+      0002A1 85*16 82         [24] 1132 	mov	dpl,_sdat
+      0002A4 85*17 83         [24] 1133 	mov	dph,(_sdat + 1)
+      0002A7 E0               [24] 1134 	movx	a,@dptr
+      0002A8 FF               [12] 1135 	mov	r7,a
+      0002A9 BF A1 2D         [24] 1136 	cjne	r7,#0xa1,00130$
+                                   1137 ;	sunkbd_hid.c:363: if (sdat->wIndexL == 0) {
+      0002AC 74 04            [12] 1138 	mov	a,#0x04
+      0002AE 25*16            [12] 1139 	add	a,_sdat
+      0002B0 FE               [12] 1140 	mov	r6,a
+      0002B1 E4               [12] 1141 	clr	a
+      0002B2 35*17            [12] 1142 	addc	a,(_sdat + 1)
+      0002B4 FF               [12] 1143 	mov	r7,a
+      0002B5 8E 82            [24] 1144 	mov	dpl,r6
+      0002B7 8F 83            [24] 1145 	mov	dph,r7
+      0002B9 E0               [24] 1146 	movx	a,@dptr
+      0002BA 70 14            [24] 1147 	jnz	00128$
+                                   1148 ;	sunkbd_hid.c:365: in0buf(0) = kbd_idle_duration;
+      0002BC 90 7F 00         [24] 1149 	mov	dptr,#_IN0BUF
+      0002BF E5*0C            [12] 1150 	mov	a,_kbd_idle_duration
+      0002C1 F0               [24] 1151 	movx	@dptr,a
+                                   1152 ;	sunkbd_hid.c:369: IN0BC     = 0x01;
+      0002C2 90 7F B5         [24] 1153 	mov	dptr,#_IN0BC
+      0002C5 74 01            [12] 1154 	mov	a,#0x01
+      0002C7 F0               [24] 1155 	movx	@dptr,a
+                                   1156 ;	sunkbd_hid.c:370: EP0CS     = 0x02;   /* clear HSNACK */
+      0002C8 90 7F B4         [24] 1157 	mov	dptr,#_EP0CS
+      0002CB 04               [12] 1158 	inc	a
+      0002CC F0               [24] 1159 	movx	@dptr,a
+      0002CD 02r05r0D         [24] 1160 	ljmp	00183$
+      0002D0                       1161 00128$:
+                                   1162 ;	sunkbd_hid.c:372: EP0CS  = 0x03;   /* stall */
+      0002D0 90 7F B4         [24] 1163 	mov	dptr,#_EP0CS
+      0002D3 74 03            [12] 1164 	mov	a,#0x03
+      0002D5 F0               [24] 1165 	movx	@dptr,a
+                                   1166 ;	sunkbd_hid.c:376: break;
+      0002D6 02r05r0D         [24] 1167 	ljmp	00183$
+                                   1168 ;	sunkbd_hid.c:378: default:
+      0002D9                       1169 00130$:
+                                   1170 ;	sunkbd_hid.c:379: EP0CS     = 0x03;   /* stall */
+      0002D9 90 7F B4         [24] 1171 	mov	dptr,#_EP0CS
+      0002DC 74 03            [12] 1172 	mov	a,#0x03
+      0002DE F0               [24] 1173 	movx	@dptr,a
+                                   1174 ;	sunkbd_hid.c:382: break;
+      0002DF 02r05r0D         [24] 1175 	ljmp	00183$
+                                   1176 ;	sunkbd_hid.c:385: case 0x03:
+      0002E2                       1177 00132$:
+                                   1178 ;	sunkbd_hid.c:386: switch (sdat->bmRequestType) {
+      0002E2 85*16 82         [24] 1179 	mov	dpl,_sdat
+      0002E5 85*17 83         [24] 1180 	mov	dph,(_sdat + 1)
+      0002E8 E0               [24] 1181 	movx	a,@dptr
+      0002E9 FF               [12] 1182 	mov	r7,a
+      0002EA 60 13            [24] 1183 	jz	00133$
+      0002EC BF 01 02         [24] 1184 	cjne	r7,#0x01,00344$
+      0002EF 80 17            [24] 1185 	sjmp	00134$
+      0002F1                       1186 00344$:
+      0002F1 BF 02 02         [24] 1187 	cjne	r7,#0x02,00345$
+      0002F4 80 1B            [24] 1188 	sjmp	00135$
+      0002F6                       1189 00345$:
+      0002F6 BF A1 03         [24] 1190 	cjne	r7,#0xa1,00346$
+      0002F9 02r03rA1         [24] 1191 	ljmp	00142$
+      0002FC                       1192 00346$:
+      0002FC 02r03rCC         [24] 1193 	ljmp	00146$
+                                   1194 ;	sunkbd_hid.c:388: case 0x00:
+      0002FF                       1195 00133$:
+                                   1196 ;	sunkbd_hid.c:389: EP0CS     = 0x02;   /* clear HSNACK */
+      0002FF 90 7F B4         [24] 1197 	mov	dptr,#_EP0CS
+      000302 74 02            [12] 1198 	mov	a,#0x02
+      000304 F0               [24] 1199 	movx	@dptr,a
+                                   1200 ;	sunkbd_hid.c:390: break;
+      000305 02r05r0D         [24] 1201 	ljmp	00183$
+                                   1202 ;	sunkbd_hid.c:392: case 0x01:
+      000308                       1203 00134$:
+                                   1204 ;	sunkbd_hid.c:393: EP0CS     = 0x02;   /* clear HSNACK */
+      000308 90 7F B4         [24] 1205 	mov	dptr,#_EP0CS
+      00030B 74 02            [12] 1206 	mov	a,#0x02
+      00030D F0               [24] 1207 	movx	@dptr,a
+                                   1208 ;	sunkbd_hid.c:394: break;
+      00030E 02r05r0D         [24] 1209 	ljmp	00183$
+                                   1210 ;	sunkbd_hid.c:396: case 0x02:
+      000311                       1211 00135$:
+                                   1212 ;	sunkbd_hid.c:397: switch (sdat->wIndexL) {
+      000311 85*16 82         [24] 1213 	mov	dpl,_sdat
+      000314 85*17 83         [24] 1214 	mov	dph,(_sdat + 1)
+      000317 A3               [24] 1215 	inc	dptr
+      000318 A3               [24] 1216 	inc	dptr
+      000319 A3               [24] 1217 	inc	dptr
+      00031A A3               [24] 1218 	inc	dptr
+      00031B E0               [24] 1219 	movx	a,@dptr
+      00031C FF               [12] 1220 	mov	r7,a
+      00031D 60 0F            [24] 1221 	jz	00136$
+      00031F BF 80 02         [24] 1222 	cjne	r7,#0x80,00348$
+      000322 80 2C            [24] 1223 	sjmp	00137$
+      000324                       1224 00348$:
+      000324 BF 81 02         [24] 1225 	cjne	r7,#0x81,00349$
+      000327 80 45            [24] 1226 	sjmp	00138$
+      000329                       1227 00349$:
+                                   1228 ;	sunkbd_hid.c:398: case 0x00:  /* OUT0 */
+      000329 BF 82 6C         [24] 1229 	cjne	r7,#0x82,00140$
+      00032C 80 61            [24] 1230 	sjmp	00139$
+      00032E                       1231 00136$:
+                                   1232 ;	sunkbd_hid.c:399: EP0CS  |= 0x01;  /* stall endpoint */
+      00032E 90 7F B4         [24] 1233 	mov	dptr,#_EP0CS
+      000331 E0               [24] 1234 	movx	a,@dptr
+      000332 FF               [12] 1235 	mov	r7,a
+      000333 74 01            [12] 1236 	mov	a,#0x01
+      000335 4F               [12] 1237 	orl	a,r7
+      000336 F0               [24] 1238 	movx	@dptr,a
+                                   1239 ;	sunkbd_hid.c:400: TOGCTL  = 0x00;
+      000337 90 7F D7         [24] 1240 	mov	dptr,#_TOGCTL
+      00033A E4               [12] 1241 	clr	a
+      00033B F0               [24] 1242 	movx	@dptr,a
+                                   1243 ;	sunkbd_hid.c:401: TOGCTL  = 0x20;
+      00033C 74 20            [12] 1244 	mov	a,#0x20
+      00033E F0               [24] 1245 	movx	@dptr,a
+                                   1246 ;	sunkbd_hid.c:402: OUT0BC  = 0x00;
+      00033F 90 7F C5         [24] 1247 	mov	dptr,#_OUT0BC
+      000342 E4               [12] 1248 	clr	a
+      000343 F0               [24] 1249 	movx	@dptr,a
+                                   1250 ;	sunkbd_hid.c:403: EP0CS  |= 0x02;  /* clear HSNACK */
+      000344 90 7F B4         [24] 1251 	mov	dptr,#_EP0CS
+      000347 E0               [24] 1252 	movx	a,@dptr
+      000348 FF               [12] 1253 	mov	r7,a
+      000349 74 02            [12] 1254 	mov	a,#0x02
+      00034B 4F               [12] 1255 	orl	a,r7
+      00034C F0               [24] 1256 	movx	@dptr,a
+                                   1257 ;	sunkbd_hid.c:404: break;
+      00034D 02r05r0D         [24] 1258 	ljmp	00183$
+                                   1259 ;	sunkbd_hid.c:405: case 0x80:  /* IN0  */
+      000350                       1260 00137$:
+                                   1261 ;	sunkbd_hid.c:406: EP0CS  |= 0x01;  /* stall endpoint */
+      000350 90 7F B4         [24] 1262 	mov	dptr,#_EP0CS
+      000353 E0               [24] 1263 	movx	a,@dptr
+      000354 FF               [12] 1264 	mov	r7,a
+      000355 74 01            [12] 1265 	mov	a,#0x01
+      000357 4F               [12] 1266 	orl	a,r7
+      000358 F0               [24] 1267 	movx	@dptr,a
+                                   1268 ;	sunkbd_hid.c:407: TOGCTL  = 0x10;
+      000359 90 7F D7         [24] 1269 	mov	dptr,#_TOGCTL
+      00035C 74 10            [12] 1270 	mov	a,#0x10
+      00035E F0               [24] 1271 	movx	@dptr,a
+                                   1272 ;	sunkbd_hid.c:408: TOGCTL  = 0x30;
+      00035F 74 30            [12] 1273 	mov	a,#0x30
+      000361 F0               [24] 1274 	movx	@dptr,a
+                                   1275 ;	sunkbd_hid.c:409: EP0CS  |= 0x02;  /* clear HSNACK */
+      000362 90 7F B4         [24] 1276 	mov	dptr,#_EP0CS
+      000365 E0               [24] 1277 	movx	a,@dptr
+      000366 FF               [12] 1278 	mov	r7,a
+      000367 74 02            [12] 1279 	mov	a,#0x02
+      000369 4F               [12] 1280 	orl	a,r7
+      00036A F0               [24] 1281 	movx	@dptr,a
+                                   1282 ;	sunkbd_hid.c:410: break;
+      00036B 02r05r0D         [24] 1283 	ljmp	00183$
+                                   1284 ;	sunkbd_hid.c:411: case 0x81:  /* IN1  */
+      00036E                       1285 00138$:
+                                   1286 ;	sunkbd_hid.c:413: IN1CS   = 0x01;  /* stall endpoint */
+      00036E 90 7F B6         [24] 1287 	mov	dptr,#_IN1CS
+      000371 74 01            [12] 1288 	mov	a,#0x01
+      000373 F0               [24] 1289 	movx	@dptr,a
+                                   1290 ;	sunkbd_hid.c:414: TOGCTL  = 0x11;
+      000374 90 7F D7         [24] 1291 	mov	dptr,#_TOGCTL
+      000377 74 11            [12] 1292 	mov	a,#0x11
+      000379 F0               [24] 1293 	movx	@dptr,a
+                                   1294 ;	sunkbd_hid.c:415: TOGCTL  = 0x31;
+      00037A 74 31            [12] 1295 	mov	a,#0x31
+      00037C F0               [24] 1296 	movx	@dptr,a
+                                   1297 ;	sunkbd_hid.c:416: IN1CS  |= 0x02;
+      00037D 90 7F B6         [24] 1298 	mov	dptr,#_IN1CS
+      000380 E0               [24] 1299 	movx	a,@dptr
+      000381 FF               [12] 1300 	mov	r7,a
+      000382 74 02            [12] 1301 	mov	a,#0x02
+      000384 4F               [12] 1302 	orl	a,r7
+      000385 F0               [24] 1303 	movx	@dptr,a
+                                   1304 ;	sunkbd_hid.c:417: EP0CS   = 0x02;  /* clear HSNACK */
+      000386 90 7F B4         [24] 1305 	mov	dptr,#_EP0CS
+      000389 74 02            [12] 1306 	mov	a,#0x02
+      00038B F0               [24] 1307 	movx	@dptr,a
+                                   1308 ;	sunkbd_hid.c:421: break;
+      00038C 02r05r0D         [24] 1309 	ljmp	00183$
+                                   1310 ;	sunkbd_hid.c:422: case 0x82:  /* IN2  */
+      00038F                       1311 00139$:
+                                   1312 ;	sunkbd_hid.c:430: EP0CS  = 0x03;   /* stall */
+      00038F 90 7F B4         [24] 1313 	mov	dptr,#_EP0CS
+      000392 74 03            [12] 1314 	mov	a,#0x03
+      000394 F0               [24] 1315 	movx	@dptr,a
+                                   1316 ;	sunkbd_hid.c:432: break;
+      000395 02r05r0D         [24] 1317 	ljmp	00183$
+                                   1318 ;	sunkbd_hid.c:433: default:
+      000398                       1319 00140$:
+                                   1320 ;	sunkbd_hid.c:434: EP0CS  = 0x03;   /* stall */
+      000398 90 7F B4         [24] 1321 	mov	dptr,#_EP0CS
+      00039B 74 03            [12] 1322 	mov	a,#0x03
+      00039D F0               [24] 1323 	movx	@dptr,a
+                                   1324 ;	sunkbd_hid.c:437: break;
+      00039E 02r05r0D         [24] 1325 	ljmp	00183$
+                                   1326 ;	sunkbd_hid.c:440: case 0xa1:
+      0003A1                       1327 00142$:
+                                   1328 ;	sunkbd_hid.c:444: if (sdat->wIndexL == 0) {
+      0003A1 74 04            [12] 1329 	mov	a,#0x04
+      0003A3 25*16            [12] 1330 	add	a,_sdat
+      0003A5 FE               [12] 1331 	mov	r6,a
+      0003A6 E4               [12] 1332 	clr	a
+      0003A7 35*17            [12] 1333 	addc	a,(_sdat + 1)
+      0003A9 FF               [12] 1334 	mov	r7,a
+      0003AA 8E 82            [24] 1335 	mov	dpl,r6
+      0003AC 8F 83            [24] 1336 	mov	dph,r7
+      0003AE E0               [24] 1337 	movx	a,@dptr
+      0003AF 70 12            [24] 1338 	jnz	00144$
+                                   1339 ;	sunkbd_hid.c:446: in0buf(0) = 1; /* always send Report protocol */
+      0003B1 90 7F 00         [24] 1340 	mov	dptr,#_IN0BUF
+      0003B4 74 01            [12] 1341 	mov	a,#0x01
+      0003B6 F0               [24] 1342 	movx	@dptr,a
+                                   1343 ;	sunkbd_hid.c:447: IN0BC     = 0x01;
+      0003B7 90 7F B5         [24] 1344 	mov	dptr,#_IN0BC
+      0003BA F0               [24] 1345 	movx	@dptr,a
+                                   1346 ;	sunkbd_hid.c:448: EP0CS     = 0x02;   /* clear HSNACK */
+      0003BB 90 7F B4         [24] 1347 	mov	dptr,#_EP0CS
+      0003BE 04               [12] 1348 	inc	a
+      0003BF F0               [24] 1349 	movx	@dptr,a
+      0003C0 02r05r0D         [24] 1350 	ljmp	00183$
+      0003C3                       1351 00144$:
+                                   1352 ;	sunkbd_hid.c:450: EP0CS  = 0x03;   /* stall */
+      0003C3 90 7F B4         [24] 1353 	mov	dptr,#_EP0CS
+      0003C6 74 03            [12] 1354 	mov	a,#0x03
+      0003C8 F0               [24] 1355 	movx	@dptr,a
+                                   1356 ;	sunkbd_hid.c:451: break;
+      0003C9 02r05r0D         [24] 1357 	ljmp	00183$
+                                   1358 ;	sunkbd_hid.c:453: default:
+      0003CC                       1359 00146$:
+                                   1360 ;	sunkbd_hid.c:454: EP0CS     = 0x03;   /* stall */
+      0003CC 90 7F B4         [24] 1361 	mov	dptr,#_EP0CS
+      0003CF 74 03            [12] 1362 	mov	a,#0x03
+      0003D1 F0               [24] 1363 	movx	@dptr,a
+                                   1364 ;	sunkbd_hid.c:457: break;
+      0003D2 02r05r0D         [24] 1365 	ljmp	00183$
+                                   1366 ;	sunkbd_hid.c:460: case 0x06:
+      0003D5                       1367 00148$:
+                                   1368 ;	sunkbd_hid.c:461: get_descriptor(/*sdat*/);
+      0003D5 12r00r0F         [24] 1369 	lcall	_get_descriptor
+                                   1370 ;	sunkbd_hid.c:462: break;
+      0003D8 02r05r0D         [24] 1371 	ljmp	00183$
+                                   1372 ;	sunkbd_hid.c:465: case 0x08:
+      0003DB                       1373 00149$:
+                                   1374 ;	sunkbd_hid.c:466: if (sdat->bmRequestType == 0x80) {
+      0003DB 85*16 82         [24] 1375 	mov	dpl,_sdat
+      0003DE 85*17 83         [24] 1376 	mov	dph,(_sdat + 1)
+      0003E1 E0               [24] 1377 	movx	a,@dptr
+      0003E2 FF               [12] 1378 	mov	r7,a
+      0003E3 BF 80 12         [24] 1379 	cjne	r7,#0x80,00151$
+                                   1380 ;	sunkbd_hid.c:467: in0buf(0) = 0x01;
+      0003E6 90 7F 00         [24] 1381 	mov	dptr,#_IN0BUF
+      0003E9 74 01            [12] 1382 	mov	a,#0x01
+      0003EB F0               [24] 1383 	movx	@dptr,a
+                                   1384 ;	sunkbd_hid.c:468: IN0BC     = 0x01;
+      0003EC 90 7F B5         [24] 1385 	mov	dptr,#_IN0BC
+      0003EF F0               [24] 1386 	movx	@dptr,a
+                                   1387 ;	sunkbd_hid.c:469: EP0CS     = 0x02;   /* clear HSNACK */
+      0003F0 90 7F B4         [24] 1388 	mov	dptr,#_EP0CS
+      0003F3 04               [12] 1389 	inc	a
+      0003F4 F0               [24] 1390 	movx	@dptr,a
+      0003F5 02r05r0D         [24] 1391 	ljmp	00183$
+      0003F8                       1392 00151$:
+                                   1393 ;	sunkbd_hid.c:471: EP0CS     = 0x03;   /* stall */
+      0003F8 90 7F B4         [24] 1394 	mov	dptr,#_EP0CS
+      0003FB 74 03            [12] 1395 	mov	a,#0x03
+      0003FD F0               [24] 1396 	movx	@dptr,a
+                                   1397 ;	sunkbd_hid.c:473: break;
+      0003FE 02r05r0D         [24] 1398 	ljmp	00183$
+                                   1399 ;	sunkbd_hid.c:476: case 0x09:
+      000401                       1400 00153$:
+                                   1401 ;	sunkbd_hid.c:477: switch (sdat->bmRequestType) {
+      000401 85*16 82         [24] 1402 	mov	dpl,_sdat
+      000404 85*17 83         [24] 1403 	mov	dph,(_sdat + 1)
+      000407 E0               [24] 1404 	movx	a,@dptr
+      000408 FF               [12] 1405 	mov	r7,a
+      000409 60 05            [24] 1406 	jz	00154$
+                                   1407 ;	sunkbd_hid.c:479: case 0x00:
+      00040B BF 21 15         [24] 1408 	cjne	r7,#0x21,00156$
+      00040E 80 09            [24] 1409 	sjmp	00155$
+      000410                       1410 00154$:
+                                   1411 ;	sunkbd_hid.c:480: EP0CS     = 0x02;   /* clear HSNACK */
+      000410 90 7F B4         [24] 1412 	mov	dptr,#_EP0CS
+      000413 74 02            [12] 1413 	mov	a,#0x02
+      000415 F0               [24] 1414 	movx	@dptr,a
+                                   1415 ;	sunkbd_hid.c:481: break;
+      000416 02r05r0D         [24] 1416 	ljmp	00183$
+                                   1417 ;	sunkbd_hid.c:484: case 0x21:
+      000419                       1418 00155$:
+                                   1419 ;	sunkbd_hid.c:487: is_ctrl_out0_kbd = TRUE;
+      000419 D2*01            [12] 1420 	setb	_is_ctrl_out0_kbd
+                                   1421 ;	sunkbd_hid.c:488: OUT0BC   = 0x00;    /* arm endpoint OUT0 */
+      00041B 90 7F C5         [24] 1422 	mov	dptr,#_OUT0BC
+      00041E E4               [12] 1423 	clr	a
+      00041F F0               [24] 1424 	movx	@dptr,a
+                                   1425 ;	sunkbd_hid.c:491: break;
+      000420 02r05r0D         [24] 1426 	ljmp	00183$
+                                   1427 ;	sunkbd_hid.c:493: default:
+      000423                       1428 00156$:
+                                   1429 ;	sunkbd_hid.c:494: EP0CS     = 0x03;   /* stall */
+      000423 90 7F B4         [24] 1430 	mov	dptr,#_EP0CS
+      000426 74 03            [12] 1431 	mov	a,#0x03
+      000428 F0               [24] 1432 	movx	@dptr,a
+                                   1433 ;	sunkbd_hid.c:497: break;
+      000429 02r05r0D         [24] 1434 	ljmp	00183$
+                                   1435 ;	sunkbd_hid.c:500: case 0x0a:
+      00042C                       1436 00158$:
+                                   1437 ;	sunkbd_hid.c:501: switch (sdat->bmRequestType) {
+      00042C 85*16 82         [24] 1438 	mov	dpl,_sdat
+      00042F 85*17 83         [24] 1439 	mov	dph,(_sdat + 1)
+      000432 E0               [24] 1440 	movx	a,@dptr
+      000433 FF               [12] 1441 	mov	r7,a
+      000434 BF 21 02         [24] 1442 	cjne	r7,#0x21,00356$
+      000437 80 15            [24] 1443 	sjmp	00160$
+      000439                       1444 00356$:
+      000439 BF 81 56         [24] 1445 	cjne	r7,#0x81,00167$
+                                   1446 ;	sunkbd_hid.c:504: in0buf(0) = 0x00;
+      00043C 90 7F 00         [24] 1447 	mov	dptr,#_IN0BUF
+      00043F E4               [12] 1448 	clr	a
+      000440 F0               [24] 1449 	movx	@dptr,a
+                                   1450 ;	sunkbd_hid.c:505: IN0BC     = 0x01;
+      000441 90 7F B5         [24] 1451 	mov	dptr,#_IN0BC
+      000444 04               [12] 1452 	inc	a
+      000445 F0               [24] 1453 	movx	@dptr,a
+                                   1454 ;	sunkbd_hid.c:506: EP0CS     = 0x02;   /* clear HSNACK */
+      000446 90 7F B4         [24] 1455 	mov	dptr,#_EP0CS
+      000449 04               [12] 1456 	inc	a
+      00044A F0               [24] 1457 	movx	@dptr,a
+                                   1458 ;	sunkbd_hid.c:507: break;
+      00044B 02r05r0D         [24] 1459 	ljmp	00183$
+                                   1460 ;	sunkbd_hid.c:510: case 0x21:
+      00044E                       1461 00160$:
+                                   1462 ;	sunkbd_hid.c:536: if (sdat->wIndexL == 0) {
+      00044E 74 04            [12] 1463 	mov	a,#0x04
+      000450 25*16            [12] 1464 	add	a,_sdat
+      000452 FE               [12] 1465 	mov	r6,a
+      000453 E4               [12] 1466 	clr	a
+      000454 35*17            [12] 1467 	addc	a,(_sdat + 1)
+      000456 FF               [12] 1468 	mov	r7,a
+      000457 8E 82            [24] 1469 	mov	dpl,r6
+      000459 8F 83            [24] 1470 	mov	dph,r7
+      00045B E0               [24] 1471 	movx	a,@dptr
+      00045C 70 2B            [24] 1472 	jnz	00165$
+                                   1473 ;	sunkbd_hid.c:538: if (sdat->wValueH > 0) {
+      00045E 74 03            [12] 1474 	mov	a,#0x03
+      000460 25*16            [12] 1475 	add	a,_sdat
+      000462 FE               [12] 1476 	mov	r6,a
+      000463 E4               [12] 1477 	clr	a
+      000464 35*17            [12] 1478 	addc	a,(_sdat + 1)
+      000466 FF               [12] 1479 	mov	r7,a
+      000467 8E 82            [24] 1480 	mov	dpl,r6
+      000469 8F 83            [24] 1481 	mov	dph,r7
+      00046B E0               [24] 1482 	movx	a,@dptr
+      00046C 60 10            [24] 1483 	jz	00162$
+                                   1484 ;	sunkbd_hid.c:540: kbd_idle_mode     = FALSE;
+      00046E C2*02            [12] 1485 	clr	_kbd_idle_mode
+                                   1486 ;	sunkbd_hid.c:541: kbd_idle_duration = sdat->wValueH;
+      000470 85*16 82         [24] 1487 	mov	dpl,_sdat
+      000473 85*17 83         [24] 1488 	mov	dph,(_sdat + 1)
+      000476 A3               [24] 1489 	inc	dptr
+      000477 A3               [24] 1490 	inc	dptr
+      000478 A3               [24] 1491 	inc	dptr
+      000479 E0               [24] 1492 	movx	a,@dptr
+      00047A F5*0C            [12] 1493 	mov	_kbd_idle_duration,a
+      00047C 80 02            [24] 1494 	sjmp	00163$
+      00047E                       1495 00162$:
+                                   1496 ;	sunkbd_hid.c:549: kbd_idle_mode     = TRUE;
+      00047E D2*02            [12] 1497 	setb	_kbd_idle_mode
+      000480                       1498 00163$:
+                                   1499 ;	sunkbd_hid.c:556: EP0CS  = 0x02;   /* clear HSNACK */
+      000480 90 7F B4         [24] 1500 	mov	dptr,#_EP0CS
+      000483 74 02            [12] 1501 	mov	a,#0x02
+      000485 F0               [24] 1502 	movx	@dptr,a
+      000486 02r05r0D         [24] 1503 	ljmp	00183$
+      000489                       1504 00165$:
+                                   1505 ;	sunkbd_hid.c:558: EP0CS  = 0x03;   /* stall */
+      000489 90 7F B4         [24] 1506 	mov	dptr,#_EP0CS
+      00048C 74 03            [12] 1507 	mov	a,#0x03
+      00048E F0               [24] 1508 	movx	@dptr,a
+                                   1509 ;	sunkbd_hid.c:560: break;
+      00048F 02r05r0D         [24] 1510 	ljmp	00183$
+                                   1511 ;	sunkbd_hid.c:562: default:
+      000492                       1512 00167$:
+                                   1513 ;	sunkbd_hid.c:563: EP0CS     = 0x03;   /* stall */
+      000492 90 7F B4         [24] 1514 	mov	dptr,#_EP0CS
+      000495 74 03            [12] 1515 	mov	a,#0x03
+      000497 F0               [24] 1516 	movx	@dptr,a
+                                   1517 ;	sunkbd_hid.c:566: break;
+      000498 02r05r0D         [24] 1518 	ljmp	00183$
+                                   1519 ;	sunkbd_hid.c:569: case 0x0b:
+      00049B                       1520 00169$:
+                                   1521 ;	sunkbd_hid.c:570: switch (sdat->bmRequestType) {
+      00049B 85*16 82         [24] 1522 	mov	dpl,_sdat
+      00049E 85*17 83         [24] 1523 	mov	dph,(_sdat + 1)
+      0004A1 E0               [24] 1524 	movx	a,@dptr
+      0004A2 FF               [12] 1525 	mov	r7,a
+      0004A3 BF 01 02         [24] 1526 	cjne	r7,#0x01,00361$
+      0004A6 80 05            [24] 1527 	sjmp	00170$
+      0004A8                       1528 00361$:
+                                   1529 ;	sunkbd_hid.c:572: case 0x01:
+      0004A8 BF 21 54         [24] 1530 	cjne	r7,#0x21,00178$
+      0004AB 80 4A            [24] 1531 	sjmp	00177$
+      0004AD                       1532 00170$:
+                                   1533 ;	sunkbd_hid.c:573: if (sdat->wValueL == 0) { /* only AS 0 supported */
+      0004AD 74 02            [12] 1534 	mov	a,#0x02
+      0004AF 25*16            [12] 1535 	add	a,_sdat
+      0004B1 FE               [12] 1536 	mov	r6,a
+      0004B2 E4               [12] 1537 	clr	a
+      0004B3 35*17            [12] 1538 	addc	a,(_sdat + 1)
+      0004B5 FF               [12] 1539 	mov	r7,a
+      0004B6 8E 82            [24] 1540 	mov	dpl,r6
+      0004B8 8F 83            [24] 1541 	mov	dph,r7
+      0004BA E0               [24] 1542 	movx	a,@dptr
+      0004BB 70 32            [24] 1543 	jnz	00175$
+                                   1544 ;	sunkbd_hid.c:587: if (sdat->wIndexL == 0) {
+      0004BD 74 04            [12] 1545 	mov	a,#0x04
+      0004BF 25*16            [12] 1546 	add	a,_sdat
+      0004C1 FE               [12] 1547 	mov	r6,a
+      0004C2 E4               [12] 1548 	clr	a
+      0004C3 35*17            [12] 1549 	addc	a,(_sdat + 1)
+      0004C5 FF               [12] 1550 	mov	r7,a
+      0004C6 8E 82            [24] 1551 	mov	dpl,r6
+      0004C8 8F 83            [24] 1552 	mov	dph,r7
+      0004CA E0               [24] 1553 	movx	a,@dptr
+      0004CB 70 1A            [24] 1554 	jnz	00172$
+                                   1555 ;	sunkbd_hid.c:588: IN1CS  |= 0x02;     /* remove busy */
+      0004CD 90 7F B6         [24] 1556 	mov	dptr,#_IN1CS
+      0004D0 E0               [24] 1557 	movx	a,@dptr
+      0004D1 FF               [12] 1558 	mov	r7,a
+      0004D2 74 02            [12] 1559 	mov	a,#0x02
+      0004D4 4F               [12] 1560 	orl	a,r7
+      0004D5 F0               [24] 1561 	movx	@dptr,a
+                                   1562 ;	sunkbd_hid.c:589: TOGCTL = 0x11;
+      0004D6 90 7F D7         [24] 1563 	mov	dptr,#_TOGCTL
+      0004D9 74 11            [12] 1564 	mov	a,#0x11
+      0004DB F0               [24] 1565 	movx	@dptr,a
+                                   1566 ;	sunkbd_hid.c:590: TOGCTL = 0x31;      /* reset toggle of IN1 */
+      0004DC 74 31            [12] 1567 	mov	a,#0x31
+      0004DE F0               [24] 1568 	movx	@dptr,a
+                                   1569 ;	sunkbd_hid.c:593: EP0CS     = 0x02;   /* clear HSNACK */
+      0004DF 90 7F B4         [24] 1570 	mov	dptr,#_EP0CS
+      0004E2 74 02            [12] 1571 	mov	a,#0x02
+      0004E4 F0               [24] 1572 	movx	@dptr,a
+      0004E5 80 26            [24] 1573 	sjmp	00183$
+      0004E7                       1574 00172$:
+                                   1575 ;	sunkbd_hid.c:595: EP0CS  = 0x03;   /* stall */
+      0004E7 90 7F B4         [24] 1576 	mov	dptr,#_EP0CS
+      0004EA 74 03            [12] 1577 	mov	a,#0x03
+      0004EC F0               [24] 1578 	movx	@dptr,a
+      0004ED 80 1E            [24] 1579 	sjmp	00183$
+      0004EF                       1580 00175$:
+                                   1581 ;	sunkbd_hid.c:597: EP0CS  = 0x03;   /* stall */
+      0004EF 90 7F B4         [24] 1582 	mov	dptr,#_EP0CS
+      0004F2 74 03            [12] 1583 	mov	a,#0x03
+      0004F4 F0               [24] 1584 	movx	@dptr,a
+                                   1585 ;	sunkbd_hid.c:598: break;
+                                   1586 ;	sunkbd_hid.c:601: case 0x21:
+      0004F5 80 16            [24] 1587 	sjmp	00183$
+      0004F7                       1588 00177$:
+                                   1589 ;	sunkbd_hid.c:602: EP0CS     = 0x02;   /* clear HSNACK */
+      0004F7 90 7F B4         [24] 1590 	mov	dptr,#_EP0CS
+      0004FA 74 02            [12] 1591 	mov	a,#0x02
+      0004FC F0               [24] 1592 	movx	@dptr,a
+                                   1593 ;	sunkbd_hid.c:603: break;
+                                   1594 ;	sunkbd_hid.c:605: default:
+      0004FD 80 0E            [24] 1595 	sjmp	00183$
+      0004FF                       1596 00178$:
+                                   1597 ;	sunkbd_hid.c:606: EP0CS     = 0x03;   /* stall */
+      0004FF 90 7F B4         [24] 1598 	mov	dptr,#_EP0CS
+      000502 74 03            [12] 1599 	mov	a,#0x03
+      000504 F0               [24] 1600 	movx	@dptr,a
+                                   1601 ;	sunkbd_hid.c:609: break;
+                                   1602 ;	sunkbd_hid.c:611: default:
+      000505 80 06            [24] 1603 	sjmp	00183$
+      000507                       1604 00180$:
+                                   1605 ;	sunkbd_hid.c:612: EP0CS     = 0x03;   /* stall */
+      000507 90 7F B4         [24] 1606 	mov	dptr,#_EP0CS
+      00050A 74 03            [12] 1607 	mov	a,#0x03
+      00050C F0               [24] 1608 	movx	@dptr,a
+                                   1609 ;	sunkbd_hid.c:614: }
+      00050D                       1610 00183$:
+                                   1611 ;	sunkbd_hid.c:620: if (IN07IRQ & 0x01) {
+      00050D 90 7F A9         [24] 1612 	mov	dptr,#_IN07IRQ
+      000510 E0               [24] 1613 	movx	a,@dptr
+      000511 FF               [12] 1614 	mov	r7,a
+      000512 30 E0 06         [24] 1615 	jnb	acc.0,00185$
+                                   1616 ;	sunkbd_hid.c:622: IN07IRQ = 0x01;
+      000515 90 7F A9         [24] 1617 	mov	dptr,#_IN07IRQ
+      000518 74 01            [12] 1618 	mov	a,#0x01
+      00051A F0               [24] 1619 	movx	@dptr,a
+      00051B                       1620 00185$:
+                                   1621 ;	sunkbd_hid.c:627: if (IN07IRQ & 0x02) {
+      00051B 90 7F A9         [24] 1622 	mov	dptr,#_IN07IRQ
+      00051E E0               [24] 1623 	movx	a,@dptr
+      00051F FF               [12] 1624 	mov	r7,a
+      000520 30 E1 08         [24] 1625 	jnb	acc.1,00187$
+                                   1626 ;	sunkbd_hid.c:629: IN07IRQ = 0x02;
+      000523 90 7F A9         [24] 1627 	mov	dptr,#_IN07IRQ
+      000526 74 02            [12] 1628 	mov	a,#0x02
+      000528 F0               [24] 1629 	movx	@dptr,a
+                                   1630 ;	sunkbd_hid.c:632: in1_busy = FALSE;
+      000529 C2*03            [12] 1631 	clr	_in1_busy
+      00052B                       1632 00187$:
+                                   1633 ;	sunkbd_hid.c:647: if (OUT07IRQ & 0x01) {
+      00052B 90 7F AA         [24] 1634 	mov	dptr,#_OUT07IRQ
+      00052E E0               [24] 1635 	movx	a,@dptr
+      00052F FF               [12] 1636 	mov	r7,a
+      000530 30 E0 3B         [24] 1637 	jnb	acc.0,00191$
+                                   1638 ;	sunkbd_hid.c:649: OUT07IRQ = 0x01;
+      000533 90 7F AA         [24] 1639 	mov	dptr,#_OUT07IRQ
+      000536 74 01            [12] 1640 	mov	a,#0x01
+      000538 F0               [24] 1641 	movx	@dptr,a
+                                   1642 ;	sunkbd_hid.c:653: if (is_ctrl_out0_kbd) {
+      000539 30*01 2D         [24] 1643 	jnb	_is_ctrl_out0_kbd,00189$
+                                   1644 ;	sunkbd_hid.c:654: Byte led_status = out0buf(0);
+      00053C 90 7E C0         [24] 1645 	mov	dptr,#_OUT0BUF
+      00053F E0               [24] 1646 	movx	a,@dptr
+      000540 FF               [12] 1647 	mov	r7,a
+                                   1648 ;	sunkbd_hid.c:660: SBUF0 = SUNKBD_CMD_SETLED;
+      000541 75 99 0E         [24] 1649 	mov	_SBUF0,#0x0e
+                                   1650 ;	sunkbd_hid.c:662: kbd_txmit_me = ((led_status & 0x02) << 2) | (led_status & 0x04) |
+      000544 74 02            [12] 1651 	mov	a,#0x02
+      000546 5F               [12] 1652 	anl	a,r7
+      000547 25 E0            [12] 1653 	add	a,acc
+      000549 25 E0            [12] 1654 	add	a,acc
+      00054B FE               [12] 1655 	mov	r6,a
+      00054C 74 04            [12] 1656 	mov	a,#0x04
+      00054E 5F               [12] 1657 	anl	a,r7
+      00054F 42 0E            [12] 1658 	orl	ar6,a
+                                   1659 ;	sunkbd_hid.c:663: ((led_status & 0x08) >> 2) | (led_status & 0x01);
+      000551 74 08            [12] 1660 	mov	a,#0x08
+      000553 5F               [12] 1661 	anl	a,r7
+      000554 03               [12] 1662 	rr	a
+      000555 03               [12] 1663 	rr	a
+      000556 54 3F            [12] 1664 	anl	a,#0x3f
+      000558 FD               [12] 1665 	mov	r5,a
+      000559 42 0E            [12] 1666 	orl	ar6,a
+      00055B 74 01            [12] 1667 	mov	a,#0x01
+      00055D 5F               [12] 1668 	anl	a,r7
+      00055E 4E               [12] 1669 	orl	a,r6
+      00055F F5*0B            [12] 1670 	mov	_kbd_txmit_me,a
+                                   1671 ;	sunkbd_hid.c:665: is_ctrl_out0_kbd = FALSE;
+      000561 C2*01            [12] 1672 	clr	_is_ctrl_out0_kbd
+                                   1673 ;	sunkbd_hid.c:666: EP0CS            = 0x02;   /* clear HSNACK */
+      000563 90 7F B4         [24] 1674 	mov	dptr,#_EP0CS
+      000566 74 02            [12] 1675 	mov	a,#0x02
+      000568 F0               [24] 1676 	movx	@dptr,a
+      000569                       1677 00189$:
+                                   1678 ;	sunkbd_hid.c:671: OUT0BC = 0x00;
+      000569 90 7F C5         [24] 1679 	mov	dptr,#_OUT0BC
+      00056C E4               [12] 1680 	clr	a
+      00056D F0               [24] 1681 	movx	@dptr,a
+      00056E                       1682 00191$:
+                                   1683 ;	sunkbd_hid.c:675: if (USBIRQ & 0x10) {
+      00056E 90 7F AB         [24] 1684 	mov	dptr,#_USBIRQ
+      000571 E0               [24] 1685 	movx	a,@dptr
+      000572 FF               [12] 1686 	mov	r7,a
+      000573 30 E4 0F         [24] 1687 	jnb	acc.4,00194$
+                                   1688 ;	sunkbd_hid.c:677: USBIRQ = 0x10;
+      000576 90 7F AB         [24] 1689 	mov	dptr,#_USBIRQ
+      000579 74 10            [12] 1690 	mov	a,#0x10
+      00057B F0               [24] 1691 	movx	@dptr,a
+                                   1692 ;	sunkbd_hid.c:679: apply_reset_values();
+      00057C 75 D0 00         [24] 1693 	mov	psw,#0x00
+      00057F 12r00r00         [24] 1694 	lcall	_apply_reset_values
+      000582 75 D0 08         [24] 1695 	mov	psw,#0x08
+      000585                       1696 00194$:
+      000585 D0 D0            [24] 1697 	pop	psw
+      000587 D0 00            [24] 1698 	pop	(0+0)
+      000589 D0 01            [24] 1699 	pop	(0+1)
+      00058B D0 02            [24] 1700 	pop	(0+2)
+      00058D D0 03            [24] 1701 	pop	(0+3)
+      00058F D0 04            [24] 1702 	pop	(0+4)
+      000591 D0 05            [24] 1703 	pop	(0+5)
+      000593 D0 06            [24] 1704 	pop	(0+6)
+      000595 D0 07            [24] 1705 	pop	(0+7)
+      000597 D0 83            [24] 1706 	pop	dph
+      000599 D0 82            [24] 1707 	pop	dpl
+      00059B D0 F0            [24] 1708 	pop	b
+      00059D D0 E0            [24] 1709 	pop	acc
+      00059F D0*00            [24] 1710 	pop	bits
+      0005A1 D2 AF            [12] 1711 	setb	ea
+      0005A3 32               [24] 1712 	reti
+                                   1713 ;------------------------------------------------------------
+                                   1714 ;Allocation info for local variables in function 'kbd_serial_isr'
+                                   1715 ;------------------------------------------------------------
+                                   1716 ;scancode                  Allocated to registers r7 
+                                   1717 ;mod_map                   Allocated to registers r6 
+                                   1718 ;i                         Allocated to registers r6 
+                                   1719 ;------------------------------------------------------------
+                                   1720 ;	sunkbd_hid.c:693: static void kbd_serial_isr(void) __interrupt (4) __using (2) __critical
+                                   1721 ;	-----------------------------------------
+                                   1722 ;	 function kbd_serial_isr
+                                   1723 ;	-----------------------------------------
+      0005A4                       1724 _kbd_serial_isr:
+                           000017  1725 	ar7 = 0x17
+                           000016  1726 	ar6 = 0x16
+                           000015  1727 	ar5 = 0x15
+                           000014  1728 	ar4 = 0x14
+                           000013  1729 	ar3 = 0x13
+                           000012  1730 	ar2 = 0x12
+                           000011  1731 	ar1 = 0x11
+                           000010  1732 	ar0 = 0x10
+      0005A4 C2 AF            [12] 1733 	clr	ea
+      0005A6 C0 E0            [24] 1734 	push	acc
+      0005A8 C0 82            [24] 1735 	push	dpl
+      0005AA C0 83            [24] 1736 	push	dph
+      0005AC C0 D0            [24] 1737 	push	psw
+      0005AE 75 D0 10         [24] 1738 	mov	psw,#0x10
+                                   1739 ;	sunkbd_hid.c:700: if (RI_0) {
+      0005B1 20 98 03         [24] 1740 	jb	_RI_0,00232$
+      0005B4 02r06rC2         [24] 1741 	ljmp	00145$
+      0005B7                       1742 00232$:
+                                   1743 ;	sunkbd_hid.c:702: scancode = SBUF0;
+      0005B7 AF 99            [24] 1744 	mov	r7,_SBUF0
+                                   1745 ;	sunkbd_hid.c:704: RI_0 = 0;
+      0005B9 C2 98            [12] 1746 	clr	_RI_0
+                                   1747 ;	sunkbd_hid.c:718: switch (scancode) {
+      0005BB BF 7F 02         [24] 1748 	cjne	r7,#0x7f,00233$
+      0005BE 80 14            [24] 1749 	sjmp	00157$
+      0005C0                       1750 00233$:
+      0005C0 BF FE 02         [24] 1751 	cjne	r7,#0xfe,00234$
+      0005C3 80 09            [24] 1752 	sjmp	00106$
+      0005C5                       1753 00234$:
+      0005C5 BF FF 21         [24] 1754 	cjne	r7,#0xff,00111$
+                                   1755 ;	sunkbd_hid.c:721: sunkbd_reset = -1;
+      0005C8 75*01 FF         [24] 1756 	mov	_sunkbd_reset,#0xff
+                                   1757 ;	sunkbd_hid.c:722: break;
+      0005CB 02r06rC2         [24] 1758 	ljmp	00145$
+                                   1759 ;	sunkbd_hid.c:724: case SUNKBD_RET_LAYOUT:
+      0005CE                       1760 00106$:
+                                   1761 ;	sunkbd_hid.c:725: sunkbd_layout = -1;
+      0005CE 75*02 FF         [24] 1762 	mov	_sunkbd_layout,#0xff
+                                   1763 ;	sunkbd_hid.c:726: break;
+      0005D1 02r06rC2         [24] 1764 	ljmp	00145$
+                                   1765 ;	sunkbd_hid.c:731: while (i-- > 0)
+      0005D4                       1766 00157$:
+      0005D4 7E 08            [12] 1767 	mov	r6,#0x08
+      0005D6                       1768 00108$:
+      0005D6 8E 15            [24] 1769 	mov	ar5,r6
+      0005D8 1E               [12] 1770 	dec	r6
+      0005D9 ED               [12] 1771 	mov	a,r5
+      0005DA 60 08            [24] 1772 	jz	00110$
+                                   1773 ;	sunkbd_hid.c:732: key_buffer[i] = 0;
+      0005DC EE               [12] 1774 	mov	a,r6
+      0005DD 24r03            [12] 1775 	add	a,#_key_buffer
+      0005DF F8               [12] 1776 	mov	r0,a
+      0005E0 76 00            [12] 1777 	mov	@r0,#0x00
+      0005E2 80 F2            [24] 1778 	sjmp	00108$
+      0005E4                       1779 00110$:
+                                   1780 ;	sunkbd_hid.c:733: kbd_new_keys   = TRUE;
+      0005E4 D2*00            [12] 1781 	setb	_kbd_new_keys
+                                   1782 ;	sunkbd_hid.c:734: break;
+      0005E6 02r06rC2         [24] 1783 	ljmp	00145$
+                                   1784 ;	sunkbd_hid.c:736: default:
+      0005E9                       1785 00111$:
+                                   1786 ;	sunkbd_hid.c:737: parse_scancode = 0;
+      0005E9 C2*04            [12] 1787 	clr	_kbd_serial_isr_parse_scancode_1_38
+                                   1788 ;	sunkbd_hid.c:739: switch (scancode & SUNKBD_KEY) {
+      0005EB 74 7F            [12] 1789 	mov	a,#0x7f
+      0005ED 5F               [12] 1790 	anl	a,r7
+      0005EE FE               [12] 1791 	mov	r6,a
+      0005EF BE 0D 02         [24] 1792 	cjne	r6,#0x0d,00238$
+      0005F2 80 3C            [24] 1793 	sjmp	00117$
+      0005F4                       1794 00238$:
+      0005F4 BE 13 02         [24] 1795 	cjne	r6,#0x13,00239$
+      0005F7 80 2B            [24] 1796 	sjmp	00114$
+      0005F9                       1797 00239$:
+      0005F9 BE 31 02         [24] 1798 	cjne	r6,#0x31,00240$
+      0005FC 80 46            [24] 1799 	sjmp	00120$
+      0005FE                       1800 00240$:
+      0005FE BE 48 02         [24] 1801 	cjne	r6,#0x48,00241$
+      000601 80 35            [24] 1802 	sjmp	00119$
+      000603                       1803 00241$:
+      000603 BE 4C 02         [24] 1804 	cjne	r6,#0x4c,00242$
+      000606 80 14            [24] 1805 	sjmp	00112$
+      000608                       1806 00242$:
+      000608 BE 63 02         [24] 1807 	cjne	r6,#0x63,00243$
+      00060B 80 13            [24] 1808 	sjmp	00113$
+      00060D                       1809 00243$:
+      00060D BE 6E 02         [24] 1810 	cjne	r6,#0x6e,00244$
+      000610 80 1A            [24] 1811 	sjmp	00116$
+      000612                       1812 00244$:
+      000612 BE 78 02         [24] 1813 	cjne	r6,#0x78,00245$
+      000615 80 11            [24] 1814 	sjmp	00115$
+      000617                       1815 00245$:
+                                   1816 ;	sunkbd_hid.c:741: case 0x4c:
+      000617 BE 7A 36         [24] 1817 	cjne	r6,#0x7a,00121$
+      00061A 80 18            [24] 1818 	sjmp	00118$
+      00061C                       1819 00112$:
+                                   1820 ;	sunkbd_hid.c:742: mod_map        = 0x01;
+      00061C 7E 01            [12] 1821 	mov	r6,#0x01
+                                   1822 ;	sunkbd_hid.c:743: break;
+                                   1823 ;	sunkbd_hid.c:746: case 0x63:
+      00061E 80 34            [24] 1824 	sjmp	00122$
+      000620                       1825 00113$:
+                                   1826 ;	sunkbd_hid.c:747: mod_map        = 0x02;
+      000620 7E 02            [12] 1827 	mov	r6,#0x02
+                                   1828 ;	sunkbd_hid.c:748: break;
+                                   1829 ;	sunkbd_hid.c:751: case 0x13:
+      000622 80 30            [24] 1830 	sjmp	00122$
+      000624                       1831 00114$:
+                                   1832 ;	sunkbd_hid.c:752: mod_map        = 0x04;
+      000624 7E 04            [12] 1833 	mov	r6,#0x04
+                                   1834 ;	sunkbd_hid.c:753: break;
+                                   1835 ;	sunkbd_hid.c:756: case 0x78:
+      000626 80 2C            [24] 1836 	sjmp	00122$
+      000628                       1837 00115$:
+                                   1838 ;	sunkbd_hid.c:757: mod_map        = 0x08;
+      000628 7E 08            [12] 1839 	mov	r6,#0x08
+                                   1840 ;	sunkbd_hid.c:758: break;
+                                   1841 ;	sunkbd_hid.c:761: case 0x6e:
+      00062A 80 28            [24] 1842 	sjmp	00122$
+      00062C                       1843 00116$:
+                                   1844 ;	sunkbd_hid.c:762: mod_map        = 0x20;
+      00062C 7E 20            [12] 1845 	mov	r6,#0x20
+                                   1846 ;	sunkbd_hid.c:763: break;
+                                   1847 ;	sunkbd_hid.c:766: case 0x0d:
+      00062E 80 24            [24] 1848 	sjmp	00122$
+      000630                       1849 00117$:
+                                   1850 ;	sunkbd_hid.c:767: mod_map        = 0x40;
+      000630 7E 40            [12] 1851 	mov	r6,#0x40
+                                   1852 ;	sunkbd_hid.c:768: break;
+                                   1853 ;	sunkbd_hid.c:771: case 0x7a:
+      000632 80 20            [24] 1854 	sjmp	00122$
+      000634                       1855 00118$:
+                                   1856 ;	sunkbd_hid.c:772: mod_map        = 0x80;
+      000634 7E 80            [12] 1857 	mov	r6,#0x80
+                                   1858 ;	sunkbd_hid.c:773: break;
+                                   1859 ;	sunkbd_hid.c:776: case 0x48:
+      000636 80 1C            [24] 1860 	sjmp	00122$
+      000638                       1861 00119$:
+                                   1862 ;	sunkbd_hid.c:777: mod_map        = 0x04;
+      000638 7E 04            [12] 1863 	mov	r6,#0x04
+                                   1864 ;	sunkbd_hid.c:778: scancode       = 0x09 | (scancode & SUNKBD_RELEASE);
+      00063A 74 80            [12] 1865 	mov	a,#0x80
+      00063C 5F               [12] 1866 	anl	a,r7
+      00063D 44 09            [12] 1867 	orl	a,#0x09
+      00063F FF               [12] 1868 	mov	r7,a
+                                   1869 ;	sunkbd_hid.c:779: parse_scancode = 1;
+      000640 D2*04            [12] 1870 	setb	_kbd_serial_isr_parse_scancode_1_38
+                                   1871 ;	sunkbd_hid.c:780: break;
+                                   1872 ;	sunkbd_hid.c:783: case 0x31:
+      000642 80 10            [24] 1873 	sjmp	00122$
+      000644                       1874 00120$:
+                                   1875 ;	sunkbd_hid.c:784: mod_map        = 0x04;
+      000644 7E 04            [12] 1876 	mov	r6,#0x04
+                                   1877 ;	sunkbd_hid.c:785: scancode       = 0x0b | (scancode & SUNKBD_RELEASE);
+      000646 74 80            [12] 1878 	mov	a,#0x80
+      000648 5F               [12] 1879 	anl	a,r7
+      000649 44 0B            [12] 1880 	orl	a,#0x0b
+      00064B FF               [12] 1881 	mov	r7,a
+                                   1882 ;	sunkbd_hid.c:786: parse_scancode = 1;
+      00064C D2*04            [12] 1883 	setb	_kbd_serial_isr_parse_scancode_1_38
+                                   1884 ;	sunkbd_hid.c:787: break;
+                                   1885 ;	sunkbd_hid.c:789: default:
+      00064E 80 04            [24] 1886 	sjmp	00122$
+      000650                       1887 00121$:
+                                   1888 ;	sunkbd_hid.c:790: mod_map        = 0;
+      000650 7E 00            [12] 1889 	mov	r6,#0x00
+                                   1890 ;	sunkbd_hid.c:791: parse_scancode = 1;
+      000652 D2*04            [12] 1891 	setb	_kbd_serial_isr_parse_scancode_1_38
+                                   1892 ;	sunkbd_hid.c:793: }
+      000654                       1893 00122$:
+                                   1894 ;	sunkbd_hid.c:796: if (mod_map) {
+      000654 EE               [12] 1895 	mov	a,r6
+      000655 60 16            [24] 1896 	jz	00127$
+                                   1897 ;	sunkbd_hid.c:801: if (scancode & SUNKBD_RELEASE) {
+      000657 EF               [12] 1898 	mov	a,r7
+      000658 30 E7 0B         [24] 1899 	jnb	acc.7,00124$
+                                   1900 ;	sunkbd_hid.c:803: key_buffer[0] &= ~mod_map;
+      00065B EE               [12] 1901 	mov	a,r6
+      00065C F4               [12] 1902 	cpl	a
+      00065D FD               [12] 1903 	mov	r5,a
+      00065E 55*03            [12] 1904 	anl	a,_key_buffer
+      000660 F5*03            [12] 1905 	mov	_key_buffer,a
+                                   1906 ;	sunkbd_hid.c:804: kbd_new_keys   = TRUE;
+      000662 D2*00            [12] 1907 	setb	_kbd_new_keys
+      000664 80 07            [24] 1908 	sjmp	00127$
+      000666                       1909 00124$:
+                                   1910 ;	sunkbd_hid.c:807: key_buffer[0] |= mod_map;
+      000666 EE               [12] 1911 	mov	a,r6
+      000667 45*03            [12] 1912 	orl	a,_key_buffer
+      000669 F5*03            [12] 1913 	mov	_key_buffer,a
+                                   1914 ;	sunkbd_hid.c:808: kbd_new_keys   = TRUE;
+      00066B D2*00            [12] 1915 	setb	_kbd_new_keys
+      00066D                       1916 00127$:
+                                   1917 ;	sunkbd_hid.c:813: if (parse_scancode) {
+      00066D 30*04 52         [24] 1918 	jnb	_kbd_serial_isr_parse_scancode_1_38,00145$
+                                   1919 ;	sunkbd_hid.c:818: if (scancode & SUNKBD_RELEASE) {
+      000670 EF               [12] 1920 	mov	a,r7
+      000671 30 E7 26         [24] 1921 	jnb	acc.7,00139$
+                                   1922 ;	sunkbd_hid.c:820: scancode &= SUNKBD_KEY;
+      000674 53 17 7F         [24] 1923 	anl	ar7,#0x7f
+                                   1924 ;	sunkbd_hid.c:821: scancode  = scancode_map[scancode];
+      000677 EF               [12] 1925 	mov	a,r7
+      000678 90r01r41         [24] 1926 	mov	dptr,#_scancode_map
+      00067B 93               [24] 1927 	movc	a,@a+dptr
+      00067C FF               [12] 1928 	mov	r7,a
+                                   1929 ;	sunkbd_hid.c:823: while (i > 1) {
+      00067D 7E 07            [12] 1930 	mov	r6,#0x07
+      00067F                       1931 00130$:
+      00067F EE               [12] 1932 	mov	a,r6
+      000680 24 FE            [12] 1933 	add	a,#0xff - 0x01
+      000682 50 12            [24] 1934 	jnc	00132$
+                                   1935 ;	sunkbd_hid.c:824: if (key_buffer[i] == scancode)
+      000684 EE               [12] 1936 	mov	a,r6
+      000685 24r03            [12] 1937 	add	a,#_key_buffer
+      000687 F9               [12] 1938 	mov	r1,a
+      000688 E7               [12] 1939 	mov	a,@r1
+      000689 FD               [12] 1940 	mov	r5,a
+      00068A B5 17 06         [24] 1941 	cjne	a,ar7,00129$
+                                   1942 ;	sunkbd_hid.c:825: key_buffer[i] = 0;
+      00068D EE               [12] 1943 	mov	a,r6
+      00068E 24r03            [12] 1944 	add	a,#_key_buffer
+      000690 F8               [12] 1945 	mov	r0,a
+      000691 76 00            [12] 1946 	mov	@r0,#0x00
+      000693                       1947 00129$:
+                                   1948 ;	sunkbd_hid.c:826: i--;
+      000693 1E               [12] 1949 	dec	r6
+      000694 80 E9            [24] 1950 	sjmp	00130$
+      000696                       1951 00132$:
+                                   1952 ;	sunkbd_hid.c:828: kbd_new_keys = TRUE;
+      000696 D2*00            [12] 1953 	setb	_kbd_new_keys
+      000698 80 28            [24] 1954 	sjmp	00145$
+      00069A                       1955 00139$:
+                                   1956 ;	sunkbd_hid.c:831: scancode &= SUNKBD_KEY;
+      00069A 53 17 7F         [24] 1957 	anl	ar7,#0x7f
+                                   1958 ;	sunkbd_hid.c:832: scancode  = scancode_map[scancode];
+      00069D EF               [12] 1959 	mov	a,r7
+      00069E 90r01r41         [24] 1960 	mov	dptr,#_scancode_map
+      0006A1 93               [24] 1961 	movc	a,@a+dptr
+      0006A2 FF               [12] 1962 	mov	r7,a
+                                   1963 ;	sunkbd_hid.c:833: i = 2;
+      0006A3 7E 02            [12] 1964 	mov	r6,#0x02
+                                   1965 ;	sunkbd_hid.c:834: while (i < 8) {
+      0006A5 7D 02            [12] 1966 	mov	r5,#0x02
+      0006A7                       1967 00135$:
+      0006A7 BD 08 00         [24] 1968 	cjne	r5,#0x08,00254$
+      0006AA                       1969 00254$:
+      0006AA 50 14            [24] 1970 	jnc	00137$
+                                   1971 ;	sunkbd_hid.c:835: if (!key_buffer[i]) {
+      0006AC ED               [12] 1972 	mov	a,r5
+      0006AD 24r03            [12] 1973 	add	a,#_key_buffer
+      0006AF F9               [12] 1974 	mov	r1,a
+      0006B0 E7               [12] 1975 	mov	a,@r1
+      0006B1 70 08            [24] 1976 	jnz	00134$
+                                   1977 ;	sunkbd_hid.c:836: key_buffer[i] = scancode;
+      0006B3 EE               [12] 1978 	mov	a,r6
+      0006B4 24r03            [12] 1979 	add	a,#_key_buffer
+      0006B6 F8               [12] 1980 	mov	r0,a
+      0006B7 A6 17            [24] 1981 	mov	@r0,ar7
+                                   1982 ;	sunkbd_hid.c:837: break;
+      0006B9 80 05            [24] 1983 	sjmp	00137$
+      0006BB                       1984 00134$:
+                                   1985 ;	sunkbd_hid.c:839: i++;
+      0006BB 0D               [12] 1986 	inc	r5
+      0006BC 8D 16            [24] 1987 	mov	ar6,r5
+      0006BE 80 E7            [24] 1988 	sjmp	00135$
+      0006C0                       1989 00137$:
+                                   1990 ;	sunkbd_hid.c:841: kbd_new_keys = TRUE;
+      0006C0 D2*00            [12] 1991 	setb	_kbd_new_keys
+                                   1992 ;	sunkbd_hid.c:845: }
+      0006C2                       1993 00145$:
+                                   1994 ;	sunkbd_hid.c:851: if (TI_0) {
+                                   1995 ;	sunkbd_hid.c:852: TI_0 = 0;
+      0006C2 10 99 02         [24] 1996 	jbc	_TI_0,00257$
+      0006C5 80 06            [24] 1997 	sjmp	00150$
+      0006C7                       1998 00257$:
+                                   1999 ;	sunkbd_hid.c:856: SBUF0        = (Byte)kbd_txmit_me;
+      0006C7 85*0B 99         [24] 2000 	mov	_SBUF0,_kbd_txmit_me
+                                   2001 ;	sunkbd_hid.c:857: kbd_txmit_me = -1;
+      0006CA 75*0B FF         [24] 2002 	mov	_kbd_txmit_me,#0xff
+      0006CD                       2003 00150$:
+      0006CD D0 D0            [24] 2004 	pop	psw
+      0006CF D0 83            [24] 2005 	pop	dph
+      0006D1 D0 82            [24] 2006 	pop	dpl
+      0006D3 D0 E0            [24] 2007 	pop	acc
+      0006D5 D2 AF            [12] 2008 	setb	ea
+      0006D7 32               [24] 2009 	reti
+                                   2010 ;	eliminated unneeded push/pop b
+                                   2011 ;------------------------------------------------------------
+                                   2012 ;Allocation info for local variables in function 'timer2_isr'
+                                   2013 ;------------------------------------------------------------
+                                   2014 ;kbd_send_report           Allocated to registers r7 
+                                   2015 ;i                         Allocated to registers r7 
+                                   2016 ;------------------------------------------------------------
+                                   2017 ;	sunkbd_hid.c:976: static void timer2_isr() __interrupt (5) __using (3) __critical
+                                   2018 ;	-----------------------------------------
+                                   2019 ;	 function timer2_isr
+                                   2020 ;	-----------------------------------------
+      0006D8                       2021 _timer2_isr:
+                           00001F  2022 	ar7 = 0x1f
+                           00001E  2023 	ar6 = 0x1e
+                           00001D  2024 	ar5 = 0x1d
+                           00001C  2025 	ar4 = 0x1c
+                           00001B  2026 	ar3 = 0x1b
+                           00001A  2027 	ar2 = 0x1a
+                           000019  2028 	ar1 = 0x19
+                           000018  2029 	ar0 = 0x18
+      0006D8 C2 AF            [12] 2030 	clr	ea
+      0006DA C0 E0            [24] 2031 	push	acc
+      0006DC C0 82            [24] 2032 	push	dpl
+      0006DE C0 83            [24] 2033 	push	dph
+      0006E0 C0 D0            [24] 2034 	push	psw
+      0006E2 75 D0 18         [24] 2035 	mov	psw,#0x18
+                                   2036 ;	sunkbd_hid.c:986: if (TF2) {
+                                   2037 ;	sunkbd_hid.c:987: TF2 = 0;
+      0006E5 10 CF 02         [24] 2038 	jbc	_TF2,00143$
+      0006E8 80 40            [24] 2039 	sjmp	00116$
+      0006EA                       2040 00143$:
+                                   2041 ;	sunkbd_hid.c:993: kbd_send_report = FALSE;
+      0006EA 7F 00            [12] 2042 	mov	r7,#0x00
+                                   2043 ;	sunkbd_hid.c:995: if (!kbd_idle_mode) {
+      0006EC 20*02 08         [24] 2044 	jb	_kbd_idle_mode,00104$
+                                   2045 ;	sunkbd_hid.c:996: if (--kbd_idle_counter == 0) {
+      0006EF D5*0D 05         [24] 2046 	djnz	_kbd_idle_counter,00104$
+                                   2047 ;	sunkbd_hid.c:997: kbd_send_report  = TRUE;
+      0006F2 7F 01            [12] 2048 	mov	r7,#0x01
+                                   2049 ;	sunkbd_hid.c:999: kbd_idle_counter = kbd_idle_duration;
+      0006F4 85*0C*0D         [24] 2050 	mov	_kbd_idle_counter,_kbd_idle_duration
+      0006F7                       2051 00104$:
+                                   2052 ;	sunkbd_hid.c:1004: if (kbd_new_keys) {
+      0006F7 30*00 07         [24] 2053 	jnb	_kbd_new_keys,00106$
+                                   2054 ;	sunkbd_hid.c:1005: kbd_send_report     = TRUE;
+      0006FA 7F 01            [12] 2055 	mov	r7,#0x01
+                                   2056 ;	sunkbd_hid.c:1006: kbd_new_keys        = FALSE;
+      0006FC C2*00            [12] 2057 	clr	_kbd_new_keys
+                                   2058 ;	sunkbd_hid.c:1008: kbd_idle_counter    = kbd_idle_duration;
+      0006FE 85*0C*0D         [24] 2059 	mov	_kbd_idle_counter,_kbd_idle_duration
+      000701                       2060 00106$:
+                                   2061 ;	sunkbd_hid.c:1011: if (kbd_send_report) {
+      000701 EF               [12] 2062 	mov	a,r7
+      000702 60 26            [24] 2063 	jz	00116$
+                                   2064 ;	sunkbd_hid.c:1012: if (!in1_busy) {
+      000704 20*03 23         [24] 2065 	jb	_in1_busy,00116$
+                                   2066 ;	sunkbd_hid.c:1014: while (i-- > 0)
+      000707 7F 08            [12] 2067 	mov	r7,#0x08
+      000709                       2068 00107$:
+      000709 8F 1E            [24] 2069 	mov	ar6,r7
+      00070B 1F               [12] 2070 	dec	r7
+      00070C EE               [12] 2071 	mov	a,r6
+      00070D 60 13            [24] 2072 	jz	00109$
+                                   2073 ;	sunkbd_hid.c:1015: in1buf(i) = key_buffer[i];
+      00070F EF               [12] 2074 	mov	a,r7
+      000710 24 80            [12] 2075 	add	a,#_IN1BUF
+      000712 F5 82            [12] 2076 	mov	dpl,a
+      000714 E4               [12] 2077 	clr	a
+      000715 34 7E            [12] 2078 	addc	a,#(_IN1BUF >> 8)
+      000717 F5 83            [12] 2079 	mov	dph,a
+      000719 EF               [12] 2080 	mov	a,r7
+      00071A 24r03            [12] 2081 	add	a,#_key_buffer
+      00071C F9               [12] 2082 	mov	r1,a
+      00071D E7               [12] 2083 	mov	a,@r1
+      00071E FE               [12] 2084 	mov	r6,a
+      00071F F0               [24] 2085 	movx	@dptr,a
+      000720 80 E7            [24] 2086 	sjmp	00107$
+      000722                       2087 00109$:
+                                   2088 ;	sunkbd_hid.c:1018: in1_busy = TRUE;
+      000722 D2*03            [12] 2089 	setb	_in1_busy
+                                   2090 ;	sunkbd_hid.c:1019: IN1BC    = 8;
+      000724 90 7F B7         [24] 2091 	mov	dptr,#_IN1BC
+      000727 74 08            [12] 2092 	mov	a,#0x08
+      000729 F0               [24] 2093 	movx	@dptr,a
+      00072A                       2094 00116$:
+      00072A D0 D0            [24] 2095 	pop	psw
+      00072C D0 83            [24] 2096 	pop	dph
+      00072E D0 82            [24] 2097 	pop	dpl
+      000730 D0 E0            [24] 2098 	pop	acc
+      000732 D2 AF            [12] 2099 	setb	ea
+      000734 32               [24] 2100 	reti
+                                   2101 ;	eliminated unneeded push/pop b
+                                   2102 ;------------------------------------------------------------
+                                   2103 ;Allocation info for local variables in function 'setup_usb_int'
+                                   2104 ;------------------------------------------------------------
+                                   2105 ;	sunkbd_hid.c:1068: static void setup_usb_int()
+                                   2106 ;	-----------------------------------------
+                                   2107 ;	 function setup_usb_int
+                                   2108 ;	-----------------------------------------
+      000735                       2109 _setup_usb_int:
+                           000007  2110 	ar7 = 0x07
+                           000006  2111 	ar6 = 0x06
+                           000005  2112 	ar5 = 0x05
+                           000004  2113 	ar4 = 0x04
+                           000003  2114 	ar3 = 0x03
+                           000002  2115 	ar2 = 0x02
+                           000001  2116 	ar1 = 0x01
+                           000000  2117 	ar0 = 0x00
+                                   2118 ;	sunkbd_hid.c:1071: EA       = 0;
+      000735 C2 AF            [12] 2119 	clr	_EA
+                                   2120 ;	sunkbd_hid.c:1074: USBBAV   = 0x00;
+      000737 90 7F AF         [24] 2121 	mov	dptr,#_USBBAV
+      00073A E4               [12] 2122 	clr	a
+      00073B F0               [24] 2123 	movx	@dptr,a
+                                   2124 ;	sunkbd_hid.c:1077: USBIRQ   = 0xff;
+      00073C 90 7F AB         [24] 2125 	mov	dptr,#_USBIRQ
+      00073F 14               [12] 2126 	dec	a
+      000740 F0               [24] 2127 	movx	@dptr,a
+                                   2128 ;	sunkbd_hid.c:1080: USBIEN   = 0x11;
+      000741 90 7F AE         [24] 2129 	mov	dptr,#_USBIEN
+      000744 74 11            [12] 2130 	mov	a,#0x11
+      000746 F0               [24] 2131 	movx	@dptr,a
+                                   2132 ;	sunkbd_hid.c:1084: IN07IRQ  = 0x07;
+      000747 90 7F A9         [24] 2133 	mov	dptr,#_IN07IRQ
+      00074A 74 07            [12] 2134 	mov	a,#0x07
+      00074C F0               [24] 2135 	movx	@dptr,a
+                                   2136 ;	sunkbd_hid.c:1087: IN07IEN  = 0x01;
+      00074D 90 7F AC         [24] 2137 	mov	dptr,#_IN07IEN
+      000750 74 01            [12] 2138 	mov	a,#0x01
+      000752 F0               [24] 2139 	movx	@dptr,a
+                                   2140 ;	sunkbd_hid.c:1089: IN07IEN |= 0x02;
+      000753 E0               [24] 2141 	movx	a,@dptr
+      000754 FF               [12] 2142 	mov	r7,a
+      000755 74 02            [12] 2143 	mov	a,#0x02
+      000757 4F               [12] 2144 	orl	a,r7
+      000758 F0               [24] 2145 	movx	@dptr,a
+                                   2146 ;	sunkbd_hid.c:1096: OUT07IRQ = 0x01;
+      000759 90 7F AA         [24] 2147 	mov	dptr,#_OUT07IRQ
+      00075C 74 01            [12] 2148 	mov	a,#0x01
+      00075E F0               [24] 2149 	movx	@dptr,a
+                                   2150 ;	sunkbd_hid.c:1099: OUT07IEN = 0x01;
+      00075F 90 7F AD         [24] 2151 	mov	dptr,#_OUT07IEN
+      000762 F0               [24] 2152 	movx	@dptr,a
+                                   2153 ;	sunkbd_hid.c:1103: IN1CS  = 0x00;
+      000763 90 7F B6         [24] 2154 	mov	dptr,#_IN1CS
+      000766 E4               [12] 2155 	clr	a
+      000767 F0               [24] 2156 	movx	@dptr,a
+                                   2157 ;	sunkbd_hid.c:1104: OUT1CS = 0x00;
+      000768 90 7F C6         [24] 2158 	mov	dptr,#_OUT1CS
+      00076B F0               [24] 2159 	movx	@dptr,a
+                                   2160 ;	sunkbd_hid.c:1105: IN2CS  = 0x00;
+      00076C 90 7F B8         [24] 2161 	mov	dptr,#_IN2CS
+      00076F F0               [24] 2162 	movx	@dptr,a
+                                   2163 ;	sunkbd_hid.c:1106: OUT2CS = 0x00;
+      000770 90 7F C8         [24] 2164 	mov	dptr,#_OUT2CS
+      000773 F0               [24] 2165 	movx	@dptr,a
+                                   2166 ;	sunkbd_hid.c:1110: IN07VAL  = SUNKBD_INVAL;
+      000774 90 7F DE         [24] 2167 	mov	dptr,#_IN07VAL
+      000777 74 03            [12] 2168 	mov	a,#0x03
+      000779 F0               [24] 2169 	movx	@dptr,a
+                                   2170 ;	sunkbd_hid.c:1111: OUT07VAL = SUNKBD_OUTVAL;
+      00077A 90 7F DF         [24] 2171 	mov	dptr,#_OUT07VAL
+      00077D 74 01            [12] 2172 	mov	a,#0x01
+      00077F F0               [24] 2173 	movx	@dptr,a
+                                   2174 ;	sunkbd_hid.c:1114: EUSB = 1;
+      000780 D2 E8            [12] 2175 	setb	_EUSB
+                                   2176 ;	sunkbd_hid.c:1117: EA   = 1;
+      000782 D2 AF            [12] 2177 	setb	_EA
+      000784 22               [24] 2178 	ret
+                                   2179 ;------------------------------------------------------------
+                                   2180 ;Allocation info for local variables in function 'setup_ser_int'
+                                   2181 ;------------------------------------------------------------
+                                   2182 ;	sunkbd_hid.c:1126: static void setup_ser_int()
+                                   2183 ;	-----------------------------------------
+                                   2184 ;	 function setup_ser_int
+                                   2185 ;	-----------------------------------------
+      000785                       2186 _setup_ser_int:
+                                   2187 ;	sunkbd_hid.c:1135: OUTB     = 0x00;
+      000785 90 7F 97         [24] 2188 	mov	dptr,#_OUTB
+      000788 E4               [12] 2189 	clr	a
+      000789 F0               [24] 2190 	movx	@dptr,a
+                                   2191 ;	sunkbd_hid.c:1136: OEB      = 0x02;
+      00078A 90 7F 9D         [24] 2192 	mov	dptr,#_OEB
+      00078D 74 02            [12] 2193 	mov	a,#0x02
+      00078F F0               [24] 2194 	movx	@dptr,a
+                                   2195 ;	sunkbd_hid.c:1137: OUTC     = 0x00;
+      000790 90 7F 98         [24] 2196 	mov	dptr,#_OUTC
+      000793 E4               [12] 2197 	clr	a
+      000794 F0               [24] 2198 	movx	@dptr,a
+                                   2199 ;	sunkbd_hid.c:1138: OEC      = 0x84;
+      000795 90 7F 9E         [24] 2200 	mov	dptr,#_OEC
+      000798 74 84            [12] 2201 	mov	a,#0x84
+      00079A F0               [24] 2202 	movx	@dptr,a
+                                   2203 ;	sunkbd_hid.c:1139: PORTCCFG = 0x03;
+      00079B 90 7F 95         [24] 2204 	mov	dptr,#_PORTCCFG
+      00079E 74 03            [12] 2205 	mov	a,#0x03
+      0007A0 F0               [24] 2206 	movx	@dptr,a
+                                   2207 ;	sunkbd_hid.c:1140: PORTBCFG = 0x04;
+      0007A1 90 7F 94         [24] 2208 	mov	dptr,#_PORTBCFG
+      0007A4 04               [12] 2209 	inc	a
+      0007A5 F0               [24] 2210 	movx	@dptr,a
+                                   2211 ;	sunkbd_hid.c:1148: TMOD     = 0x20;
+      0007A6 75 89 20         [24] 2212 	mov	_TMOD,#0x20
+                                   2213 ;	sunkbd_hid.c:1149: CKCON   &= 0xef;
+      0007A9 53 8E EF         [24] 2214 	anl	_CKCON,#0xef
+                                   2215 ;	sunkbd_hid.c:1150: TH1      = 204;
+      0007AC 75 8D CC         [24] 2216 	mov	_TH1,#0xcc
+                                   2217 ;	sunkbd_hid.c:1152: PCON     = 0x00;
+      0007AF 75 87 00         [24] 2218 	mov	_PCON,#0x00
+                                   2219 ;	sunkbd_hid.c:1160: SCON0    = 0x50;
+      0007B2 75 98 50         [24] 2220 	mov	_SCON0,#0x50
+                                   2221 ;	sunkbd_hid.c:1161: T2CON    = 0x00;
+      0007B5 75 C8 00         [24] 2222 	mov	_T2CON,#0x00
+                                   2223 ;	sunkbd_hid.c:1163: ES0      = 1;
+      0007B8 D2 AC            [12] 2224 	setb	_ES0
+                                   2225 ;	sunkbd_hid.c:1179: TR1      = 1;
+      0007BA D2 8E            [12] 2226 	setb	_TR1
+      0007BC 22               [24] 2227 	ret
+                                   2228 ;------------------------------------------------------------
+                                   2229 ;Allocation info for local variables in function 'setup_keyboard'
+                                   2230 ;------------------------------------------------------------
+                                   2231 ;j                         Allocated to registers r7 
+                                   2232 ;------------------------------------------------------------
+                                   2233 ;	sunkbd_hid.c:1189: static void setup_keyboard()
+                                   2234 ;	-----------------------------------------
+                                   2235 ;	 function setup_keyboard
+                                   2236 ;	-----------------------------------------
+      0007BD                       2237 _setup_keyboard:
+                                   2238 ;	sunkbd_hid.c:1193: sunkbd_layout = 0;  /* not used yet */
+      0007BD 75*02 00         [24] 2239 	mov	_sunkbd_layout,#0x00
+                                   2240 ;	sunkbd_hid.c:1197: while (j-- > 0) {
+      0007C0 7F 08            [12] 2241 	mov	r7,#0x08
+      0007C2                       2242 00101$:
+      0007C2 8F 06            [24] 2243 	mov	ar6,r7
+      0007C4 1F               [12] 2244 	dec	r7
+      0007C5 EE               [12] 2245 	mov	a,r6
+      0007C6 60 14            [24] 2246 	jz	00103$
+                                   2247 ;	sunkbd_hid.c:1198: in1buf(j)     = 0;
+      0007C8 EF               [12] 2248 	mov	a,r7
+      0007C9 24 80            [12] 2249 	add	a,#_IN1BUF
+      0007CB F5 82            [12] 2250 	mov	dpl,a
+      0007CD E4               [12] 2251 	clr	a
+      0007CE 34 7E            [12] 2252 	addc	a,#(_IN1BUF >> 8)
+      0007D0 F5 83            [12] 2253 	mov	dph,a
+      0007D2 E4               [12] 2254 	clr	a
+      0007D3 F0               [24] 2255 	movx	@dptr,a
+                                   2256 ;	sunkbd_hid.c:1199: key_buffer[j] = 0;
+      0007D4 EF               [12] 2257 	mov	a,r7
+      0007D5 24r03            [12] 2258 	add	a,#_key_buffer
+      0007D7 F8               [12] 2259 	mov	r0,a
+      0007D8 76 00            [12] 2260 	mov	@r0,#0x00
+      0007DA 80 E6            [24] 2261 	sjmp	00101$
+      0007DC                       2262 00103$:
+                                   2263 ;	sunkbd_hid.c:1203: sunkbd_reset = -2;
+      0007DC 75*01 FE         [24] 2264 	mov	_sunkbd_reset,#0xfe
+                                   2265 ;	sunkbd_hid.c:1204: SBUF0        = SUNKBD_CMD_RESET;
+      0007DF 75 99 01         [24] 2266 	mov	_SBUF0,#0x01
+                                   2267 ;	sunkbd_hid.c:1207: sunkbd_type  = sunkbd_reset;
+      0007E2 85*01*00         [24] 2268 	mov	_sunkbd_type,_sunkbd_reset
+                                   2269 ;	sunkbd_hid.c:1208: sunkbd_reset = 0;
+      0007E5 75*01 00         [24] 2270 	mov	_sunkbd_reset,#0x00
+                                   2271 ;	sunkbd_hid.c:1210: if (sunkbd_type == 4) { /* Type 4 keyboard */
+      0007E8 74 04            [12] 2272 	mov	a,#0x04
+      0007EA B5*00 0E         [24] 2273 	cjne	a,_sunkbd_type,00114$
+                                   2274 ;	sunkbd_hid.c:1211: sunkbd_layout = -2;
+      0007ED 75*02 FE         [24] 2275 	mov	_sunkbd_layout,#0xfe
+                                   2276 ;	sunkbd_hid.c:1213: SBUF0         = SUNKBD_CMD_LAYOUT;
+      0007F0 75 99 0F         [24] 2277 	mov	_SBUF0,#0x0f
+                                   2278 ;	sunkbd_hid.c:1215: if (sunkbd_layout & SUNKBD_LAYOUT_5_MASK)
+      0007F3 E5*02            [12] 2279 	mov	a,_sunkbd_layout
+      0007F5 30 E5 03         [24] 2280 	jnb	acc.5,00114$
+                                   2281 ;	sunkbd_hid.c:1216: sunkbd_type = 5;
+      0007F8 75*00 05         [24] 2282 	mov	_sunkbd_type,#0x05
+      0007FB                       2283 00114$:
+      0007FB 22               [24] 2284 	ret
+                                   2285 ;------------------------------------------------------------
+                                   2286 ;Allocation info for local variables in function 'setup_timer2_int'
+                                   2287 ;------------------------------------------------------------
+                                   2288 ;	sunkbd_hid.c:1250: static void setup_timer2_int()
+                                   2289 ;	-----------------------------------------
+                                   2290 ;	 function setup_timer2_int
+                                   2291 ;	-----------------------------------------
+      0007FC                       2292 _setup_timer2_int:
+                                   2293 ;	sunkbd_hid.c:1254: kbd_idle_counter = kbd_idle_duration;
+      0007FC 85*0C*0D         [24] 2294 	mov	_kbd_idle_counter,_kbd_idle_duration
+                                   2295 ;	sunkbd_hid.c:1265: T2CON  = 0x00;
+      0007FF 75 C8 00         [24] 2296 	mov	_T2CON,#0x00
+                                   2297 ;	sunkbd_hid.c:1266: RCAP2H = TH2 = 0xc1;
+      000802 75 CD C1         [24] 2298 	mov	_TH2,#0xc1
+      000805 75 CB C1         [24] 2299 	mov	_RCAP2H,#0xc1
+                                   2300 ;	sunkbd_hid.c:1267: RCAP2L = TL2 = 0x80;
+      000808 75 CC 80         [24] 2301 	mov	_TL2,#0x80
+      00080B 75 CA 80         [24] 2302 	mov	_RCAP2L,#0x80
+                                   2303 ;	sunkbd_hid.c:1270: ET2    = 1;
+      00080E D2 AD            [12] 2304 	setb	_ET2
+                                   2305 ;	sunkbd_hid.c:1272: TF2    = 0;
+      000810 C2 CF            [12] 2306 	clr	_TF2
+                                   2307 ;	sunkbd_hid.c:1274: TR2    = 1;
+      000812 D2 CA            [12] 2308 	setb	_TR2
+      000814 22               [24] 2309 	ret
+                                   2310 ;------------------------------------------------------------
+                                   2311 ;Allocation info for local variables in function '_sdcc_external_startup'
+                                   2312 ;------------------------------------------------------------
+                                   2313 ;i                         Allocated to registers r7 
+                                   2314 ;------------------------------------------------------------
+                                   2315 ;	sunkbd_hid.c:1286: Byte _sdcc_external_startup()
+                                   2316 ;	-----------------------------------------
+                                   2317 ;	 function _sdcc_external_startup
+                                   2318 ;	-----------------------------------------
+      000815                       2319 __sdcc_external_startup:
+                                   2320 ;	sunkbd_hid.c:1293: for (i = 2; i > 0; i--) ;
+      000815 7F 02            [12] 2321 	mov	r7,#0x02
+      000817                       2322 00103$:
+      000817 EF               [12] 2323 	mov	a,r7
+      000818 14               [12] 2324 	dec	a
+      000819 FE               [12] 2325 	mov	r6,a
+      00081A FF               [12] 2326 	mov	r7,a
+      00081B 70 FA            [24] 2327 	jnz	00103$
+                                   2328 ;	sunkbd_hid.c:1296: USBCS &= ~0x04;    /* tristate the Disconnect pin */
+      00081D 90 7F D6         [24] 2329 	mov	dptr,#_USBCS
+      000820 E0               [24] 2330 	movx	a,@dptr
+      000821 FF               [12] 2331 	mov	r7,a
+      000822 74 FB            [12] 2332 	mov	a,#0xfb
+      000824 5F               [12] 2333 	anl	a,r7
+      000825 F0               [24] 2334 	movx	@dptr,a
+                                   2335 ;	sunkbd_hid.c:1297: USBCS |= 0x08;     /* disconnect USB core         */
+      000826 E0               [24] 2336 	movx	a,@dptr
+      000827 FF               [12] 2337 	mov	r7,a
+      000828 74 08            [12] 2338 	mov	a,#0x08
+      00082A 4F               [12] 2339 	orl	a,r7
+      00082B F0               [24] 2340 	movx	@dptr,a
+                                   2341 ;	sunkbd_hid.c:1300: return(0);
+      00082C 75 82 00         [24] 2342 	mov	dpl,#0x00
+      00082F 22               [24] 2343 	ret
+                                   2344 ;------------------------------------------------------------
+                                   2345 ;Allocation info for local variables in function 'main'
+                                   2346 ;------------------------------------------------------------
+                                   2347 ;loop                      Allocated to registers r6 r7 
+                                   2348 ;------------------------------------------------------------
+                                   2349 ;	sunkbd_hid.c:1311: void main()
+                                   2350 ;	-----------------------------------------
+                                   2351 ;	 function main
+                                   2352 ;	-----------------------------------------
+      000830                       2353 _main:
+                                   2354 ;	sunkbd_hid.c:1317: while (loop-- > 0) ;
+      000830 7E 00            [12] 2355 	mov	r6,#0x00
+      000832 7F 40            [12] 2356 	mov	r7,#0x40
+      000834                       2357 00101$:
+      000834 8E 04            [24] 2358 	mov	ar4,r6
+      000836 8F 05            [24] 2359 	mov	ar5,r7
+      000838 1E               [12] 2360 	dec	r6
+      000839 BE FF 01         [24] 2361 	cjne	r6,#0xff,00119$
+      00083C 1F               [12] 2362 	dec	r7
+      00083D                       2363 00119$:
+      00083D C3               [12] 2364 	clr	c
+      00083E E4               [12] 2365 	clr	a
+      00083F 9C               [12] 2366 	subb	a,r4
+      000840 74 80            [12] 2367 	mov	a,#(0x00 ^ 0x80)
+      000842 8D F0            [24] 2368 	mov	b,r5
+      000844 63 F0 80         [24] 2369 	xrl	b,#0x80
+      000847 95 F0            [12] 2370 	subb	a,b
+      000849 40 E9            [24] 2371 	jc	00101$
+                                   2372 ;	sunkbd_hid.c:1321: apply_reset_values();
+      00084B 12r00r00         [24] 2373 	lcall	_apply_reset_values
+                                   2374 ;	sunkbd_hid.c:1323: setup_usb_int();
+      00084E 12r07r35         [24] 2375 	lcall	_setup_usb_int
+                                   2376 ;	sunkbd_hid.c:1326: setup_ser_int();
+      000851 12r07r85         [24] 2377 	lcall	_setup_ser_int
+                                   2378 ;	sunkbd_hid.c:1328: setup_keyboard();
+      000854 12r07rBD         [24] 2379 	lcall	_setup_keyboard
+                                   2380 ;	sunkbd_hid.c:1333: setup_timer2_int();
+      000857 12r07rFC         [24] 2381 	lcall	_setup_timer2_int
+                                   2382 ;	sunkbd_hid.c:1336: USBCS |= 0x02;     /* activate RENUM                     */
+      00085A 90 7F D6         [24] 2383 	mov	dptr,#_USBCS
+      00085D E0               [24] 2384 	movx	a,@dptr
+      00085E FF               [12] 2385 	mov	r7,a
+      00085F 74 02            [12] 2386 	mov	a,#0x02
+      000861 4F               [12] 2387 	orl	a,r7
+      000862 F0               [24] 2388 	movx	@dptr,a
+                                   2389 ;	sunkbd_hid.c:1337: USBCS &= ~0x08;    /* deactivate DISCON                  */
+      000863 E0               [24] 2390 	movx	a,@dptr
+      000864 FF               [12] 2391 	mov	r7,a
+      000865 74 F7            [12] 2392 	mov	a,#0xf7
+      000867 5F               [12] 2393 	anl	a,r7
+      000868 F0               [24] 2394 	movx	@dptr,a
+                                   2395 ;	sunkbd_hid.c:1338: USBCS |= 0x04;     /* release tristate on Disconnect pin */
+      000869 E0               [24] 2396 	movx	a,@dptr
+      00086A FF               [12] 2397 	mov	r7,a
+      00086B 74 04            [12] 2398 	mov	a,#0x04
+      00086D 4F               [12] 2399 	orl	a,r7
+      00086E F0               [24] 2400 	movx	@dptr,a
+                                   2401 ;	sunkbd_hid.c:1341: while (TRUE) ;
+      00086F                       2402 00105$:
+      00086F 80 FE            [24] 2403 	sjmp	00105$
+                                   2404 	.area CSEG    (CODE)
+                                   2405 	.area CONST   (CODE)
+      000000                       2406 _dev_desc:
+      000000 12                    2407 	.db #0x12	; 18
+      000001 01                    2408 	.db #0x01	; 1
+      000002 00                    2409 	.db #0x00	; 0
+      000003 01                    2410 	.db #0x01	; 1
+      000004 00                    2411 	.db #0x00	; 0
+      000005 00                    2412 	.db #0x00	; 0
+      000006 00                    2413 	.db #0x00	; 0
+      000007 40                    2414 	.db #0x40	; 64
+      000008 CD                    2415 	.db #0xcd	; 205
+      000009 06                    2416 	.db #0x06	; 6
+      00000A 01                    2417 	.db #0x01	; 1
+      00000B C0                    2418 	.db #0xc0	; 192
+      00000C 55                    2419 	.db #0x55	; 85	'U'
+      00000D 01                    2420 	.db #0x01	; 1
+      00000E 01                    2421 	.db #0x01	; 1
+      00000F 02                    2422 	.db #0x02	; 2
+      000010 00                    2423 	.db #0x00	; 0
+      000011 01                    2424 	.db #0x01	; 1
+      000012                       2425 _conf_desc:
+      000012 09                    2426 	.db #0x09	; 9
+      000013 02                    2427 	.db #0x02	; 2
+      000014 22                    2428 	.db #0x22	; 34
+      000015 00                    2429 	.db #0x00	; 0
+      000016 01                    2430 	.db #0x01	; 1
+      000017 01                    2431 	.db #0x01	; 1
+      000018 00                    2432 	.db #0x00	; 0
+      000019 80                    2433 	.db #0x80	; 128
+      00001A 64                    2434 	.db #0x64	; 100	'd'
+      00001B 09                    2435 	.db #0x09	; 9
+      00001C 04                    2436 	.db #0x04	; 4
+      00001D 00                    2437 	.db #0x00	; 0
+      00001E 00                    2438 	.db #0x00	; 0
+      00001F 01                    2439 	.db #0x01	; 1
+      000020 03                    2440 	.db #0x03	; 3
+      000021 01                    2441 	.db #0x01	; 1
+      000022 01                    2442 	.db #0x01	; 1
+      000023 03                    2443 	.db #0x03	; 3
+      000024 09                    2444 	.db #0x09	; 9
+      000025 21                    2445 	.db #0x21	; 33
+      000026 00                    2446 	.db #0x00	; 0
+      000027 01                    2447 	.db #0x01	; 1
+      000028 21                    2448 	.db #0x21	; 33
+      000029 01                    2449 	.db #0x01	; 1
+      00002A 22                    2450 	.db #0x22	; 34
+      00002B 3F                    2451 	.db #0x3f	; 63
+      00002C 00                    2452 	.db #0x00	; 0
+      00002D 07                    2453 	.db #0x07	; 7
+      00002E 05                    2454 	.db #0x05	; 5
+      00002F 81                    2455 	.db #0x81	; 129
+      000030 03                    2456 	.db #0x03	; 3
+      000031 08                    2457 	.db #0x08	; 8
+      000032 00                    2458 	.db #0x00	; 0
+      000033 0A                    2459 	.db #0x0a	; 10
+      000034                       2460 _report_desc_keyboard:
+      000034 05                    2461 	.db #0x05	; 5
+      000035 01                    2462 	.db #0x01	; 1
+      000036 09                    2463 	.db #0x09	; 9
+      000037 06                    2464 	.db #0x06	; 6
+      000038 A1                    2465 	.db #0xa1	; 161
+      000039 01                    2466 	.db #0x01	; 1
+      00003A 05                    2467 	.db #0x05	; 5
+      00003B 07                    2468 	.db #0x07	; 7
+      00003C 19                    2469 	.db #0x19	; 25
+      00003D E0                    2470 	.db #0xe0	; 224
+      00003E 29                    2471 	.db #0x29	; 41
+      00003F E7                    2472 	.db #0xe7	; 231
+      000040 15                    2473 	.db #0x15	; 21
+      000041 00                    2474 	.db #0x00	; 0
+      000042 25                    2475 	.db #0x25	; 37
+      000043 01                    2476 	.db #0x01	; 1
+      000044 75                    2477 	.db #0x75	; 117	'u'
+      000045 01                    2478 	.db #0x01	; 1
+      000046 95                    2479 	.db #0x95	; 149
+      000047 08                    2480 	.db #0x08	; 8
+      000048 81                    2481 	.db #0x81	; 129
+      000049 02                    2482 	.db #0x02	; 2
+      00004A 95                    2483 	.db #0x95	; 149
+      00004B 01                    2484 	.db #0x01	; 1
+      00004C 75                    2485 	.db #0x75	; 117	'u'
+      00004D 08                    2486 	.db #0x08	; 8
+      00004E 81                    2487 	.db #0x81	; 129
+      00004F 01                    2488 	.db #0x01	; 1
+      000050 95                    2489 	.db #0x95	; 149
+      000051 05                    2490 	.db #0x05	; 5
+      000052 75                    2491 	.db #0x75	; 117	'u'
+      000053 01                    2492 	.db #0x01	; 1
+      000054 05                    2493 	.db #0x05	; 5
+      000055 08                    2494 	.db #0x08	; 8
+      000056 19                    2495 	.db #0x19	; 25
+      000057 01                    2496 	.db #0x01	; 1
+      000058 29                    2497 	.db #0x29	; 41
+      000059 05                    2498 	.db #0x05	; 5
+      00005A 91                    2499 	.db #0x91	; 145
+      00005B 02                    2500 	.db #0x02	; 2
+      00005C 95                    2501 	.db #0x95	; 149
+      00005D 01                    2502 	.db #0x01	; 1
+      00005E 75                    2503 	.db #0x75	; 117	'u'
+      00005F 03                    2504 	.db #0x03	; 3
+      000060 91                    2505 	.db #0x91	; 145
+      000061 01                    2506 	.db #0x01	; 1
+      000062 95                    2507 	.db #0x95	; 149
+      000063 06                    2508 	.db #0x06	; 6
+      000064 75                    2509 	.db #0x75	; 117	'u'
+      000065 08                    2510 	.db #0x08	; 8
+      000066 15                    2511 	.db #0x15	; 21
+      000067 00                    2512 	.db #0x00	; 0
+      000068 25                    2513 	.db #0x25	; 37
+      000069 65                    2514 	.db #0x65	; 101	'e'
+      00006A 05                    2515 	.db #0x05	; 5
+      00006B 07                    2516 	.db #0x07	; 7
+      00006C 19                    2517 	.db #0x19	; 25
+      00006D 00                    2518 	.db #0x00	; 0
+      00006E 29                    2519 	.db #0x29	; 41
+      00006F 65                    2520 	.db #0x65	; 101	'e'
+      000070 81                    2521 	.db #0x81	; 129
+      000071 00                    2522 	.db #0x00	; 0
+      000072 C0                    2523 	.db #0xc0	; 192
+      000073                       2524 _string_langid:
+      000073 04                    2525 	.db #0x04	; 4
+      000074 03                    2526 	.db #0x03	; 3
+      000075 00                    2527 	.db #0x00	; 0
+      000076 00                    2528 	.db #0x00	; 0
+      000077                       2529 _string_mfg:
+      000077 22                    2530 	.db #0x22	; 34
+      000078 03                    2531 	.db #0x03	; 3
+      000079 41                    2532 	.db #0x41	; 65	'A'
+      00007A 00                    2533 	.db #0x00	; 0
+      00007B 43                    2534 	.db #0x43	; 67	'C'
+      00007C 00                    2535 	.db #0x00	; 0
+      00007D 4D                    2536 	.db #0x4d	; 77	'M'
+      00007E 00                    2537 	.db #0x00	; 0
+      00007F 45                    2538 	.db #0x45	; 69	'E'
+      000080 00                    2539 	.db #0x00	; 0
+      000081 20                    2540 	.db #0x20	; 32
+      000082 00                    2541 	.db #0x00	; 0
+      000083 75                    2542 	.db #0x75	; 117	'u'
+      000084 00                    2543 	.db #0x00	; 0
+      000085 73                    2544 	.db #0x73	; 115	's'
+      000086 00                    2545 	.db #0x00	; 0
+      000087 62                    2546 	.db #0x62	; 98	'b'
+      000088 00                    2547 	.db #0x00	; 0
+      000089 20                    2548 	.db #0x20	; 32
+      00008A 00                    2549 	.db #0x00	; 0
+      00008B 57                    2550 	.db #0x57	; 87	'W'
+      00008C 00                    2551 	.db #0x00	; 0
+      00008D 69                    2552 	.db #0x69	; 105	'i'
+      00008E 00                    2553 	.db #0x00	; 0
+      00008F 64                    2554 	.db #0x64	; 100	'd'
+      000090 00                    2555 	.db #0x00	; 0
+      000091 67                    2556 	.db #0x67	; 103	'g'
+      000092 00                    2557 	.db #0x00	; 0
+      000093 65                    2558 	.db #0x65	; 101	'e'
+      000094 00                    2559 	.db #0x00	; 0
+      000095 74                    2560 	.db #0x74	; 116	't'
+      000096 00                    2561 	.db #0x00	; 0
+      000097 73                    2562 	.db #0x73	; 115	's'
+      000098 00                    2563 	.db #0x00	; 0
+      000099                       2564 _string_prod:
+      000099 22                    2565 	.db #0x22	; 34
+      00009A 03                    2566 	.db #0x03	; 3
+      00009B 53                    2567 	.db #0x53	; 83	'S'
+      00009C 00                    2568 	.db #0x00	; 0
+      00009D 75                    2569 	.db #0x75	; 117	'u'
+      00009E 00                    2570 	.db #0x00	; 0
+      00009F 6E                    2571 	.db #0x6e	; 110	'n'
+      0000A0 00                    2572 	.db #0x00	; 0
+      0000A1 20                    2573 	.db #0x20	; 32
+      0000A2 00                    2574 	.db #0x00	; 0
+      0000A3 6B                    2575 	.db #0x6b	; 107	'k'
+      0000A4 00                    2576 	.db #0x00	; 0
+      0000A5 65                    2577 	.db #0x65	; 101	'e'
+      0000A6 00                    2578 	.db #0x00	; 0
+      0000A7 79                    2579 	.db #0x79	; 121	'y'
+      0000A8 00                    2580 	.db #0x00	; 0
+      0000A9 62                    2581 	.db #0x62	; 98	'b'
+      0000AA 00                    2582 	.db #0x00	; 0
+      0000AB 6F                    2583 	.db #0x6f	; 111	'o'
+      0000AC 00                    2584 	.db #0x00	; 0
+      0000AD 61                    2585 	.db #0x61	; 97	'a'
+      0000AE 00                    2586 	.db #0x00	; 0
+      0000AF 72                    2587 	.db #0x72	; 114	'r'
+      0000B0 00                    2588 	.db #0x00	; 0
+      0000B1 64                    2589 	.db #0x64	; 100	'd'
+      0000B2 00                    2590 	.db #0x00	; 0
+      0000B3 20                    2591 	.db #0x20	; 32
+      0000B4 00                    2592 	.db #0x00	; 0
+      0000B5 48                    2593 	.db #0x48	; 72	'H'
+      0000B6 00                    2594 	.db #0x00	; 0
+      0000B7 49                    2595 	.db #0x49	; 73	'I'
+      0000B8 00                    2596 	.db #0x00	; 0
+      0000B9 44                    2597 	.db #0x44	; 68	'D'
+      0000BA 00                    2598 	.db #0x00	; 0
+      0000BB                       2599 _string_if_keyboard:
+      0000BB 86                    2600 	.db #0x86	; 134
+      0000BC 03                    2601 	.db #0x03	; 3
+      0000BD 53                    2602 	.db #0x53	; 83	'S'
+      0000BE 00                    2603 	.db #0x00	; 0
+      0000BF 75                    2604 	.db #0x75	; 117	'u'
+      0000C0 00                    2605 	.db #0x00	; 0
+      0000C1 6E                    2606 	.db #0x6e	; 110	'n'
+      0000C2 00                    2607 	.db #0x00	; 0
+      0000C3 20                    2608 	.db #0x20	; 32
+      0000C4 00                    2609 	.db #0x00	; 0
+      0000C5 4B                    2610 	.db #0x4b	; 75	'K'
+      0000C6 00                    2611 	.db #0x00	; 0
+      0000C7 65                    2612 	.db #0x65	; 101	'e'
+      0000C8 00                    2613 	.db #0x00	; 0
+      0000C9 79                    2614 	.db #0x79	; 121	'y'
+      0000CA 00                    2615 	.db #0x00	; 0
+      0000CB 62                    2616 	.db #0x62	; 98	'b'
+      0000CC 00                    2617 	.db #0x00	; 0
+      0000CD 6F                    2618 	.db #0x6f	; 111	'o'
+      0000CE 00                    2619 	.db #0x00	; 0
+      0000CF 61                    2620 	.db #0x61	; 97	'a'
+      0000D0 00                    2621 	.db #0x00	; 0
+      0000D1 72                    2622 	.db #0x72	; 114	'r'
+      0000D2 00                    2623 	.db #0x00	; 0
+      0000D3 64                    2624 	.db #0x64	; 100	'd'
+      0000D4 00                    2625 	.db #0x00	; 0
+      0000D5 20                    2626 	.db #0x20	; 32
+      0000D6 00                    2627 	.db #0x00	; 0
+      0000D7 48                    2628 	.db #0x48	; 72	'H'
+      0000D8 00                    2629 	.db #0x00	; 0
+      0000D9 49                    2630 	.db #0x49	; 73	'I'
+      0000DA 00                    2631 	.db #0x00	; 0
+      0000DB 44                    2632 	.db #0x44	; 68	'D'
+      0000DC 00                    2633 	.db #0x00	; 0
+      0000DD 20                    2634 	.db #0x20	; 32
+      0000DE 00                    2635 	.db #0x00	; 0
+      0000DF 44                    2636 	.db #0x44	; 68	'D'
+      0000E0 00                    2637 	.db #0x00	; 0
+      0000E1 72                    2638 	.db #0x72	; 114	'r'
+      0000E2 00                    2639 	.db #0x00	; 0
+      0000E3 69                    2640 	.db #0x69	; 105	'i'
+      0000E4 00                    2641 	.db #0x00	; 0
+      0000E5 76                    2642 	.db #0x76	; 118	'v'
+      0000E6 00                    2643 	.db #0x00	; 0
+      0000E7 65                    2644 	.db #0x65	; 101	'e'
+      0000E8 00                    2645 	.db #0x00	; 0
+      0000E9 72                    2646 	.db #0x72	; 114	'r'
+      0000EA 00                    2647 	.db #0x00	; 0
+      0000EB 2C                    2648 	.db #0x2c	; 44
+      0000EC 00                    2649 	.db #0x00	; 0
+      0000ED 20                    2650 	.db #0x20	; 32
+      0000EE 00                    2651 	.db #0x00	; 0
+      0000EF 46                    2652 	.db #0x46	; 70	'F'
+      0000F0 00                    2653 	.db #0x00	; 0
+      0000F1 69                    2654 	.db #0x69	; 105	'i'
+      0000F2 00                    2655 	.db #0x00	; 0
+      0000F3 72                    2656 	.db #0x72	; 114	'r'
+      0000F4 00                    2657 	.db #0x00	; 0
+      0000F5 6D                    2658 	.db #0x6d	; 109	'm'
+      0000F6 00                    2659 	.db #0x00	; 0
+      0000F7 77                    2660 	.db #0x77	; 119	'w'
+      0000F8 00                    2661 	.db #0x00	; 0
+      0000F9 61                    2662 	.db #0x61	; 97	'a'
+      0000FA 00                    2663 	.db #0x00	; 0
+      0000FB 72                    2664 	.db #0x72	; 114	'r'
+      0000FC 00                    2665 	.db #0x00	; 0
+      0000FD 65                    2666 	.db #0x65	; 101	'e'
+      0000FE 00                    2667 	.db #0x00	; 0
+      0000FF 20                    2668 	.db #0x20	; 32
+      000100 00                    2669 	.db #0x00	; 0
+      000101 43                    2670 	.db #0x43	; 67	'C'
+      000102 00                    2671 	.db #0x00	; 0
+      000103 6F                    2672 	.db #0x6f	; 111	'o'
+      000104 00                    2673 	.db #0x00	; 0
+      000105 70                    2674 	.db #0x70	; 112	'p'
+      000106 00                    2675 	.db #0x00	; 0
+      000107 79                    2676 	.db #0x79	; 121	'y'
+      000108 00                    2677 	.db #0x00	; 0
+      000109 72                    2678 	.db #0x72	; 114	'r'
+      00010A 00                    2679 	.db #0x00	; 0
+      00010B 69                    2680 	.db #0x69	; 105	'i'
+      00010C 00                    2681 	.db #0x00	; 0
+      00010D 67                    2682 	.db #0x67	; 103	'g'
+      00010E 00                    2683 	.db #0x00	; 0
+      00010F 68                    2684 	.db #0x68	; 104	'h'
+      000110 00                    2685 	.db #0x00	; 0
+      000111 74                    2686 	.db #0x74	; 116	't'
+      000112 00                    2687 	.db #0x00	; 0
+      000113 20                    2688 	.db #0x20	; 32
+      000114 00                    2689 	.db #0x00	; 0
+      000115 28                    2690 	.db #0x28	; 40
+      000116 00                    2691 	.db #0x00	; 0
+      000117 63                    2692 	.db #0x63	; 99	'c'
+      000118 00                    2693 	.db #0x00	; 0
+      000119 29                    2694 	.db #0x29	; 41
+      00011A 00                    2695 	.db #0x00	; 0
+      00011B 20                    2696 	.db #0x20	; 32
+      00011C 00                    2697 	.db #0x00	; 0
+      00011D 32                    2698 	.db #0x32	; 50	'2'
+      00011E 00                    2699 	.db #0x00	; 0
+      00011F 30                    2700 	.db #0x30	; 48	'0'
+      000120 00                    2701 	.db #0x00	; 0
+      000121 30                    2702 	.db #0x30	; 48	'0'
+      000122 00                    2703 	.db #0x00	; 0
+      000123 32                    2704 	.db #0x32	; 50	'2'
+      000124 00                    2705 	.db #0x00	; 0
+      000125 20                    2706 	.db #0x20	; 32
+      000126 00                    2707 	.db #0x00	; 0
+      000127 41                    2708 	.db #0x41	; 65	'A'
+      000128 00                    2709 	.db #0x00	; 0
+      000129 72                    2710 	.db #0x72	; 114	'r'
+      00012A 00                    2711 	.db #0x00	; 0
+      00012B 6E                    2712 	.db #0x6e	; 110	'n'
+      00012C 00                    2713 	.db #0x00	; 0
+      00012D 69                    2714 	.db #0x69	; 105	'i'
+      00012E 00                    2715 	.db #0x00	; 0
+      00012F 6D                    2716 	.db #0x6d	; 109	'm'
+      000130 00                    2717 	.db #0x00	; 0
+      000131 20                    2718 	.db #0x20	; 32
+      000132 00                    2719 	.db #0x00	; 0
+      000133 4C                    2720 	.db #0x4c	; 76	'L'
+      000134 00                    2721 	.db #0x00	; 0
+      000135 61                    2722 	.db #0x61	; 97	'a'
+      000136 00                    2723 	.db #0x00	; 0
+      000137 65                    2724 	.db #0x65	; 101	'e'
+      000138 00                    2725 	.db #0x00	; 0
+      000139 75                    2726 	.db #0x75	; 117	'u'
+      00013A 00                    2727 	.db #0x00	; 0
+      00013B 67                    2728 	.db #0x67	; 103	'g'
+      00013C 00                    2729 	.db #0x00	; 0
+      00013D 65                    2730 	.db #0x65	; 101	'e'
+      00013E 00                    2731 	.db #0x00	; 0
+      00013F 72                    2732 	.db #0x72	; 114	'r'
+      000140 00                    2733 	.db #0x00	; 0
+      000141                       2734 _scancode_map:
+      000141 00                    2735 	.db #0x00	; 0
+      000142 78                    2736 	.db #0x78	; 120	'x'
+      000143 81                    2737 	.db #0x81	; 129
+      000144 79                    2738 	.db #0x79	; 121	'y'
+      000145 80                    2739 	.db #0x80	; 128
+      000146 3A                    2740 	.db #0x3a	; 58
+      000147 3B                    2741 	.db #0x3b	; 59
+      000148 43                    2742 	.db #0x43	; 67	'C'
+      000149 3C                    2743 	.db #0x3c	; 60
+      00014A 44                    2744 	.db #0x44	; 68	'D'
+      00014B 3D                    2745 	.db #0x3d	; 61
+      00014C 45                    2746 	.db #0x45	; 69	'E'
+      00014D 3E                    2747 	.db #0x3e	; 62
+      00014E E4                    2748 	.db #0xe4	; 228
+      00014F 3F                    2749 	.db #0x3f	; 63
+      000150 00                    2750 	.db #0x00	; 0
+      000151 40                    2751 	.db #0x40	; 64
+      000152 41                    2752 	.db #0x41	; 65	'A'
+      000153 42                    2753 	.db #0x42	; 66	'B'
+      000154 E2                    2754 	.db #0xe2	; 226
+      000155 52                    2755 	.db #0x52	; 82	'R'
+      000156 48                    2756 	.db #0x48	; 72	'H'
+      000157 46                    2757 	.db #0x46	; 70	'F'
+      000158 47                    2758 	.db #0x47	; 71	'G'
+      000159 50                    2759 	.db #0x50	; 80	'P'
+      00015A 74                    2760 	.db #0x74	; 116	't'
+      00015B 7A                    2761 	.db #0x7a	; 122	'z'
+      00015C 51                    2762 	.db #0x51	; 81	'Q'
+      00015D 4F                    2763 	.db #0x4f	; 79	'O'
+      00015E 29                    2764 	.db #0x29	; 41
+      00015F 1E                    2765 	.db #0x1e	; 30
+      000160 1F                    2766 	.db #0x1f	; 31
+      000161 20                    2767 	.db #0x20	; 32
+      000162 21                    2768 	.db #0x21	; 33
+      000163 22                    2769 	.db #0x22	; 34
+      000164 23                    2770 	.db #0x23	; 35
+      000165 24                    2771 	.db #0x24	; 36
+      000166 25                    2772 	.db #0x25	; 37
+      000167 26                    2773 	.db #0x26	; 38
+      000168 27                    2774 	.db #0x27	; 39
+      000169 2D                    2775 	.db #0x2d	; 45
+      00016A 2E                    2776 	.db #0x2e	; 46
+      00016B 35                    2777 	.db #0x35	; 53	'5'
+      00016C 2A                    2778 	.db #0x2a	; 42
+      00016D 49                    2779 	.db #0x49	; 73	'I'
+      00016E 00                    2780 	.db #0x00	; 0
+      00016F 54                    2781 	.db #0x54	; 84	'T'
+      000170 55                    2782 	.db #0x55	; 85	'U'
+      000171 00                    2783 	.db #0x00	; 0
+      000172 00                    2784 	.db #0x00	; 0
+      000173 63                    2785 	.db #0x63	; 99	'c'
+      000174 7C                    2786 	.db #0x7c	; 124
+      000175 4A                    2787 	.db #0x4a	; 74	'J'
+      000176 2B                    2788 	.db #0x2b	; 43
+      000177 14                    2789 	.db #0x14	; 20
+      000178 1A                    2790 	.db #0x1a	; 26
+      000179 08                    2791 	.db #0x08	; 8
+      00017A 15                    2792 	.db #0x15	; 21
+      00017B 17                    2793 	.db #0x17	; 23
+      00017C 1C                    2794 	.db #0x1c	; 28
+      00017D 18                    2795 	.db #0x18	; 24
+      00017E 0C                    2796 	.db #0x0c	; 12
+      00017F 12                    2797 	.db #0x12	; 18
+      000180 13                    2798 	.db #0x13	; 19
+      000181 2F                    2799 	.db #0x2f	; 47
+      000182 30                    2800 	.db #0x30	; 48	'0'
+      000183 4C                    2801 	.db #0x4c	; 76	'L'
+      000184 65                    2802 	.db #0x65	; 101	'e'
+      000185 5F                    2803 	.db #0x5f	; 95
+      000186 60                    2804 	.db #0x60	; 96
+      000187 61                    2805 	.db #0x61	; 97	'a'
+      000188 56                    2806 	.db #0x56	; 86	'V'
+      000189 00                    2807 	.db #0x00	; 0
+      00018A 7D                    2808 	.db #0x7d	; 125
+      00018B 4D                    2809 	.db #0x4d	; 77	'M'
+      00018C FF                    2810 	.db #0xff	; 255
+      00018D E0                    2811 	.db #0xe0	; 224
+      00018E 04                    2812 	.db #0x04	; 4
+      00018F 16                    2813 	.db #0x16	; 22
+      000190 07                    2814 	.db #0x07	; 7
+      000191 09                    2815 	.db #0x09	; 9
+      000192 0A                    2816 	.db #0x0a	; 10
+      000193 0B                    2817 	.db #0x0b	; 11
+      000194 0D                    2818 	.db #0x0d	; 13
+      000195 0E                    2819 	.db #0x0e	; 14
+      000196 0F                    2820 	.db #0x0f	; 15
+      000197 33                    2821 	.db #0x33	; 51	'3'
+      000198 34                    2822 	.db #0x34	; 52	'4'
+      000199 31                    2823 	.db #0x31	; 49	'1'
+      00019A 28                    2824 	.db #0x28	; 40
+      00019B 58                    2825 	.db #0x58	; 88	'X'
+      00019C 5C                    2826 	.db #0x5c	; 92
+      00019D 5D                    2827 	.db #0x5d	; 93
+      00019E 5E                    2828 	.db #0x5e	; 94
+      00019F 62                    2829 	.db #0x62	; 98	'b'
+      0001A0 7E                    2830 	.db #0x7e	; 126
+      0001A1 4B                    2831 	.db #0x4b	; 75	'K'
+      0001A2 7B                    2832 	.db #0x7b	; 123
+      0001A3 53                    2833 	.db #0x53	; 83	'S'
+      0001A4 E1                    2834 	.db #0xe1	; 225
+      0001A5 1D                    2835 	.db #0x1d	; 29
+      0001A6 1B                    2836 	.db #0x1b	; 27
+      0001A7 06                    2837 	.db #0x06	; 6
+      0001A8 19                    2838 	.db #0x19	; 25
+      0001A9 05                    2839 	.db #0x05	; 5
+      0001AA 11                    2840 	.db #0x11	; 17
+      0001AB 10                    2841 	.db #0x10	; 16
+      0001AC 36                    2842 	.db #0x36	; 54	'6'
+      0001AD 37                    2843 	.db #0x37	; 55	'7'
+      0001AE 38                    2844 	.db #0x38	; 56	'8'
+      0001AF E5                    2845 	.db #0xe5	; 229
+      0001B0 00                    2846 	.db #0x00	; 0
+      0001B1 59                    2847 	.db #0x59	; 89	'Y'
+      0001B2 5A                    2848 	.db #0x5a	; 90	'Z'
+      0001B3 5B                    2849 	.db #0x5b	; 91
+      0001B4 FF                    2850 	.db #0xff	; 255
+      0001B5 FF                    2851 	.db #0xff	; 255
+      0001B6 FF                    2852 	.db #0xff	; 255
+      0001B7 75                    2853 	.db #0x75	; 117	'u'
+      0001B8 39                    2854 	.db #0x39	; 57	'9'
+      0001B9 E3                    2855 	.db #0xe3	; 227
+      0001BA 2C                    2856 	.db #0x2c	; 44
+      0001BB E7                    2857 	.db #0xe7	; 231
+      0001BC 4E                    2858 	.db #0x4e	; 78	'N'
+      0001BD FF                    2859 	.db #0xff	; 255
+      0001BE 57                    2860 	.db #0x57	; 87	'W'
+      0001BF 00                    2861 	.db #0x00	; 0
+      0001C0 00                    2862 	.db #0x00	; 0
+                                   2863 	.area XINIT   (CODE)
+                                   2864 	.area CABS    (ABS,CODE)

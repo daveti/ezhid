@@ -9,11 +9,6 @@ FEATURES=-DKEYBOARD -DMOUSE
 ROM_FW=
 #ROM_FW=-DROM_FIRMWARE
 
-# This makefile supports for sdcc v3.6.0
-# and generates binary fw directly
-# Jan 9, 2017
-# daveti
-
 
 sdcc:
 	mkdir sdcc
@@ -34,10 +29,8 @@ sunkbd_hid.ihx: Makefile sunkbd_hid.c sunkbd_hid.h ../../include/ezusb_reg.h sdc
 	cd sdcc; \
 	cp ../sunkbd_hid.c .; \
 	cp ../sunkbd_hid.h .; \
-	sdcc-sdcc -I.. -I../../../include ${FEATURES} ${ROM_FW} sunkbd_hid.c; \
-	sdcc-packihx < sunkbd_hid.ihx > ../sunkbd_hid.ihx; \
-	sdcc-sdcc sunkbd_hid.rel -o sunkbd_hid.hex; \
-	sdcc-makebin -p sunkbd_hid.hex sunkbd_hid.fw
+	sdcc -I.. -I../../../include ${FEATURES} ${ROM_FW} sunkbd_hid.c; \
+	packihx < sunkbd_hid.ihx > ../sunkbd_hid.ihx
 
 .PHONY: clean
 clean:

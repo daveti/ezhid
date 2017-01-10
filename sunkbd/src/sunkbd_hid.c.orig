@@ -83,7 +83,7 @@ static void apply_reset_values()
  *****************************************************************************/
 #pragma save
 #pragma nooverlay
-static void get_descriptor(void) __using (1)
+static void get_descriptor(void) using 1
 {
    switch (sdat->wValueH) {
          /* type: device */
@@ -196,7 +196,7 @@ static void get_descriptor(void) __using (1)
  * According to the EZ-USB Technical Reference Manual it is essential to
  * clear HSNACK when stalling EP0 (see section 12.12).
  *****************************************************************************/
-static void usb_isr(void) __interrupt (8) __using (1) __critical
+static void usb_isr(void) interrupt 8 using 1 critical
 {
    /* clear INT2 interrupt */
    EXIF &= 0xef;
@@ -690,11 +690,11 @@ static void usb_isr(void) __interrupt (8) __using (1) __critical
  * The transmitter cares for the txmit queue.
  *****************************************************************************/
 #if defined (KEYBOARD)
-static void kbd_serial_isr(void) __interrupt (4) __using (2) __critical
+static void kbd_serial_isr(void) interrupt 4 using 2 critical
 {
    Byte scancode;
    Byte mod_map;
-   __bit  parse_scancode;
+   bit  parse_scancode;
    register Byte i;
 
    if (RI_0) {
@@ -876,7 +876,7 @@ static void kbd_serial_isr(void) __interrupt (4) __using (2) __critical
  */
 #define CLIP(__X)	(((__X) > 127) ? 127 : (((__X) < -127) ? -127 : (__X)))
 
-static void mouse_serial_isr(void) __interrupt (7) __using (2) __critical
+static void mouse_serial_isr(void) interrupt 7 using 2 critical
 {
    register Byte        mousecode, mc;
    register signed char delta;
@@ -973,7 +973,7 @@ static void mouse_serial_isr(void) __interrupt (7) __using (2) __critical
  * table. If none happened, bahviour depends on the IDLE mode and the idle
  * duration setting.
  *****************************************************************************/
-static void timer2_isr() __interrupt (5) __using (3) __critical
+static void timer2_isr() interrupt 5 using 3 critical
 {
 #if defined (KEYBOARD)
    register Byte kbd_send_report;
