@@ -1,0 +1,31 @@
+SNES connector on the PCB as seen from bottom view:
+---------------------------------------------------
+
+  T 1 2 3 4 5 6
+    o o o o o o
+     o o o o o
+  B  1 2 3 4 5
+
+
+T 1  GND
+  2  Data Clock   Pad 2    PA6  -|<|-
+  3  N/C 5        Pad 1
+  4  N/C 5        Pad 2
+  5  N/C 6        Pad 2
+  6  VCC
+
+B 1  Data Latch   Pad 1+2  PA7  -|<|-
+  2  Data Clock   Pad 1    PA6  -|<|-
+  3  Serial Data  Pad 1    PA5
+  4  Serial Data  Pad 2    PA4
+  5  N/C 6        Pad 1
+
+All signals active low.
+
+
+Bit order in a SNES packet:
+---------------------------
+Bits shifted in from LSB
+
+  11  10   9   8   7   6   5   4   3   2   1   0
+   B   Y Sel Sta  YU  YD  XL  XR   A   X  TL  TR

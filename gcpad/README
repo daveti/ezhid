@@ -1,0 +1,104 @@
+
+                 EzHID Gamecube Controller Firmware
+
+  Introduction
+
+   The gcpad module is a firmware package for the EZ-USB device that
+   manages up to four Gamecube controllers. It makes them available as
+   generic gamepads to any computer system that supports the HID class of
+   the USB standard. Modern computer systems should be able to recognize
+   this bundle and to attach it seamlessly to the set of input devices
+   for game control. There should be even no need for specific drivers as
+   the HUT gamepad characteristics are well-defined inside the HID
+   specification. The generic driver of any operating system should do
+   the job.
+   It has been tested with Linux 2.4.22 so far, which implements joystick
+   handling within the joydev module. In case this module is not loaded
+   automatically, consult the documentation of your distribution on how
+   to activate this module.
+
+  Restrictions
+
+   Some restrictions apply when using this module. Not everything has
+   been tested yet and I do not know which flaws are still present. The
+   firmware is known to play well with the original controller and
+   certain clones. It definitely works with a "BigBen Interactive" clone.
+
+  Compilation and Installing
+
+   The file gcpad.ihx contains a compiled version of the firmware based
+   of the released source files. You need the [1]SDCC compiler suite if
+   you want to modify the sources.
+   Once it is installed, issue
+
+   make
+
+   The hex-file can be downloaded directly to the EZ-USB device using
+   your preferred method. The firmware supports both downloading into the
+   device RAM or being bootloaded from a programmed serial I2C EEPROM on
+   the board. In the latter case you'll have to set the variable ROM_FW
+   accordingly in Makefile. After having compiled the source code to suit
+   the needs of the bootloading, run create_ezhid_e2.pl on the compiled
+   hex-file. The output of create_ezhid_e2.pl has the correct format for
+   the onbaord I2C EEPROM.
+
+   The benefit of having the firmware permanently in the EEPROM is that
+   you do not have to set up a firmware downloader for every operating
+   system you happen to use on your computer.
+
+  Adapter Hardware
+
+   The Gamecube controller connector is quite straight forward. It uses
+   three pins for power supply (+5.0V, +3.43V and GND) and one pin for
+   the data signal. Please note that the voltages were measured at two
+   PAL consoles only, so it is a good idea to verify if their values
+   match your paticular console. Here's a schematic how to connect the
+   controllers:
+   I am not 100% sure about the value of the four resitors. I followed
+   the description of [2]crema and they worked for me.
+
+   Wiring diagram for the Gamecube controller adapter (gcpad.png)
+
+   The assignment to the EZ-USB ports is arbitrary. It can be changed by
+   modifying the #define statements in pad_port.h.
+   Although some references for the Gamecube controller mention the
+   supply voltage to be 3.43V it seems not to be mandatory to stick
+   exactly to this voltage. I use the 3.3V on-board supply which works
+   well with my controllers.
+   If you are lucky you can find a matching connector and wire this to
+   the EZ-USB device. Alternatively, you can reuse an externsion cable
+   and replace the connector which plugs into the console by a standard
+   male connector. The matching female connector is then connected to the
+   EZ-USB according to the above schematic. 5-Pin DIN connectors are well
+   suited, cheap and provide compatibility with extension cables for old
+   keyboards. You can share the adapter hardware of an [3]N64 controller
+   and add the 5.0V supply to a spare pin.
+   Once the firmware is downloaded and installed, the HID subsystem
+   should report four new gamepad devices. Each controller has eight axes
+   (analog joystick, analog C-joystick, digital pad, L and R) and 8
+   buttons. The buttons are assigned in the following way:
+
+   Gamecube Button | Gamepad Button
+   ----------------+---------------
+   A               | 0
+   B               | 1
+   Y               | 2
+   X               | 3
+   Z               | 4
+   Start           | 5
+   L               | 6
+   R               | 7
+
+  Additional Resources
+
+     * Nintendo Gamecube Controller Pinout
+       http://www.int03.co.uk/crema/hardware/gamecube/gc-control.html
+
+     * Myself
+       arniml at users.sourceforge.net
+
+References
+
+   1. http://sdcc.sourceforge.net/
+   2. http://www.int03.co.uk/crema/hardware/gamecube/gc-control.html
+   3. file://localhost/mnt/data/home/arnim/prg/c/usb/sourceforge/html/n64pad.html

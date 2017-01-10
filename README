@@ -1,0 +1,181 @@
+
+README for the EzHID Project
+============================
+Version: $Date: 2004/10/01 17:04:19 $
+
+
+Legal Stuff
+-----------
+
+  This program is free software; you can redistribute it and/or modify it
+  under the terms of the GNU General Public License as published by the Free
+  Software Foundation; either version 2 of the License, or (at your option)
+  any later version. See also the file COPYING which came with this
+  application.
+
+  This program is distributed in the hope that it will be useful, but WITHOUT
+  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+  FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+  more details.
+
+  See the different firmware packages for copyright notices.
+
+
+Introduction
+------------
+
+  The EzHID project is intended to be a loose collection of firmware for
+  Cypress' EZ-USB (AN2131) device that allow different types of input devices
+  (keyboards, mice, etc.) to be connected to USB. These devices will then show
+  up as USB HID (Human Interface Device) compliant devices. Their usage is not
+  only restricted to Linux, but other operating systems that support USB/HID
+  will be able to talk to them instantly.
+
+  Although the focus is on the EZ-USB device, no software for other
+  microcontrollers will be rejected.
+
+
+Available Packages
+------------------
+
+  The current release contains the following firmware packages:
+
+  * sunkbd:
+    Sun Type 4 and 5 Keyboard Adapter
+    Sun Type 5 Mouse Adapter
+
+  * amikbd
+    Amiga A2000/A3000 Keyboard Adapter
+
+  * snespad
+    SNES Gamepad Adapter
+
+  * gcpad
+    Gamecube Controller Adapter
+
+  More will follow in the future, please contact the author for development
+  status. Or, even better, start development yourself and contribute to the
+  EzHID project!
+
+
+Prerequisites
+-------------
+
+  1) EZ-USB prototype board or equivalent hardware to run your software.
+
+     The USB I2C/IO EZ-USB from DeVaSys is a good platform for working with
+     the EZ-USB device. It consists of a compact PCB with onboard EEPROM and
+     has all important signals wired to standard connectors. Both serial
+     ports are directly accessible so you won't have any trouble connecting
+     keyboards to this board.
+
+     The AN2131 chip is also contained in some USB devices that you can buy
+     off the shelf. E.g. Keyspan, Inc. produces serial-to-USB adapters that
+     are equipped with exactly this chip and come in a handy case. One
+     drawback of such a stock solution is that you are somehow restricted in
+     the accessibility to the device pins.
+
+  2) Assembler for the 8051 microcontroller.
+     Good progress has been made using as31 [1].
+
+  3) C compiler for the 8051 microcontroller.
+     Currently, SDCC [2] is used with success.
+     It is also available for the Win32 platform.
+
+  4) Download tool for the EZ-USB.
+     There are many floating around and it is quite easy to build a simple one
+     yourself. I recommend the ezusb2131 kernel module from [3] for Linux. A
+     generic loader for Windows can be found at USB Design By Example [4].
+
+  5) Serial I2C EEPROM programmer.
+     This one is optional. If you do not like to download the firmware into
+     the EZ-USB everytime after a reset, it could be a good idea to place it
+     directly in the I2C EEPROM on your EZ-USB board. The perl script
+     create_ezhid_e2.pl supports this job by converting a hex-file with the
+     final firmware into the format expected by the built-in bootloader of the
+     EZ-USB device. The result can then be programmed into a serial I2C EEPROM
+     suitable for your board.
+     Alternatively, the EEPROM can be programmed in-system by the EZ-USB device
+     itself. Supportive tools are available in the tools directory. See the
+     README file for a description how to use them.
+
+
+Development
+-----------
+
+  If you like to build an adapter for another exotic device you are welcome to
+  contribute to this project :-) You are not restricted to any development
+  tools as long as they are available for free. The project focuses on Linux
+  but if you are more familiar with tools on other operating systems then go
+  ahead and maybe someone ports the firmware package to the main tools as31
+  and sdcc.
+
+  To include your firmware as a package into this project, you must release it
+  under the terms of the GNU Public License (GPL 2). Other licenses could be
+  ok, but increase the legal mumbo-jumbo here and with SourceForge.
+  It will be common for all firmware packages that they report a copyright
+  notice in the descriptor for the interface they are associated with.
+
+
+Prototype Boards
+----------------
+
+  + DeVaSys USB I2C/IO EZ-USB board
+    http://www.devasys.com/usbi2cio.htm
+
+  + ActiveWire USB Devices
+    http://www.activewireinc.com/
+
+  + The EZ Protoboard
+    http://www.ajusd.org/~edward/ezproto/
+
+  + Braintechnology: USB Interface
+    http://www.braintechnology.de/braintechnology/en/usb_interface.html
+
+
+Resources
+---------
+
+   [0] EzHID Project:
+       http://sourceforge.net/projects/ezhid
+
+   [1] as31 assembler package:
+       http://www.pjrc.com/tech/8051/index.html
+
+   [2] SDCC C Compiler:
+       http://sdcc.sourceforge.net/
+
+   [3] The ezusb2131 Linux kernel module:
+       http://ezusb2131.sourceforge.net/
+
+   [4] USB Design By Example
+       http://developer.intel.com/intelpress/usb/examples/download.htm
+
+   [5] EZ-USB Technical Reference Manual
+       http://www.cypress.com/products/datasheet.cfm?partnum=AN2131SC
+
+   [6] Dallas High Speed Microcontroller User's Guide
+       http://www.maxim-ic.com/MicroUserGuides.htm
+
+   [7] 8051 Instruction Set
+       http://www.rehn.org/YAM51/
+
+   [8] Hacking the Keyspan Serial Adaptor
+       http://www.omnigroup.com/~wiml/soft/pic/keyspan.html
+
+   [9] USB 1.1 Specification:
+       http://www.usb.org/developers/docs/usbspec.zip
+
+  [10] USB HID 1.1 Specification:
+       http://www.usb.org/developers/hidpage/
+
+  [11] USB HID Usage Tables 1.1 Specification:
+       http://www.usb.org/developers/hidpage/
+
+  [12] USB Central
+       http://www.lvr.com/usb.html
+
+
+-- 
+  Arnim Laeuger
+  arniml@users.sourceforge.net

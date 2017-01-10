@@ -1,0 +1,34 @@
+;
+;
+; Copyright (C) 2003 Arnim Laeuger
+;
+;  This program is free software; you can redistribute it and/or modify
+;  it under the terms of the GNU General Public License as published by
+;  the Free Software Foundation; either version 2 of the License, or
+;  (at your option) any later version. See also the file COPYING which
+;  came with this application.
+;
+;  This program is distributed in the hope that it will be useful,
+;  but WITHOUT ANY WARRANTY; without even the implied warranty of
+;  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;  GNU General Public License for more details.
+;
+;  You should have received a copy of the GNU General Public License
+;  along with this program; if not, write to the Free Software
+;  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+;
+;
+; $Id: initializer.asm,v 1.1 2003/12/23 22:56:38 arniml Exp $
+;
+
+	.module	initializer
+
+	.globl	_string_index
+
+	.area	CSEG
+
+_string_index:
+	.db	#_string_langid,      #(_string_langid      >> 8)
+	.db	#_string_mfg,         #(_string_mfg         >> 8)
+	.db	#_string_prod,        #(_string_prod        >> 8)
+	.db	#_string_if_keyboard, #(_string_if_keyboard >> 8)

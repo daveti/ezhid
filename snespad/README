@@ -1,0 +1,89 @@
+
+                          EzHID SNES Gamepad Firmware
+
+  Introduction
+
+   The snespad module is a firmware package for the EZ-USB device that
+   manages up to two gamepads of the Super Nintendo Entertainment System.
+   It makes them available as generic gamepads to any computer system
+   that supports the HID class of the USB standard. Modern computer
+   systems should be able to recognize this bundle and to attach it
+   seamlessly to the set of input devices for game control. There should
+   be even no need for specific drivers as the HUT gamepad
+   characteristics are well-defined inside the HID specification. The
+   generic driver of any operating system should do the job.
+   It has been tested with Linux 2.4.22 so far, which implements joystick
+   handling within the joydev module. In case this module is not loaded
+   automatically, consult the documentation of your distribution on how
+   to activate this module.
+
+  Compilation and Installing
+
+   The file snespad.ihx contains a compiled version of the firmware based
+   of the released source files. If you want to modify the sources, you
+   need the SDCC compiler suite.
+   Once it is installed, issue
+
+   make
+
+   It is a good idea to use a recent version of SDCC so look on the
+   website for snapshots or check-out directly from the CVS repository.
+   The hex-file can be downloaded directly to the EZ-USB device using
+   your preferred method. The firmware supports both downloading into the
+   device RAM or being bootloaded from a programmed serial I2C EEPROM on
+   the board. In the latter case, you'll have to add the option
+   -DROM_FIRMWARE in Makefile. After having compiled the source code to
+   suit the needs of the bootloading, run create_ezhid_e2.pl on the
+   compiled hex-file. The output of create_ezhid_e2.pl has the correct
+   format for the onbaord I2C EEPROM.
+   The benefit of having the firmware permanently in the EEPROM is that
+   you do not have to set up a firmware downloader for every operating
+   system you happen to use on your computer.
+
+  Adapter Hardware
+
+   The required hardware setup is pretty simple if you reuse the
+   connector of a SNES console. It is quite robust and offers all
+   connections centrally on the bottom side of the PCB at the pins for
+   the cable socket. In addition, you will need an external 5V power
+   source. Such a configuration is shown in the following picture.
+
+   Wiring Diagram for the SNES Gamepad (snespad.png)
+
+   Pin B1 is the common Data Latch signal for Pad 1 and Pad 2. The pins
+   B2 and T2 are the Data Clock for Pad 1 and Pad 2 resp. They have to be
+   connected together to PA6 of the EZ-USB device as the firmware clocks
+   both pads simultaneously. Pin B3 is the Serial Data of Pad 1 and Pin
+   B4 is the Serial Data of Pad 2. All these signals are low active.
+   The assignment to the EZ-USB ports is arbitrary. It can be changed by
+   modifying the #define statements in pad_port.h
+
+   The gamepad buttons are assigned in the following way:
+
+   SNES Button | Gamepad Button
+   ------------+---------------
+   A           | 0
+   B           | 1
+   X           | 2
+   Y           | 3
+   Select      | 4
+   Start       | 5
+   L           | 6
+   R           | 7
+
+  Additional Resources
+
+     * The Linux Input Drivers site [1]
+
+     * Linux Kernel 2.4.x Sources [2]
+
+     * The Hardware Book [3]
+
+     * Myself
+       arniml at users.sourceforge.net
+
+References
+
+   1. http://atrey.karlin.mff.cuni.cz/%7Evojtech/input/
+   2. file://localhost/usr/src/linux/drivers/char/joystick/gamecon.c
+   3. http://www.hardwarebook.net/connector/userinput/snescontroller.html

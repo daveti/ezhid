@@ -1,0 +1,94 @@
+
+                     Programming the Onboard I2C EEPROM
+                                      
+  Motivation
+  
+   Downloading the firmware to the internal RAM of the EZ-USB device is a
+   nice thing during development. It gives you increased flexibility and
+   shorter turnaround cycles when building or debugging the code.
+   Furthermore a board is not destined to a single purpose but can serve
+   different applications by exchanging the firmware online. This can
+   even be automated when the systems sees the need for a certain
+   functionality.
+   All this works fine with a properly configured host in the background
+   and if the user has the ability to guide its mechanisms. Still there
+   are scenarios where all this is just bothering. Either because a
+   device is selected to run the same firmware all the time or because
+   there are no means to transfer the firmware into internal RAM.
+   Expecially when a device should be connected to different hosts
+   running different operationg systems or there is no chance to download
+   directly after the host's system start.
+   Here, the need arises to place the firmware permanently into a
+   non-volatile memory getting benefit from the feature that the EZ-USB
+   is able to load its RAM from an onboard EEPROM.
+   
+  Data preparation
+  
+   The compiled firmware has to be reordered to fit the format which is
+   expected by the boot-loader. No matter how you program the EEPROM, a
+   conversion has to take place that results in a structure as specified
+   in the by Cypress (for details refer to "[1]The EZ-USB Integrated
+   Circuit Technical Reference Manual" v1.9, section 5.8).
+   This task is performed by the script create_ezhid_e2.pl. It takes the
+   compiled firmware in IHEX-format and outputs a reformatted version of
+   it.
+   Run it as
+   
+     create_ezhid_e2.pl < firmware.ihx > e2_data.ihx
+     
+  EEPROM programming
+  
+   After the preparation step all input data for the programming process
+   is available. In case you own an E(E)PROM programmer, put in the
+   EEPROM and load the reformatted ihex-file. This can be annoying and is
+   in fact not necessary. Just use the EZ-USB to program its onboard
+   EEPROM itself.
+   The firmware i2c_firm in the tools directory turns the EZ-USB device
+   into an I2C-programmer which receives data via USB and places it into
+   the EEPROM. It can read out the EEPROM for test purposes as well and
+   returns the content back to the host computer. Just build the firmware
+   and transfer it to the EZ-USB in the usual way. On the host side there
+   is a perl script called eeprom.pl that reads in an ihex-file and sends
+   the data to the board.
+   For example
+   
+     eeprom.pl -d /proc/bus/usb/001/011 -w -i e2_data.ihx
+     
+   will send the content of e2_data.ihx to the specified USB device.
+   Single bytes can be written as well:
+   
+     eeprom.pl -d /proc/bus/usb/001/011 -w -a 0x0200 -l 2 -D "0xaf 0xfe"
+     
+   This will place the two bytes 0xaf and 0xfe at address 0x0200 and
+   0x0201 in the EEPROM.
+   To verify that the bytes have been actually written, execute the
+   following:
+   
+     eeprom.pl -d /proc/bus/usb/001/011 -r -a 0x0200 -l 2
+     
+   For all options run eeprom.pl -h or have a look at the script code.
+   You will need [2]libusb and the [3]USB perl module to access USB
+   devices from userland.
+   
+  Troubleshooting
+  
+   There might be times during debugging when you are confronted with the
+   problem that your buggy little firmware hangs the EZ-USB so bad that
+   it is no longer possible to download anything to internal RAM.
+   Unplugging the board won't help If the firmware resides in the EEPROM.
+   Your only chance to overwrite the troublesome memory content is to
+   disable the EEPROM before the EZ-USB is powered on to prevent the USB
+   core from boot-loading the firmware. Enable the EEPROM again, download
+   i2_firm and finally clean at least the first byte. Here you must tweak
+   eeprom.pl and disable I2C autodetection. Specify the correct bus
+   address and address size. This is necessary because the USB core will
+   store the information that there is no EEPROM present at power-up and
+   autodetection in i2_firm will guess the wrong type.
+   Fell free to contact me if you have problems with this.
+
+
+References
+
+   1. http://www.cypress.com/cfuploads/img/products/AN2131SC.pdf
+   2. http://libusb.sourceforge.net/
+   3. http://www.linuxhelp.com.au/people/anthony/perl-libusb/

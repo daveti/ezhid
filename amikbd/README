@@ -1,0 +1,59 @@
+
+                         EzHID Amiga Keyboard Firmware
+
+  Introduction
+
+   The amikbd module is a firmware package for the EZ-USB device that
+   interfaces between the serial communication protocol of an Amiga
+   A2000/A3000 keyboard and the USB HID driver of any operating system.
+   Supporting the USB boot protocol for keyboards, it can be attached as
+   the primary keyboard to modern computers.
+
+  Compilation
+
+   Change to the amikbd/src directory and type
+
+   make
+
+   You will need a recent version of SDCC, so it is a good idea to
+   check-out the latest code from the repository or donwload a snapshot.
+   The hex-file can be downloaded directly to the EZ-USB device using
+   your preferred method. The firmware supports both downloading into the
+   device RAM or being bootloaded from a programmed serial I2C EEPROM on
+   the board. In the latter case, you'll have to add the option
+   -DROM_FIRMWARE in Makefile. After having compiled the source code to
+   suit the needs of the bootloading, run create_ezhid_e2.pl on the
+   compiled hex-file. The output of create_ezhid_e2.pl has the correct
+   format for the onbaord I2C EEPROM.
+   The benefit of having the firmware permanently in the EEPROM is that
+   most modern motherboards detect the USB keyboard boot protocol and
+   include the keyboard at system boot time. Moreover, you do not have to
+   set up a firmware downloader for every operating system you happen to
+   use on your computer.
+
+  Adapter Hardware
+
+   There is not much hardware required to attach the Amiga keyboard to
+   the EZ-USB board. You will need an appropriate connector and an
+   external 5V power source.
+
+   Wiring Diagram for the Amiga Keyboard (amikbd.png)
+   Keyboard KCLK (1) is connected to PC4 and keyboard KDAT (2) to PC5.
+   This assignment is arbitrary as the serial transfer code bit-bangs
+   over any general-purpose IO-ports. If the default pins don't suit your
+   needs, you can alter the macros in amikbd.h accordingly.
+
+Additional Resources
+
+     * The Amiga Hardware Reference Manual [1], [2]
+
+     * The Hardware Book [3]
+
+     * Myself
+       arniml at users.sourceforge.net
+
+References
+
+   1. http://www.amigarealm.com/computing/nkb6e.htm
+   2. http://rmitton.com/amiga/hrm.html
+   3. http://www.hardwarebook.net/connector/userinput/keyboardamiga5.html

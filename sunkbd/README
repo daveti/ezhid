@@ -1,0 +1,141 @@
+
+README for Sun Keyboard/Mouse HID Firmware
+==========================================
+Version: $Date: 2004/04/24 17:35:19 $
+
+
+Legal Stuff
+-----------
+
+    sunkbd_hid firmware is copyright (C) 2001 Arnim Laeuger
+
+  This program is free software; you can redistribute it and/or modify it
+  under the terms of the GNU General Public License as published by the Free
+  Software Foundation; either version 2 of the License, or (at your option)
+  any later version. See also the file COPYING which came with this
+  application.
+
+  This program is distributed in the hope that it will be useful, but WITHOUT
+  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+  FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+  more details.
+
+
+Introduction
+------------
+
+  sunkbd_hid is a firmware package for the EZ-USB chip that handles all
+  interfacing between the serial communication protocol of a Sun type 4 or 5
+  keyboard and the USB HID driver of any operating system. It behaves like a
+  keyboard type interface device with boot protocol capabilities. The firmware
+  has been augmented by an additional interface that collects the serial input
+  stream from a Sun mouse (mine says 'Type 5').
+
+  Most of the special function keys are reported through USB but many of them
+  show no reaction in the console or XFree86. To support the very important
+  ones, OPEN and FRONT, I have added special functionality in the scancode
+  converter.  As a result the OPEN key is translated to a simultaneous
+  LALT+F11 and the FRONT key is translated to LALT+F12. Swapping and hiding
+  windows with these keys must then be configured in the window manager.
+
+
+Compilation
+-----------
+
+  The source code is written completely in C. For compilation you need a
+  recent version of sdcc (any v2.2.2 or later).
+  Type either
+
+    make kbd
+    make mouse
+    make kbdmouse
+
+  to build the firmware with keyboard, mouse or combined keyboard and mouse
+  capabilites. The hex-file can be downloaded directly to the EZ-USB using your
+  preferred method.
+
+  The firmware supports both downloading into the device RAM or being
+  bootloaded from a programmed serial I2C EEPROM on the development board. In
+  the latter case small modifications have to be applied to the code. See the
+  comments in Makefile for detailed instructions. After having compiled the
+  source code to suit the needs of the bootloading, run create_ezhid_e2.pl on
+  the compiled hex-file. The output of create_ezhid_e2.pl has the correct
+  format for the onbaord I2C EEPROM.
+  The benefit of having the firmware permanently in the EEPROM is that most
+  modern motherboards detect the USB keyboard boot protocol and include the
+  keyboard at system boot time. Moreover, you do not have to set up a firmware
+  downloader for every operating system you happen to use on your computer.
+
+
+Converter
+---------
+
+  Depending on the type of prototype board you have for the EZ-USB chip, you
+  will need a dedicated converter or a simple cable.
+  Most important is the fact that Sun keyboards provide normal TTL level
+  signals at the PS/2 plug with RS232 polarity (but not voltage level!). The
+  AN2131 device has 5V-TTL tolerant 3.3V I/O ports so it is save to connect
+  the keyboard without level shifters. If you use the I2CIO prototype board
+  from DeVaSys you can access the pins TxD0 and RxD0 (RxD1) of the chip 
+  directly and there will be no need for additional logic. A simple cable is
+  all that is required in this case. Consult the Hardware Book for the pinout
+  of the keyboard connector.
+  If you re-use a Keyspan PDA adapter like I did initially or similar devices,
+  then you have to build some external hardware because inverters and level
+  shifters are needed to adapt to the standard serial connector. In either
+  case see the circuit in sunkbd.png to get a hint on how to connect the
+  keyboard in your environment. The schematic was drawn by Leonardo M.
+  Teixiera <leonardoteixeira@inetone.com.br>.
+  Maybe the CD4069 gives you troubles because it uses CMOS levels which could
+  be too restrictive. Alternatively replace it by a standard TTL circuit like
+  a 74LS04.
+  The mouse driver uses serial port 1. In this case pin 4 of the PS/2
+  connector should be wired to RxD1/2 at the EZ-USB chip. I have reused pin 9
+  (RI) of the DB 9 serial connector at my Keyspan adapter and connected pin 19
+  (PC5/T1) of the AN2131SC device internally to pin 26 (PB2/RxD2).
+
+  One last word about the power supply. I use an additional voltage regulator
+  to source the external glue logic and the keyboard itself. It could be
+  possible to draw the current directly from the USB supply.
+  My Sun type 5 keyboard declares to use max. 150 mA and the mouse needs 15 mA,
+  so this combination is realistic from USB specification point of view. To
+  inform the hub and host about the current consumption you can adjust the
+  MaxPower value in the configuration descriptor. It is currently set to 100
+  that means 200 mA.
+  Be careful when you wire the USB supply to the outside!  You could easily
+  burn your host controller or hub when generating shorts!
+
+
+Additional Resources
+--------------------
+
+  * The Linux Input Drivers site:
+    http://atrey.karlin.mff.cuni.cz/~vojtech/input/
+
+  * The Linux-console Project:
+    http://linuxconsole.sourceforge.net/
+
+  * The Hardware Book
+    http://www.hardwarebook.net/
+
+  * Linux Kernel 2.4.x Sources:
+    file:/usr/src/linux/drivers/sbus/char/sunkbd.c
+    file:/usr/src/linux/drivers/sbus/char/sunmouse.c
+
+  * A nice report on connecting a Sun Type 5 keyboard to the Keyspan Adapter
+    http://bedroomlan.dyndns.org/~alexios/hardware_suntype5.html
+
+  * Sun keyboard related links
+    http://www.optix.org/~dxy/sparc/keyboard/
+
+  * Sun Type 5 Keyboard on the PC
+    http://www.buzzard.org.uk/jonathan/sunkbd.html
+
+  * Sun Serial Keyboard and Mouse
+    http://www.iptel-now.de/HOWTO/SUN_SERIAL_KBD/sun_serial_kbd.html
+
+  * Using a Sun Type 6 USB keyboard on Linux systems
+    http://www.infosun.fmi.uni-passau.de/~nils/type6/
+
+  * Myself:
+    mailto:arniml@users.sourceforge.net
