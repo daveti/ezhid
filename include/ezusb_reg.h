@@ -31,7 +31,7 @@
 #define __EZUSB_REG_H__
 
 
-__sbit  __at 0xe8 EUSB;
+__sbit  __at 0xe8 EUSB;		/* 8052 - ibf */
 __sbit  __at 0xac ES0;
 __sbit  __at 0xae ES1;
 __sbit  __at 0x98 RI_0;
@@ -51,12 +51,12 @@ __sfr   __at 0x98 SCON0;
 __sfr   __at 0xc0 SCON1;
 __sfr   __at 0x99 SBUF0;
 __sfr   __at 0xc1 SBUF1;
-__sfr   __at 0x8e CKCON;
-__sfr   __at 0xc8 T2CON;
-__sfr   __at 0xca RCAP2L;
-__sfr   __at 0xcb RCAP2H;
-__sfr   __at 0xcc TL2;
-__sfr   __at 0xcd TH2;
+__sfr   __at 0x8e CKCON;	/* 8052 - pwcm */
+__sfr   __at 0xc8 T2CON;	/* 8052 specific */
+__sfr   __at 0xca RCAP2L;	/* 8052 */
+__sfr   __at 0xcb RCAP2H;	/* 8052 */
+__sfr   __at 0xcc TL2;		/* 8052 */
+__sfr   __at 0xcd TH2;		/* 8052 */
 __sfr   __at 0xd8 EICON;
 __sfr   __at 0x82 DPL0;
 __sfr   __at 0x83 DPH0;
